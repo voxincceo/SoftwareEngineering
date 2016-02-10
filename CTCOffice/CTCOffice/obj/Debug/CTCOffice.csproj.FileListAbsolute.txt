@@ -7,3 +7,16 @@ C:\Users\Luke\Desktop\CTCOffice\CTCOffice\obj\Debug\CTCOffice.Properties.Resourc
 C:\Users\Luke\Desktop\CTCOffice\CTCOffice\obj\Debug\CTCOffice.csproj.GenerateResource.Cache
 C:\Users\Luke\Desktop\CTCOffice\CTCOffice\obj\Debug\CTCOffice.exe
 C:\Users\Luke\Desktop\CTCOffice\CTCOffice\obj\Debug\CTCOffice.pdb
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\bin\Debug\CTCOffice.exe.config
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.exe
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.pdb
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\bin\Debug\CTCOffice.exe
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\bin\Debug\CTCOffice.pdb
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.csprojResolveAssemblyReference.cache
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.Form1.resources
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.Properties.Resources.resources
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.csproj.GenerateResource.Cache
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.SampleModule.resources
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.TestingForm.resources
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.RoutesForm.resources
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.ScheduleForm.resources
