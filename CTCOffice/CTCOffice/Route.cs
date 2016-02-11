@@ -10,12 +10,14 @@ namespace CTCOffice
     {
         Dictionary<int, TrackSegment> route;
         private int start, end;
+        private string stationEnd;
 
         public Route()
         {
             route = new Dictionary<int, TrackSegment>();
             start = 0;
             end = 0;
+            stationEnd = "";
         }
 
         public void UpdateRoute(Dictionary<int, TrackSegment> newRoute)
@@ -38,6 +40,11 @@ namespace CTCOffice
             return end;
         }
 
+        public string GetStationEnd()
+        {
+            return stationEnd;
+        }
+
         public void SetStart(int value)
         {
             start = value;
@@ -46,6 +53,11 @@ namespace CTCOffice
         public void SetEnd(int value)
         {
             end = value;
+        }
+
+        public void SetStationEnd(string value)
+        {
+            stationEnd = value;
         }
    
     }

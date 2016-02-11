@@ -159,7 +159,8 @@ namespace CTCOffice
             Route newRoute = new Route();
             newRoute.UpdateRoute(trackSegments);
             newRoute.SetStart(1);
-            newRoute.SetEnd(1);
+            newRoute.SetEnd(5);
+            newRoute.SetStationEnd("Station 2");
 
             segmentsInRoute.Add(stations, newRoute);
 
@@ -176,6 +177,7 @@ namespace CTCOffice
             newRoute.UpdateRoute(segments);
             newRoute.SetStart(5);
             newRoute.SetEnd(1);
+            newRoute.SetStationEnd("Station 1");
 
             segmentsInRoute.Add(stations, newRoute);
         }

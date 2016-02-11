@@ -132,14 +132,11 @@ namespace CTCOffice
             }
             else if (direction.Equals("West"))
             {
-                position = position - changeInPosition;
+                position = position + changeInPosition;
             }
 
             authority = authority - changeInPosition;
-            if (changeInPosition > 0)
-            {
-                timeOnSchedule += 0.1;
-            }
+            timeOnSchedule += 0.1;
         }
 
         public void changeRoute(ArrayList newRoute)

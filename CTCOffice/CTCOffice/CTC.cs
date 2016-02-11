@@ -54,7 +54,7 @@ namespace CTCOffice
                     testingForm.UpdateTrainAuthority(number, authority);
                     train.updateAuthority(authority);
 
-                    speed = (authority / (train.getSchedule()["Station 2"] - 1) / 60);
+                    speed = (authority / (train.getSchedule()["Station 2"] - 1.2) / 60);
 
                     if (speed > (double) central.getTrackSegment(1).getSpeedLimit() / 3.6)
                     {
@@ -77,6 +77,37 @@ namespace CTCOffice
                     int closedSegment = 0, errorOnClosed = 0;
                     double newAuthority = 0;
 
+                    if (train.getAuthority() <= 0 && train.GetRouteSegments().GetEnd() == train.getSegment() && train.getTimeOnSchedule() >= train.getSchedule()[train.GetRouteSegments().GetStationEnd()] * 60)
+                    {
+                        Dictionary<string, double> schedule = new Dictionary<string,double>();
+                        string direction, routingList;
+
+                        if (train.GetRouteSegments().GetEnd() == 5)
+                        {
+                            schedule.Add("Station 1", 2.4);
+                            direction = "West";
+                            routingList = "Station2:Station1";
+                        }
+                        else
+                        {
+                            schedule.Add("Station 2", 2.4);
+                            direction = "East";
+                            routingList = "Station1:Station2";
+                        }
+
+                        train.updateDirection(direction);
+                        this.Invoke(new MethodInvoker(delegate()
+                        {
+                            listViewTrains.Items[0].SubItems[3].Text = direction;
+                        }));
+                        train.changeSchedule(schedule);
+                        train.ChangeRouteSegments(central.GetRoute(routingList));
+                        train.setTimeOnSchedule(0);
+                        train.updatePosition(0);
+                    }
+
+                    double leastAuthority = 100000000000;
+
                     foreach (KeyValuePair<int, TrackSegment> pair in train.GetRouteSegments().GetRoute())
                     {
                         if (pair.Value.getOpenClosed().Equals("Closed") || pair.Value.getFailure().Equals("Segment Failure"))
@@ -84,7 +115,7 @@ namespace CTCOffice
                             closedSegment = 1;
                             if (pair.Value.Equals(central.getTrackSegment(train.getSegment())))
                             {
-                                newAuthority = 0;
+                                leastAuthority = 0;
                                 errorOnClosed = 1;
                             }
                             else
@@ -92,41 +123,99 @@ namespace CTCOffice
                                 if (errorOnClosed == 0)
                                 {
                                     newAuthority = central.getTrackSegment(train.getSegment()).getLength() - train.getPosition();
-                                    for (int i = 1; !pair.Value.Equals(central.getTrackSegment(train.getSegment() + i)) && (train.getSegment() + i) < 6; i++)
+                                    if(train.getDirection().Equals("East"))
                                     {
-                                        newAuthority += central.getTrackSegment(train.getSegment() + i).getLength();
-                                        if (train.getSegment() + i + 1 > 5)
+                                        if (train.getSegment() + 1 != 6)
                                         {
-                                            break;
+                                            for (int i = 1; !pair.Value.Equals(central.getTrackSegment(train.getSegment() + i)) && (train.getSegment() + i) < 6; i++)
+                                            {
+                                                newAuthority += central.getTrackSegment(train.getSegment() + i).getLength();
+                                                if (train.getSegment() + i + 1 > 5)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (train.getSegment() - 1 != 0)
+                                        {
+                                            for (int i = 1; !pair.Value.Equals(central.getTrackSegment(train.getSegment() - i)); i++)
+                                            {
+                                                newAuthority += central.getTrackSegment(train.getSegment() - i).getLength();
+                                                if (train.getSegment() + i - 1 < 1)
+                                                {
+                                                    break;
+                                                }
+                                            }
                                         }
                                     }
                                 }
+                            }
+
+                            if (newAuthority < leastAuthority)
+                            {
+                                leastAuthority = newAuthority;
                             }
                         }
 
                         if (closedSegment == 0)
                         {
-                            newAuthority = central.getTrackSegment(train.getSegment()).getLength() - train.getPosition();
-                            for (int i = 1; (train.getSegment() + i) < 6; i++)
+                            if(train.getDirection().Equals("East"))
                             {
-                                newAuthority += central.getTrackSegment(train.getSegment() + i).getLength();
+                                newAuthority = central.getTrackSegment(train.getSegment()).getLength() - train.getPosition();
+                                if (train.getSegment() + 1 != 6)
+                                {
+                                    for (int i = 1; (train.getSegment() + i) < 6; i++)
+                                    {
+                                        newAuthority += central.getTrackSegment(train.getSegment() + i).getLength();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                newAuthority = central.getTrackSegment(train.getSegment()).getLength() - train.getPosition();
+                                if (train.getSegment() - 1 != 0)
+                                {
+                                    for (int i = 1; (train.getSegment() - i) > 0; i++)
+                                    {
+                                        newAuthority += central.getTrackSegment(train.getSegment() - i).getLength();
+                                    }
+                                }
+                            }
+                            if (newAuthority < leastAuthority)
+                            {
+                                leastAuthority = newAuthority;
                             }
                         }
 
-                        testingForm.UpdateTrainAuthority(train.getNumber(), newAuthority);
-                        train.updateAuthority(newAuthority);
+                        testingForm.UpdateTrainAuthority(train.getNumber(), leastAuthority);
+                        train.updateAuthority(leastAuthority);
                     }
 
                     if (train.getPosition() >= central.getTrackSegment(train.getSegment()).getLength())
                     {
-                        if (train.getSegment() != 5)
+                        if (train.getSegment() != train.GetRouteSegments().GetEnd())
                         {
+                            int segmentNumber = 0;
+
                             train.updatePosition(train.getPosition() - central.getTrackSegment(train.getSegment()).getLength());
-                            testingForm.updateTrainSegment(train.getNumber(), train.getSegment() + 1);
+
+                            if(train.getDirection().Equals("East"))
+                            { 
+                                segmentNumber = train.getSegment() + 1;
+                            }
+                            else
+                            {
+                                segmentNumber = train.getSegment() - 1;
+                            }
+
+                            testingForm.updateTrainSegment(train.getNumber(), segmentNumber);
                         }
                     }
 
-                    speed = (train.getAuthority() / (train.getSchedule()["Station 2"] - 1 - (train.getTimeOnSchedule() / 60)) / 60);
+                    speed = (train.getAuthority() / (train.getSchedule()[train.GetRouteSegments().GetStationEnd()] - 1.2 - (train.getTimeOnSchedule() / 60)) / 60);
 
                     speed *= 3.6;
 
@@ -258,6 +347,8 @@ namespace CTCOffice
             systemTimer = new System.Timers.Timer(50);
             systemTimer.Elapsed += systemTimer_Elapsed;
             systemTimer.Enabled = true;
+
+            central.getTrain(1).setTimeOnSchedule(0);
         }
 
         public void DevelopTestSchedule()
