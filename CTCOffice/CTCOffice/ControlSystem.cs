@@ -11,11 +11,13 @@ namespace CTCOffice
     {
         Dictionary<int, Train> trains;
         Dictionary<int, TrackSegment> trackSegments;
+        Dictionary<string, Route> segmentsInRoute;
 
         public ControlSystem()
         {
             trains = new Dictionary<int,Train>();
             trackSegments = new Dictionary<int, TrackSegment>();
+            segmentsInRoute = new Dictionary<string, Route>();
         }
 
         public void createTrain(int number)
@@ -148,6 +150,39 @@ namespace CTCOffice
             }
 
             return segmentList;
+        }
+
+        public void GenerateRoutes()
+        {
+            string stations = "Station1:Station2";
+
+            Route newRoute = new Route();
+            newRoute.UpdateRoute(trackSegments);
+            newRoute.SetStart(1);
+            newRoute.SetEnd(1);
+
+            segmentsInRoute.Add(stations, newRoute);
+
+            stations = "Station2:Station1";
+
+            newRoute = new Route();
+            Dictionary<int, TrackSegment> segments = new Dictionary<int, TrackSegment>();
+            segments.Add(5, trackSegments[5]);
+            segments.Add(4, trackSegments[4]);
+            segments.Add(3, trackSegments[3]);
+            segments.Add(2, trackSegments[2]);
+            segments.Add(1, trackSegments[1]);
+
+            newRoute.UpdateRoute(segments);
+            newRoute.SetStart(5);
+            newRoute.SetEnd(1);
+
+            segmentsInRoute.Add(stations, newRoute);
+        }
+
+        public Route GetRoute(string stations)
+        {
+            return segmentsInRoute[stations];
         }
     }
 }

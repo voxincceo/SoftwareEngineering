@@ -15,6 +15,7 @@ namespace CTCOffice
         private System.Timers.Timer timer;
         private ArrayList route;
         private Dictionary<string, double> schedule;
+        private Route routeSegments;
 
         public Train()
         {
@@ -29,6 +30,7 @@ namespace CTCOffice
 
             route = new ArrayList();
             schedule = new Dictionary<string, double>();
+            routeSegments = new Route();
 
             timer = new System.Timers.Timer(100);
             timer.Elapsed += timer_Elapsed;
@@ -158,6 +160,16 @@ namespace CTCOffice
         public Dictionary<string, double> getSchedule()
         {
             return schedule;
+        }
+
+        public void ChangeRouteSegments(Route newRoute)
+        {
+            routeSegments = newRoute;
+        }
+
+        public Route GetRouteSegments()
+        {
+            return routeSegments;
         }
     }
 }

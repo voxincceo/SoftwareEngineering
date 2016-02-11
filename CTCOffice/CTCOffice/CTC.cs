@@ -74,6 +74,49 @@ namespace CTCOffice
                 }
                 else
                 {
+                    int closedSegment = 0, errorOnClosed = 0;
+                    double newAuthority = 0;
+
+                    foreach (KeyValuePair<int, TrackSegment> pair in train.GetRouteSegments().GetRoute())
+                    {
+                        if (pair.Value.getOpenClosed().Equals("Closed") || pair.Value.getFailure().Equals("Segment Failure"))
+                        {
+                            closedSegment = 1;
+                            if (pair.Value.Equals(central.getTrackSegment(train.getSegment())))
+                            {
+                                newAuthority = 0;
+                                errorOnClosed = 1;
+                            }
+                            else
+                            {
+                                if (errorOnClosed == 0)
+                                {
+                                    newAuthority = central.getTrackSegment(train.getSegment()).getLength() - train.getPosition();
+                                    for (int i = 1; !pair.Value.Equals(central.getTrackSegment(train.getSegment() + i)) && (train.getSegment() + i) < 6; i++)
+                                    {
+                                        newAuthority += central.getTrackSegment(train.getSegment() + i).getLength();
+                                        if (train.getSegment() + i + 1 > 5)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (closedSegment == 0)
+                        {
+                            newAuthority = central.getTrackSegment(train.getSegment()).getLength() - train.getPosition();
+                            for (int i = 1; (train.getSegment() + i) < 6; i++)
+                            {
+                                newAuthority += central.getTrackSegment(train.getSegment() + i).getLength();
+                            }
+                        }
+
+                        testingForm.UpdateTrainAuthority(train.getNumber(), newAuthority);
+                        train.updateAuthority(newAuthority);
+                    }
+
                     if (train.getPosition() >= central.getTrackSegment(train.getSegment()).getLength())
                     {
                         if (train.getSegment() != 5)
@@ -197,6 +240,8 @@ namespace CTCOffice
 
                 listViewTrack.Items.Add(temporarySegmentLVI);
             }
+
+            central.GenerateRoutes();
         }
 
         public void openCloseSegment(int number, string text)
@@ -227,6 +272,10 @@ namespace CTCOffice
 
             central.updateTrainRoute(route, 1);
             central.updateTrainSchedule(schedule, 1);
+
+            string stations = "Station1:Station2";
+
+            central.getTrain(1).ChangeRouteSegments(central.GetRoute(stations));
         }
 
         public void updateRouteFromForm(ArrayList route, int train)
