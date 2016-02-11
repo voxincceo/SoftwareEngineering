@@ -30,6 +30,8 @@ namespace CTCOffice
 
             testingForm = new TestingForm(this);
             testingForm.Show();
+
+            //InitializeGraphics();
         }
 
         void systemTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -241,6 +243,7 @@ namespace CTCOffice
                         listViewTrains.Items[0].SubItems[4].Text = train.getAuthority().ToString();
                         listViewTrains.Items[0].SubItems[1].Text = train.getSegment().ToString();
                         listViewTrains.Items[0].SubItems[2].Text = train.getSpeed().ToString();
+                        systemGraphics.Refresh();
                     }));
                 }
             }
@@ -522,9 +525,58 @@ namespace CTCOffice
             }
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        public void UpdateGraphics()
         {
-            base.OnClosing(e);
+
+        }
+
+        private void systemGraphics_Paint(object sender, PaintEventArgs e)
+        {
+            SolidBrush drawBrush = new SolidBrush(Color.Black);
+            Pen trainPen = new Pen(Color.Red, 2);
+            int startX = 250, startY = 200;
+
+            foreach (TrackSegment segment in central.getTrackSegments())
+            {
+                e.Graphics.FillRectangle(drawBrush, new Rectangle(startX, startY, segment.getLength(), 10));
+                startX += segment.getLength() + 5;
+            }
+
+            foreach (Train train in central.getTrains())
+            {
+                int position = 0;
+
+                if (train.getDirection().Equals("East"))
+                {
+                    for (int i = 1; i < 6; i++)
+                    {
+                        if (train.getSegment() > i)
+                        {
+                            position += central.getTrackSegment(i).getLength();
+                        }
+                        else if (train.getSegment() == i)
+                        {
+                            position += (int)train.getPosition();
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i < 6; i++)
+                    {
+                        if (train.getSegment() > i)
+                        {
+                            position += central.getTrackSegment(i).getLength();
+                        }
+                        else if (train.getSegment() == i)
+                        {
+                            position += central.getTrackSegment(i).getLength() - (int)train.getPosition();
+                        }
+                    }
+                }
+
+                e.Graphics.DrawEllipse(trainPen, new Rectangle(250 + position, 196, 16, 16));
+            }
         }
     }
 }

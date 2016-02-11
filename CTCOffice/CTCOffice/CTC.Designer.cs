@@ -45,11 +45,13 @@
             this.routeButton = new System.Windows.Forms.Button();
             this.scheduleButton = new System.Windows.Forms.Button();
             this.listViewTrains = new System.Windows.Forms.ListView();
+            this.systemGraphics = new System.Windows.Forms.PictureBox();
             this.moduleBox.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.systemGraphics)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -126,6 +128,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.systemGraphics);
             this.tabPage1.Controls.Add(this.errorListView);
             this.tabPage1.Controls.Add(this.systemListView);
             this.tabPage1.Controls.Add(this.moduleBox);
@@ -224,6 +227,15 @@
             this.listViewTrains.TabIndex = 0;
             this.listViewTrains.UseCompatibleStateImageBehavior = false;
             // 
+            // systemGraphics
+            // 
+            this.systemGraphics.Location = new System.Drawing.Point(9, 7);
+            this.systemGraphics.Name = "systemGraphics";
+            this.systemGraphics.Size = new System.Drawing.Size(854, 405);
+            this.systemGraphics.TabIndex = 3;
+            this.systemGraphics.TabStop = false;
+            this.systemGraphics.Paint += new System.Windows.Forms.PaintEventHandler(this.systemGraphics_Paint);
+            // 
             // CTC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,6 +249,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.systemGraphics)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -260,6 +273,7 @@
         private System.Windows.Forms.Button scheduleButton;
         private System.Windows.Forms.ListView errorListView;
         private System.Windows.Forms.ListView systemListView;
+        private System.Windows.Forms.PictureBox systemGraphics;
     }
 }
 
