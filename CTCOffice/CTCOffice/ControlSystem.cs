@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -115,6 +116,16 @@ namespace CTCOffice
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
             temporaryTrackSegment.updateSpeedLimit(speedLimit);
+        }
+
+        public void updateTrainRoute(ArrayList route, int number)
+        {
+           trains[number].changeRoute(route);
+        }
+
+        public void updateTrainSchedule(Dictionary<string, double> schedule, int number)
+        {
+            trains[number].changeSchedule(schedule);
         }
     }
 }

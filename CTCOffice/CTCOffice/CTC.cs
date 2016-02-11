@@ -100,6 +100,30 @@ namespace CTCOffice
             listViewTrack.Items[number - 1].SubItems[3].Text = text;
         }
 
+        public void startSystemTest()
+        {
+            ArrayList route = new ArrayList();
+            route.Add("Black");
+            route.Add("Station 1");
+            route.Add("Station 2");
+
+            Dictionary<string, double> schedule = new Dictionary<string, double>();
+            schedule.Add("Station 2", 1.4);
+
+            central.updateTrainRoute(route, 1);
+            central.updateTrainSchedule(schedule, 1);
+        }
+
+        public void updateRouteFromForm(ArrayList route, int train)
+        {
+            central.updateTrainRoute(route, train);
+        }
+
+        public void updateScheduleFromForm(Dictionary<string, double> schedule, int train)
+        {
+            central.updateTrainSchedule(schedule, train);
+        }
+
         private void showSampleModule()
         {
             Form sampleForm = new SampleModule();
@@ -208,14 +232,22 @@ namespace CTCOffice
 
         private void routeButton_Click(object sender, EventArgs e)
         {
-            Form routeForm = new RoutesForm();
-            routeForm.Show();
+            if(listViewTrains.SelectedItems.Count > 0)
+            {
+                Train train = central.getTrain(Int32.Parse(listViewTrains.SelectedItems[0].Text));
+                Form routeForm = new RoutesForm(train.getNumber(), train.getRoute(), this);
+                routeForm.Show();
+            }
         }
 
         private void scheduleButton_Click(object sender, EventArgs e)
         {
-            Form scheduleForm = new ScheduleForm();
-            scheduleForm.Show();
+            if (listViewTrains.SelectedItems.Count > 0)
+            {
+                Train train = central.getTrain(Int32.Parse(listViewTrains.SelectedItems[0].Text));
+                Form scheduleForm = new ScheduleForm(train.getNumber(), train.getLine(), train.getSchedule(), this);
+                scheduleForm.Show();
+            }
         }
 
         private void listViewTrack_SelectedIndexChanged(object sender, EventArgs e)

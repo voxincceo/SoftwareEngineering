@@ -30,11 +30,11 @@
         {
             this.listViewRoutes = new System.Windows.Forms.ListView();
             this.groupBoxRoutes = new System.Windows.Forms.GroupBox();
-            this.labelStartStation = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.labelEndStation = new System.Windows.Forms.Label();
             this.confirmRouteButton = new System.Windows.Forms.Button();
+            this.labelEndStation = new System.Windows.Forms.Label();
+            this.comboBoxEnd = new System.Windows.Forms.ComboBox();
+            this.comboBoxStart = new System.Windows.Forms.ComboBox();
+            this.labelStartStation = new System.Windows.Forms.Label();
             this.groupBoxRoutes.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,8 +50,8 @@
             // 
             this.groupBoxRoutes.Controls.Add(this.confirmRouteButton);
             this.groupBoxRoutes.Controls.Add(this.labelEndStation);
-            this.groupBoxRoutes.Controls.Add(this.comboBox2);
-            this.groupBoxRoutes.Controls.Add(this.comboBox1);
+            this.groupBoxRoutes.Controls.Add(this.comboBoxEnd);
+            this.groupBoxRoutes.Controls.Add(this.comboBoxStart);
             this.groupBoxRoutes.Controls.Add(this.labelStartStation);
             this.groupBoxRoutes.Location = new System.Drawing.Point(13, 183);
             this.groupBoxRoutes.Name = "groupBoxRoutes";
@@ -59,40 +59,6 @@
             this.groupBoxRoutes.TabIndex = 1;
             this.groupBoxRoutes.TabStop = false;
             this.groupBoxRoutes.Text = "Edit Route";
-            // 
-            // labelStartStation
-            // 
-            this.labelStartStation.AutoSize = true;
-            this.labelStartStation.Location = new System.Drawing.Point(10, 20);
-            this.labelStartStation.Name = "labelStartStation";
-            this.labelStartStation.Size = new System.Drawing.Size(32, 13);
-            this.labelStartStation.TabIndex = 0;
-            this.labelStartStation.Text = "Start:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(73, 17);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(73, 49);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 2;
-            // 
-            // labelEndStation
-            // 
-            this.labelEndStation.AutoSize = true;
-            this.labelEndStation.Location = new System.Drawing.Point(10, 52);
-            this.labelEndStation.Name = "labelEndStation";
-            this.labelEndStation.Size = new System.Drawing.Size(29, 13);
-            this.labelEndStation.TabIndex = 3;
-            this.labelEndStation.Text = "End:";
             // 
             // confirmRouteButton
             // 
@@ -103,6 +69,42 @@
             this.confirmRouteButton.Text = "Confirm";
             this.confirmRouteButton.UseVisualStyleBackColor = true;
             this.confirmRouteButton.Click += new System.EventHandler(this.confirmRouteButton_Click);
+            // 
+            // labelEndStation
+            // 
+            this.labelEndStation.AutoSize = true;
+            this.labelEndStation.Location = new System.Drawing.Point(10, 52);
+            this.labelEndStation.Name = "labelEndStation";
+            this.labelEndStation.Size = new System.Drawing.Size(29, 13);
+            this.labelEndStation.TabIndex = 3;
+            this.labelEndStation.Text = "End:";
+            // 
+            // comboBoxEnd
+            // 
+            this.comboBoxEnd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEnd.FormattingEnabled = true;
+            this.comboBoxEnd.Location = new System.Drawing.Point(73, 49);
+            this.comboBoxEnd.Name = "comboBoxEnd";
+            this.comboBoxEnd.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxEnd.TabIndex = 2;
+            // 
+            // comboBoxStart
+            // 
+            this.comboBoxStart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxStart.FormattingEnabled = true;
+            this.comboBoxStart.Location = new System.Drawing.Point(73, 17);
+            this.comboBoxStart.Name = "comboBoxStart";
+            this.comboBoxStart.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxStart.TabIndex = 1;
+            // 
+            // labelStartStation
+            // 
+            this.labelStartStation.AutoSize = true;
+            this.labelStartStation.Location = new System.Drawing.Point(10, 20);
+            this.labelStartStation.Name = "labelStartStation";
+            this.labelStartStation.Size = new System.Drawing.Size(32, 13);
+            this.labelStartStation.TabIndex = 0;
+            this.labelStartStation.Text = "Start:";
             // 
             // RoutesForm
             // 
@@ -124,8 +126,8 @@
         private System.Windows.Forms.ListView listViewRoutes;
         private System.Windows.Forms.GroupBox groupBoxRoutes;
         private System.Windows.Forms.Label labelEndStation;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxEnd;
+        private System.Windows.Forms.ComboBox comboBoxStart;
         private System.Windows.Forms.Label labelStartStation;
         private System.Windows.Forms.Button confirmRouteButton;
     }

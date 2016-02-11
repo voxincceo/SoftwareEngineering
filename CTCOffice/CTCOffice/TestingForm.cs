@@ -25,6 +25,8 @@ namespace CTCOffice
             initializeInputList();
             initializeOutputList();
             initializeTrainsAndTrack();
+
+            CTCOffice.startSystemTest();
         }
 
         private void initializeTrainsAndTrack()

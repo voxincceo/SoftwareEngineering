@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,10 @@ namespace CTCOffice
     class Train
     {
         private int number, onSegment, position, speed, authority;
-        private string direction;
+        private string direction, line;
         private System.Timers.Timer timer;
+        private ArrayList route;
+        private Dictionary<string, double> schedule;
 
         public Train()
         {
@@ -20,6 +23,10 @@ namespace CTCOffice
             speed = 0;
             authority = 0;
             direction = "None";
+            line = "Black";
+
+            route = new ArrayList();
+            schedule = new Dictionary<string, double>();
 
             timer = new System.Timers.Timer(100);
             timer.Elapsed += timer_Elapsed;
@@ -56,6 +63,16 @@ namespace CTCOffice
             direction = newDirection;
         }
 
+        public void updateLine(string newLine)
+        {
+            line = newLine;
+        }
+
+        public string getLine()
+        {
+            return line;
+        }
+
         public int getPosition()
         {
             return position;
@@ -86,7 +103,7 @@ namespace CTCOffice
             return direction;
         }
 
-        public void calculatePositionAndAuthority()
+        private void calculatePositionAndAuthority()
         {
             int changeInPosition = speed / 36;  // km/h * 1000m / 3600s / 1000ms * 100ms
 
@@ -100,6 +117,26 @@ namespace CTCOffice
             }
 
             authority = authority - changeInPosition;
+        }
+
+        public void changeRoute(ArrayList newRoute)
+        {
+            route = newRoute;
+        }
+
+        public void changeSchedule(Dictionary<string, double> newSchedule)
+        {
+            schedule = newSchedule;
+        }
+
+        public ArrayList getRoute()
+        {
+            return route;
+        }
+
+        public Dictionary<string, double> getSchedule()
+        {
+            return schedule;
         }
     }
 }
