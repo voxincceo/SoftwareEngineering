@@ -1,6 +1,6 @@
 ﻿namespace CTCOffice
 {
-    partial class Form1
+    partial class CTC
     {
         /// <summary>
         /// Required designer variable.
@@ -40,14 +40,10 @@
             this.systemListView = new System.Windows.Forms.ListView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openCloseButton = new System.Windows.Forms.Button();
-            this.segmentLabel = new System.Windows.Forms.Label();
-            this.listBoxSegments = new System.Windows.Forms.ListBox();
             this.listViewTrack = new System.Windows.Forms.ListView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.routeButton = new System.Windows.Forms.Button();
-            this.labelTrains = new System.Windows.Forms.Label();
             this.scheduleButton = new System.Windows.Forms.Button();
-            this.listBoxTrains = new System.Windows.Forms.ListBox();
             this.listViewTrains = new System.Windows.Forms.ListView();
             this.moduleBox.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -160,8 +156,6 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.openCloseButton);
-            this.tabPage2.Controls.Add(this.segmentLabel);
-            this.tabPage2.Controls.Add(this.listBoxSegments);
             this.tabPage2.Controls.Add(this.listViewTrack);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -173,7 +167,7 @@
             // 
             // openCloseButton
             // 
-            this.openCloseButton.Location = new System.Drawing.Point(129, 318);
+            this.openCloseButton.Location = new System.Drawing.Point(6, 476);
             this.openCloseButton.Name = "openCloseButton";
             this.openCloseButton.Size = new System.Drawing.Size(100, 25);
             this.openCloseButton.TabIndex = 3;
@@ -181,37 +175,19 @@
             this.openCloseButton.UseVisualStyleBackColor = true;
             this.openCloseButton.Click += new System.EventHandler(this.openCloseButton_Click);
             // 
-            // segmentLabel
-            // 
-            this.segmentLabel.AutoSize = true;
-            this.segmentLabel.Location = new System.Drawing.Point(3, 302);
-            this.segmentLabel.Name = "segmentLabel";
-            this.segmentLabel.Size = new System.Drawing.Size(54, 13);
-            this.segmentLabel.TabIndex = 2;
-            this.segmentLabel.Text = "Segments";
-            // 
-            // listBoxSegments
-            // 
-            this.listBoxSegments.FormattingEnabled = true;
-            this.listBoxSegments.Location = new System.Drawing.Point(3, 318);
-            this.listBoxSegments.Name = "listBoxSegments";
-            this.listBoxSegments.Size = new System.Drawing.Size(120, 186);
-            this.listBoxSegments.TabIndex = 1;
-            // 
             // listViewTrack
             // 
             this.listViewTrack.Location = new System.Drawing.Point(4, 4);
             this.listViewTrack.Name = "listViewTrack";
-            this.listViewTrack.Size = new System.Drawing.Size(862, 284);
+            this.listViewTrack.Size = new System.Drawing.Size(862, 466);
             this.listViewTrack.TabIndex = 0;
             this.listViewTrack.UseCompatibleStateImageBehavior = false;
+            this.listViewTrack.SelectedIndexChanged += new System.EventHandler(this.listViewTrack_SelectedIndexChanged);
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.routeButton);
-            this.tabPage3.Controls.Add(this.labelTrains);
             this.tabPage3.Controls.Add(this.scheduleButton);
-            this.tabPage3.Controls.Add(this.listBoxTrains);
             this.tabPage3.Controls.Add(this.listViewTrains);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -222,7 +198,7 @@
             // 
             // routeButton
             // 
-            this.routeButton.Location = new System.Drawing.Point(130, 350);
+            this.routeButton.Location = new System.Drawing.Point(110, 479);
             this.routeButton.Name = "routeButton";
             this.routeButton.Size = new System.Drawing.Size(100, 25);
             this.routeButton.TabIndex = 4;
@@ -230,18 +206,9 @@
             this.routeButton.UseVisualStyleBackColor = true;
             this.routeButton.Click += new System.EventHandler(this.routeButton_Click);
             // 
-            // labelTrains
-            // 
-            this.labelTrains.AutoSize = true;
-            this.labelTrains.Location = new System.Drawing.Point(4, 299);
-            this.labelTrains.Name = "labelTrains";
-            this.labelTrains.Size = new System.Drawing.Size(36, 13);
-            this.labelTrains.TabIndex = 3;
-            this.labelTrains.Text = "Trains";
-            // 
             // scheduleButton
             // 
-            this.scheduleButton.Location = new System.Drawing.Point(130, 318);
+            this.scheduleButton.Location = new System.Drawing.Point(4, 479);
             this.scheduleButton.Name = "scheduleButton";
             this.scheduleButton.Size = new System.Drawing.Size(100, 25);
             this.scheduleButton.TabIndex = 2;
@@ -249,37 +216,27 @@
             this.scheduleButton.UseVisualStyleBackColor = true;
             this.scheduleButton.Click += new System.EventHandler(this.scheduleButton_Click);
             // 
-            // listBoxTrains
-            // 
-            this.listBoxTrains.FormattingEnabled = true;
-            this.listBoxTrains.Location = new System.Drawing.Point(4, 318);
-            this.listBoxTrains.Name = "listBoxTrains";
-            this.listBoxTrains.Size = new System.Drawing.Size(120, 186);
-            this.listBoxTrains.TabIndex = 1;
-            // 
             // listViewTrains
             // 
             this.listViewTrains.Location = new System.Drawing.Point(4, 4);
             this.listViewTrains.Name = "listViewTrains";
-            this.listViewTrains.Size = new System.Drawing.Size(862, 284);
+            this.listViewTrains.Size = new System.Drawing.Size(862, 469);
             this.listViewTrains.TabIndex = 0;
             this.listViewTrains.UseCompatibleStateImageBehavior = false;
             // 
-            // Form1
+            // CTC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(901, 557);
             this.Controls.Add(this.tabControl);
-            this.Name = "Form1";
+            this.Name = "CTC";
             this.Text = "CTC Office";
             this.moduleBox.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -298,13 +255,9 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ListView listViewTrack;
         private System.Windows.Forms.ListView listViewTrains;
-        private System.Windows.Forms.Label segmentLabel;
-        private System.Windows.Forms.ListBox listBoxSegments;
         private System.Windows.Forms.Button openCloseButton;
         private System.Windows.Forms.Button routeButton;
-        private System.Windows.Forms.Label labelTrains;
         private System.Windows.Forms.Button scheduleButton;
-        private System.Windows.Forms.ListBox listBoxTrains;
         private System.Windows.Forms.ListView errorListView;
         private System.Windows.Forms.ListView systemListView;
     }
