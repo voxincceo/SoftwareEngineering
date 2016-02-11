@@ -168,5 +168,15 @@ namespace CTCOffice
         {
             return routeSegments;
         }
+
+        public void Start()
+        {
+            timer.Start();
+        }
+
+        public void Stop()
+        {
+            timer.Stop();
+        }
     }
 }

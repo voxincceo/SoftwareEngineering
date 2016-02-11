@@ -30,8 +30,6 @@ namespace CTCOffice
 
             testingForm = new TestingForm(this);
             testingForm.Show();
-
-            //InitializeGraphics();
         }
 
         void systemTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -112,7 +110,7 @@ namespace CTCOffice
 
                     foreach (KeyValuePair<int, TrackSegment> pair in train.GetRouteSegments().GetRoute())
                     {
-                        if (pair.Value.getOpenClosed().Equals("Closed") || pair.Value.getFailure().Equals("Segment Failure"))
+                        if (pair.Value.getOpenClosed().Equals("Closed") || pair.Value.getFailure().Equals("Failure"))
                         {
                             closedSegment = 1;
                             if (pair.Value.Equals(central.getTrackSegment(train.getSegment())))
@@ -146,7 +144,7 @@ namespace CTCOffice
                                             for (int i = 1; !pair.Value.Equals(central.getTrackSegment(train.getSegment() - i)); i++)
                                             {
                                                 newAuthority += central.getTrackSegment(train.getSegment() - i).getLength();
-                                                if (train.getSegment() + i - 1 < 1)
+                                                if (train.getSegment() - i - 1 < 1)
                                                 {
                                                     break;
                                                 }
@@ -236,15 +234,18 @@ namespace CTCOffice
                             testingForm.updateTrainSpeed(train.getNumber(), speed);
                         }
                     }
-
-                    this.Invoke(new MethodInvoker(delegate()
+                    if (IsHandleCreated && !IsDisposed)
                     {
-                        testingForm.UpdateTrainAuthority(train.getNumber(), train.getAuthority());
-                        listViewTrains.Items[0].SubItems[4].Text = train.getAuthority().ToString();
-                        listViewTrains.Items[0].SubItems[1].Text = train.getSegment().ToString();
-                        listViewTrains.Items[0].SubItems[2].Text = train.getSpeed().ToString();
-                        systemGraphics.Refresh();
-                    }));
+                        this.Invoke(new MethodInvoker(delegate()
+                        {
+                            testingForm.UpdateTrainAuthority(train.getNumber(), train.getAuthority());
+                            systemListView.Items[0].SubItems[1].Text = (60 / central.getTrain(1).getSchedule()[central.getTrain(1).GetRouteSegments().GetStationEnd()]).ToString();
+                            listViewTrains.Items[0].SubItems[4].Text = train.getAuthority().ToString();
+                            listViewTrains.Items[0].SubItems[1].Text = train.getSegment().ToString();
+                            listViewTrains.Items[0].SubItems[2].Text = train.getSpeed().ToString();
+                            systemGraphics.Refresh();
+                        }));
+                    }
                 }
             }
         }
@@ -261,7 +262,7 @@ namespace CTCOffice
         public void trainSpeed(int train, double speed)
         {
             central.getTrain(train).updateTrainSpeed(speed);
-            this.Invoke(new MethodInvoker(delegate()
+            this.Invoke(new Action(() =>
             {
                 listViewTrains.Items[0].SubItems[2].Text = speed.ToString();
             }));
@@ -436,7 +437,7 @@ namespace CTCOffice
 
             ListViewItem systemThroughputLVI = new ListViewItem();
             systemThroughputLVI.Text = "System Throughput (Trains per Hour)";
-            systemThroughputLVI.SubItems.Add("3");
+            systemThroughputLVI.SubItems.Add("N/A");
 
             ListViewItem trackHeaterLVI = new ListViewItem();
             trackHeaterLVI.Text = "Track Heater";
@@ -525,20 +526,31 @@ namespace CTCOffice
             }
         }
 
-        public void UpdateGraphics()
-        {
-
-        }
-
         private void systemGraphics_Paint(object sender, PaintEventArgs e)
         {
-            SolidBrush drawBrush = new SolidBrush(Color.Black);
-            Pen trainPen = new Pen(Color.Red, 2);
+            SolidBrush blackBrush = new SolidBrush(Color.Black);
+            SolidBrush redBrush = new SolidBrush(Color.Red);
+            SolidBrush orangeBrush = new SolidBrush(Color.Orange);
+            SolidBrush colorBrush;
+            Pen trainPen = new Pen(Color.DeepSkyBlue, 4);
             int startX = 250, startY = 200;
 
             foreach (TrackSegment segment in central.getTrackSegments())
             {
-                e.Graphics.FillRectangle(drawBrush, new Rectangle(startX, startY, segment.getLength(), 10));
+                if (segment.getFailure().Equals("Failure"))
+                {
+                    colorBrush = redBrush;
+                }
+                else if (segment.getOpenClosed().Equals("Closed"))
+                {
+                    colorBrush = orangeBrush;
+                }
+                else
+                {
+                    colorBrush = blackBrush;
+                }
+
+                e.Graphics.FillRectangle(colorBrush, new Rectangle(startX, startY, segment.getLength(), 10));
                 startX += segment.getLength() + 5;
             }
 
@@ -575,8 +587,56 @@ namespace CTCOffice
                     }
                 }
 
-                e.Graphics.DrawEllipse(trainPen, new Rectangle(250 + position, 196, 16, 16));
+                e.Graphics.DrawEllipse(trainPen, new Rectangle(250 + position, 197, 16, 16));
             }
+        }
+
+        private void CTC_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            testingForm.Dispose();
+        }
+
+        public void UpdateTrackHeater(string text)
+        {
+            systemListView.Items[1].SubItems[1].Text = text;
+        }
+
+        public void UpdateTrackCiruitFailure(string text)
+        {
+            errorListView.Items[1].SubItems[1].Text = text;
+
+            if (text.Equals("None"))
+            {
+                systemTimer.Start();
+                central.getTrain(1).Start();
+            }
+            else
+            {
+                systemTimer.Stop();
+                central.getTrain(1).Stop();
+            }
+        }
+
+        public void UpdatePowerFailure(string text)
+        {
+            errorListView.Items[0].SubItems[1].Text = text;
+
+            if (text.Equals("None"))
+            {
+                systemTimer.Start();
+                central.getTrain(1).Start();
+            }
+            else
+            {
+                systemTimer.Stop();
+                central.getTrain(1).Stop();
+            }
+        }
+
+        public void UpdateTrackSegmentFailure(int number, string text)
+        {
+            central.updateSegmentFailure(number, text);
+            listViewTrack.Items[number - 1].SubItems[4].Text = text;
         }
     }
 }

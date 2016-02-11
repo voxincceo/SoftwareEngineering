@@ -26,11 +26,22 @@ namespace CTCOffice
             initializeOutputList();
             initializeTrainsAndTrack();
 
+            breakSegmentButton.Enabled = false;
+
             CTCOffice.DevelopTestSchedule();
         }
 
         private void initializeTrainsAndTrack()
         {
+            buttonCircuit.Enabled = false;
+            buttonPower.Enabled = false;
+
+            comboBoxSegments.Items.Add("Track 1");
+            comboBoxSegments.Items.Add("Track 2");
+            comboBoxSegments.Items.Add("Track 3");
+            comboBoxSegments.Items.Add("Track 4");
+            comboBoxSegments.Items.Add("Track 5");
+
             trains = new ArrayList();
             segments = new ArrayList();
 
@@ -262,33 +273,128 @@ namespace CTCOffice
 
         public void updateTrainSpeed(int number, double speed)
         {
-            this.Invoke(new MethodInvoker(delegate()
+            if (IsHandleCreated && !IsDisposed)
             {
-                listViewOutputs.Items[0].SubItems[1].Text = speed.ToString();
-            }));
-            updateTrainSpeedInput(number, speed);
+                listViewOutputs.Invoke(new Action(() =>
+                {
+                    listViewOutputs.Items[0].SubItems[1].Text = speed.ToString();
+                }));
+                updateTrainSpeedInput(number, speed);
+            }
         }
 
         private void updateTrainSpeedInput(int number, double speed)
         {
-            this.Invoke(new MethodInvoker(delegate()
+            if (IsHandleCreated && !IsDisposed)
             {
-                listViewInputs.Items[0].SubItems[1].Text = speed.ToString();
-            }));
-            CTCOffice.trainSpeed(number, speed);
+                this.Invoke(new MethodInvoker(delegate()
+                {
+                    listViewInputs.Items[0].SubItems[1].Text = speed.ToString();
+                }));
+                CTCOffice.trainSpeed(number, speed);
+            }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            buttonPower.Enabled = true;
+            buttonCircuit.Enabled = true;
             CTCOffice.startSystemTest();
         }
 
         public void UpdateTrainAuthority(int number, double authority)
         {
-            this.Invoke(new MethodInvoker(delegate()
+            if (IsHandleCreated && !IsDisposed)
             {
-                listViewOutputs.Items[1].SubItems[1].Text = authority.ToString();
-            }));
+                listViewOutputs.Invoke(new Action(() =>
+                {
+                    listViewOutputs.Items[1].SubItems[1].Text = authority.ToString();
+                }));
+            }
+        }
+
+        private void TestingForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CTCOffice.Close();
+        }
+
+        private void breakSegmentButton_Click(object sender, EventArgs e)
+        {
+            string trackSegment = comboBoxSegments.SelectedItem.ToString();
+            string status;
+
+            status = listViewInputs.Items[(4 * (int)Char.GetNumericValue(trackSegment[6])) + 1].SubItems[1].Text;
+
+            if(status.Equals("None"))
+            {
+                status = "Failure";
+            }
+            else
+            {
+                status = "None";
+            }
+
+            listViewInputs.Items[(4 * (int)Char.GetNumericValue(trackSegment[6])) + 1].SubItems[1].Text = status;
+            CTCOffice.UpdateTrackSegmentFailure((int)Char.GetNumericValue(trackSegment[6]), status);
+        }
+
+        private void buttonPower_Click(object sender, EventArgs e)
+        {
+            string currentText = listViewInputs.Items[23].SubItems[1].Text;
+            string newText;
+
+            if (currentText.Equals("None"))
+            {
+                newText = "Failure";
+            }
+            else
+            {
+                newText = "None";
+            }
+
+            listViewInputs.Items[23].SubItems[1].Text = newText;
+            CTCOffice.UpdatePowerFailure(newText);
+        }
+
+        private void buttonCircuit_Click(object sender, EventArgs e)
+        {
+            string currentText = listViewInputs.Items[24].SubItems[1].Text;
+            string newText;
+
+            if (currentText.Equals("None"))
+            {
+                newText = "Failure";
+            }
+            else
+            {
+                newText = "None";
+            }
+
+            listViewInputs.Items[24].SubItems[1].Text = newText;
+            CTCOffice.UpdateTrackCiruitFailure(newText);
+        }
+
+        private void buttonHeater_Click(object sender, EventArgs e)
+        {
+            string currentText = listViewInputs.Items[2].SubItems[1].Text;
+            string newText;
+
+            if (currentText.Equals("Off"))
+            {
+                newText = "On";
+            }
+            else
+            {
+                newText = "Off";
+            }
+
+            listViewInputs.Items[2].SubItems[1].Text = newText;
+            CTCOffice.UpdateTrackHeater(newText);
+        }
+
+        private void comboBoxSegments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            breakSegmentButton.Enabled = true;
         }
     }
 }
