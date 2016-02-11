@@ -15,6 +15,7 @@ namespace CTCOffice
     {
         private ControlSystem central;
         private TestingForm testingForm;
+        private System.Timers.Timer systemTimer;
 
         public CTC()
         {
@@ -29,6 +30,106 @@ namespace CTCOffice
 
             testingForm = new TestingForm(this);
             testingForm.Show();
+        }
+
+        void systemTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            ArrayList trainList = central.getTrains();
+            ArrayList segmentList = central.getTrackSegments();
+            int authority = 0, number = 0;
+            double speed = 0;
+
+            foreach (Train train in trainList)
+            {
+                if (train.getSegment() == 0)
+                {
+                    number = train.getNumber();
+
+                    testingForm.updateTrainSegment(number, 1);
+                    
+                    foreach (TrackSegment segment in segmentList)
+                    {
+                        authority += segment.getLength();
+                    }
+                    testingForm.UpdateTrainAuthority(number, authority);
+                    train.updateAuthority(authority);
+
+                    speed = (authority / (train.getSchedule()["Station 2"] - 1) / 60);
+
+                    if (speed > (double) central.getTrackSegment(1).getSpeedLimit() / 3.6)
+                    {
+                        testingForm.updateTrainSpeed(number, (double) central.getTrackSegment(1).getSpeedLimit());
+                    }
+                    else
+                    {
+                        testingForm.updateTrainSpeed(number, speed);
+                    }
+
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        listViewTrains.Items[0].SubItems[4].Text = authority.ToString();
+                        listViewTrains.Items[0].SubItems[3].Text = "East";
+                    }));
+                    train.updateDirection("East");
+                }
+                else
+                {
+                    if (train.getPosition() >= central.getTrackSegment(train.getSegment()).getLength())
+                    {
+                        if (train.getSegment() != 5)
+                        {
+                            train.updatePosition(train.getPosition() - central.getTrackSegment(train.getSegment()).getLength());
+                            testingForm.updateTrainSegment(train.getNumber(), train.getSegment() + 1);
+                        }
+                    }
+
+                    speed = (train.getAuthority() / (train.getSchedule()["Station 2"] - 1 - (train.getTimeOnSchedule() / 60)) / 60);
+
+                    speed *= 3.6;
+
+                    if (speed > central.getTrackSegment(train.getSegment()).getSpeedLimit() || speed < 0)
+                    {
+                        testingForm.updateTrainSpeed(train.getNumber(), central.getTrackSegment(train.getSegment()).getSpeedLimit());
+                    }
+                    else
+                    {
+                        if (train.getAuthority() <= 0)
+                        {
+                            testingForm.updateTrainSpeed(train.getNumber(), 0);
+                        }
+                        else
+                        {
+                            testingForm.updateTrainSpeed(train.getNumber(), speed);
+                        }
+                    }
+
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        testingForm.UpdateTrainAuthority(train.getNumber(), train.getAuthority());
+                        listViewTrains.Items[0].SubItems[4].Text = train.getAuthority().ToString();
+                        listViewTrains.Items[0].SubItems[1].Text = train.getSegment().ToString();
+                        listViewTrains.Items[0].SubItems[2].Text = train.getSpeed().ToString();
+                    }));
+                }
+            }
+        }
+
+        public void trainSegment(int train, int segment)
+        {
+            central.getTrain(train).updateSegment(segment);
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewTrains.Items[0].SubItems[1].Text = segment.ToString();
+            }));
+        }
+
+        public void trainSpeed(int train, double speed)
+        {
+            central.getTrain(train).updateTrainSpeed(speed);
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewTrains.Items[0].SubItems[2].Text = speed.ToString();
+            }));
         }
 
         public void initializeSystemTrains(ArrayList trains)
@@ -66,18 +167,23 @@ namespace CTCOffice
                 {
                     case 1:
                         temporarySegment.updateSpeedLimit(10);
+                        temporarySegment.setLength(35);
                         break;
                     case 2:
                         temporarySegment.updateSpeedLimit(35);
+                        temporarySegment.setLength(50);
                         break;
                     case 3:
                         temporarySegment.updateSpeedLimit(50);
+                        temporarySegment.setLength(150);
                         break;
                     case 4:
                         temporarySegment.updateSpeedLimit(35);
+                        temporarySegment.setLength(50);
                         break;
                     case 5:
                         temporarySegment.updateSpeedLimit(10);
+                        temporarySegment.setLength(35);
                         break;
                 }
 
@@ -96,11 +202,20 @@ namespace CTCOffice
         public void openCloseSegment(int number, string text)
         {
             central.getTrackSegment(number).updateOpenClosed(text);
-
-            listViewTrack.Items[number - 1].SubItems[3].Text = text;
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewTrack.Items[number - 1].SubItems[3].Text = text;
+            }));
         }
 
         public void startSystemTest()
+        {
+            systemTimer = new System.Timers.Timer(50);
+            systemTimer.Elapsed += systemTimer_Elapsed;
+            systemTimer.Enabled = true;
+        }
+
+        public void DevelopTestSchedule()
         {
             ArrayList route = new ArrayList();
             route.Add("Black");
@@ -108,7 +223,7 @@ namespace CTCOffice
             route.Add("Station 2");
 
             Dictionary<string, double> schedule = new Dictionary<string, double>();
-            schedule.Add("Station 2", 1.4);
+            schedule.Add("Station 2", 2.4);
 
             central.updateTrainRoute(route, 1);
             central.updateTrainSchedule(schedule, 1);
@@ -265,6 +380,11 @@ namespace CTCOffice
                    openCloseButton.Text = "Open";
                }
             }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
         }
     }
 }

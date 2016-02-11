@@ -127,5 +127,27 @@ namespace CTCOffice
         {
             trains[number].changeSchedule(schedule);
         }
+
+        public ArrayList getTrains()
+        {
+            ArrayList trainList = new ArrayList();
+            foreach (KeyValuePair<int, Train> pair in trains)
+            {
+                trainList.Add(pair.Value);
+            }
+
+            return trainList;
+        }
+
+        public ArrayList getTrackSegments()
+        {
+            ArrayList segmentList = new ArrayList();
+            foreach (KeyValuePair<int, TrackSegment> pair in trackSegments)
+            {
+                segmentList.Add(pair.Value);
+            }
+
+            return segmentList;
+        }
     }
 }

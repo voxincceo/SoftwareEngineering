@@ -26,7 +26,7 @@ namespace CTCOffice
             initializeOutputList();
             initializeTrainsAndTrack();
 
-            CTCOffice.startSystemTest();
+            CTCOffice.DevelopTestSchedule();
         }
 
         private void initializeTrainsAndTrack()
@@ -235,14 +235,60 @@ namespace CTCOffice
 
         public void updateSegment(int number, string text)
         {
-            listViewOutputs.Items[number + 1].SubItems[1].Text = text;
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewOutputs.Items[number + 1].SubItems[1].Text = text;
+            }));
             UpdateSegmentInput(number, text);
         }
 
-        public void UpdateSegmentInput(int number, string text)
+        private void UpdateSegmentInput(int number, string text)
         {
-            listViewInputs.Items[4 * number].SubItems[1].Text = text;
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewInputs.Items[4 * number].SubItems[1].Text = text;
+            }));
             CTCOffice.openCloseSegment(number, text);
+        }
+
+        public void updateTrainSegment(int number, int segment)
+        {
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewInputs.Items[1].SubItems[1].Text = segment.ToString();
+            }));
+            CTCOffice.trainSegment(number, segment);
+        }
+
+        public void updateTrainSpeed(int number, double speed)
+        {
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewOutputs.Items[0].SubItems[1].Text = speed.ToString();
+            }));
+            updateTrainSpeedInput(number, speed);
+        }
+
+        private void updateTrainSpeedInput(int number, double speed)
+        {
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewInputs.Items[0].SubItems[1].Text = speed.ToString();
+            }));
+            CTCOffice.trainSpeed(number, speed);
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            CTCOffice.startSystemTest();
+        }
+
+        public void UpdateTrainAuthority(int number, double authority)
+        {
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                listViewOutputs.Items[1].SubItems[1].Text = authority.ToString();
+            }));
         }
     }
 }

@@ -9,7 +9,8 @@ namespace CTCOffice
 {
     class Train
     {
-        private int number, onSegment, position, speed, authority;
+        private int number, onSegment;
+        private double position, authority, timeOnSchedule, speed;
         private string direction, line;
         private System.Timers.Timer timer;
         private ArrayList route;
@@ -22,6 +23,7 @@ namespace CTCOffice
             position = 0;
             speed = 0;
             authority = 0;
+            timeOnSchedule = 0;
             direction = "None";
             line = "Black";
 
@@ -48,12 +50,12 @@ namespace CTCOffice
             onSegment = newOnSegment;
         }
 
-        public void updateTrainSpeed(int newSpeed)
+        public void updateTrainSpeed(double newSpeed)
         {
             speed = newSpeed;
         }
 
-        public void updateAuthority(int newAuthority)
+        public void updateAuthority(double newAuthority)
         {
             authority = newAuthority;
         }
@@ -68,12 +70,22 @@ namespace CTCOffice
             line = newLine;
         }
 
+        public void updatePosition(double newPosition)
+        {
+            position = newPosition;
+        }
+
+        public void setTimeOnSchedule(double time)
+        {
+            timeOnSchedule = time;
+        }
+
         public string getLine()
         {
             return line;
         }
 
-        public int getPosition()
+        public double getPosition()
         {
             return position;
         }
@@ -88,12 +100,12 @@ namespace CTCOffice
             return number;
         }
 
-        public int getSpeed()
+        public double getSpeed()
         {
             return speed;
         }
 
-        public int getAuthority()
+        public double getAuthority()
         {
             return authority;
         }
@@ -103,9 +115,14 @@ namespace CTCOffice
             return direction;
         }
 
+        public double getTimeOnSchedule()
+        {
+            return timeOnSchedule;
+        }
+
         private void calculatePositionAndAuthority()
         {
-            int changeInPosition = speed / 36;  // km/h * 1000m / 3600s / 1000ms * 100ms
+            double changeInPosition = (double) speed / 36;  // km/h * 1000m / 3600s / 1000ms * 100ms
 
             if(direction.Equals("East"))
             {
@@ -117,6 +134,10 @@ namespace CTCOffice
             }
 
             authority = authority - changeInPosition;
+            if (changeInPosition > 0)
+            {
+                timeOnSchedule += 0.1;
+            }
         }
 
         public void changeRoute(ArrayList newRoute)

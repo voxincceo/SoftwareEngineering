@@ -30,6 +30,7 @@
         {
             this.listViewInputs = new System.Windows.Forms.ListView();
             this.listViewOutputs = new System.Windows.Forms.ListView();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewInputs
@@ -48,11 +49,22 @@
             this.listViewOutputs.TabIndex = 1;
             this.listViewOutputs.UseCompatibleStateImageBehavior = false;
             // 
+            // buttonStart
+            // 
+            this.buttonStart.Location = new System.Drawing.Point(274, 537);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(182, 23);
+            this.buttonStart.TabIndex = 2;
+            this.buttonStart.Text = "Start Test";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
             // TestingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 543);
+            this.ClientSize = new System.Drawing.Size(732, 570);
+            this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.listViewOutputs);
             this.Controls.Add(this.listViewInputs);
             this.Name = "TestingForm";
@@ -65,6 +77,7 @@
 
         private System.Windows.Forms.ListView listViewInputs;
         private System.Windows.Forms.ListView listViewOutputs;
+        private System.Windows.Forms.Button buttonStart;
 
     }
 }
