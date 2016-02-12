@@ -638,5 +638,11 @@ namespace CTCOffice
             central.updateSegmentFailure(number, text);
             listViewTrack.Items[number - 1].SubItems[4].Text = text;
         }
+
+        private void buttonDispatch_Click(object sender, EventArgs e)
+        {
+            TrainDispatch trainDispatch = new TrainDispatch(this);
+            trainDispatch.Show();
+        }
     }
 }

@@ -46,6 +46,7 @@
             this.routeButton = new System.Windows.Forms.Button();
             this.scheduleButton = new System.Windows.Forms.Button();
             this.listViewTrains = new System.Windows.Forms.ListView();
+            this.buttonDispatch = new System.Windows.Forms.Button();
             this.moduleBox.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -198,6 +199,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.buttonDispatch);
             this.tabPage3.Controls.Add(this.routeButton);
             this.tabPage3.Controls.Add(this.scheduleButton);
             this.tabPage3.Controls.Add(this.listViewTrains);
@@ -235,6 +237,16 @@
             this.listViewTrains.Size = new System.Drawing.Size(862, 469);
             this.listViewTrains.TabIndex = 0;
             this.listViewTrains.UseCompatibleStateImageBehavior = false;
+            // 
+            // buttonDispatch
+            // 
+            this.buttonDispatch.Location = new System.Drawing.Point(216, 479);
+            this.buttonDispatch.Name = "buttonDispatch";
+            this.buttonDispatch.Size = new System.Drawing.Size(100, 25);
+            this.buttonDispatch.TabIndex = 5;
+            this.buttonDispatch.Text = "Dispatch Train";
+            this.buttonDispatch.UseVisualStyleBackColor = true;
+            this.buttonDispatch.Click += new System.EventHandler(this.buttonDispatch_Click);
             // 
             // CTC
             // 
@@ -275,6 +287,7 @@
         private System.Windows.Forms.ListView errorListView;
         private System.Windows.Forms.ListView systemListView;
         private System.Windows.Forms.PictureBox systemGraphics;
+        private System.Windows.Forms.Button buttonDispatch;
     }
 }
 

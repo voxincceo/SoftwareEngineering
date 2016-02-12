@@ -20,3 +20,4 @@ C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CT
 C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.RoutesForm.resources
 C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.ScheduleForm.resources
 C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.CTC.resources
+C:\Users\Luke\Documents\Git\SoftwareEngineering\CTCOffice\CTCOffice\obj\Debug\CTCOffice.TrainDispatch.resources
