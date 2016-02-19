@@ -75,7 +75,7 @@
             this.buttonDispatch.TabIndex = 4;
             this.buttonDispatch.Text = "Dispatch";
             this.buttonDispatch.UseVisualStyleBackColor = true;
-            this.buttonDispatch.Click += new System.EventHandler(this.buttonDispatch_Click);
+            this.buttonDispatch.Click += new System.EventHandler(this.ButtonDispatch_Click);
             // 
             // TrainDispatch
             // 

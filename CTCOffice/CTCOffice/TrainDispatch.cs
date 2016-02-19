@@ -21,7 +21,7 @@ namespace CTCOffice
             office = update;
         }
 
-        private void buttonDispatch_Click(object sender, EventArgs e)
+        private void ButtonDispatch_Click(object sender, EventArgs e)
         {
             int number = 0, result = 0, segment = 0;
             string message = "", title = "";
@@ -55,8 +55,8 @@ namespace CTCOffice
             if (result == 1)
             {
                 train.Add(number);
-                office.initializeSystemTrains(train);
-                office.trainSegment(number, segment);
+                office.InitializeSystemTrains(train);
+                office.SetTrainSegment(number, segment);
             }
         }
     }

@@ -68,7 +68,7 @@
             this.confirmRouteButton.TabIndex = 4;
             this.confirmRouteButton.Text = "Confirm";
             this.confirmRouteButton.UseVisualStyleBackColor = true;
-            this.confirmRouteButton.Click += new System.EventHandler(this.confirmRouteButton_Click);
+            this.confirmRouteButton.Click += new System.EventHandler(this.ConfirmRouteButton_Click);
             // 
             // labelEndStation
             // 

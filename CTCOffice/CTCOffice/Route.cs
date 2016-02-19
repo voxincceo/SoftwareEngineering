@@ -59,6 +59,10 @@ namespace CTCOffice
         {
             stationEnd = value;
         }
-   
+
+        public int GetNumberOfSegmentsInRoute()
+        {
+            return route.Count;
+        }
     }
 }

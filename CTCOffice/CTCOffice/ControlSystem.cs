@@ -20,33 +20,33 @@ namespace CTCOffice
             segmentsInRoute = new Dictionary<string, Route>();
         }
 
-        public void createTrain(int number)
+        public void CreateTrain(int number)
         {
             Train temporaryTrain = new Train();
-            temporaryTrain.setNumber(number);
+            temporaryTrain.SetNumber(number);
 
             trains.Add(number, temporaryTrain);
         }
 
-        public void createTrackSegment(int number)
+        public void CreateTrackSegment(int number)
         {
             TrackSegment temporaryTrackSegment = new TrackSegment();
-            temporaryTrackSegment.setNumber(number);
+            temporaryTrackSegment.SetNumber(number);
 
             trackSegments.Add(number, temporaryTrackSegment);
         }
 
-        public Train getTrain(int number)
+        public Train GetTrain(int number)
         {
             return trains[number];
         }
 
-        public TrackSegment getTrackSegment(int number)
+        public TrackSegment GetTrackSegment(int number)
         {
             return trackSegments[number];
         }
 
-        public void updateTrainSpeed(int number, int speed)
+        public void UpdateTrainSpeed(int number, int speed)
         {
             Train temporaryTrain = trains[number];
             /*int oldOnSegment = temporaryTrain.getSegment();
@@ -68,69 +68,69 @@ namespace CTCOffice
                 }
             }*/
 
-            temporaryTrain.updateTrainSpeed(speed);
+            temporaryTrain.SetTrainSpeed(speed);
         }
 
-        public void updateTrainSegment(int number, int segment)
+        public void UpdateTrainSegment(int number, int segment)
         {
             Train temporaryTrain = trains[number];
 
-            temporaryTrain.updateSegment(segment);
+            temporaryTrain.SetSegment(segment);
         }
 
-        public void updateTrainAuthority(int number, int authority)
+        public void UpdateTrainAuthority(int number, int authority)
         {
             Train temporaryTrain = trains[number];
 
-            temporaryTrain.updateAuthority(authority);
+            temporaryTrain.SetAuthority(authority);
         }
 
-        public void updateSegmentLine(int number, string line)
+        public void UpdateSegmentLine(int number, string line)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
-            temporaryTrackSegment.updateLine(line);
+            temporaryTrackSegment.SetLine(line);
         }
 
-        public void updateSegmentOpenClosed(int number, string open)
+        public void UpdateSegmentOpenClosed(int number, string open)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
-            temporaryTrackSegment.updateOpenClosed(open);
+            temporaryTrackSegment.SetOpenClosed(open);
         }
 
-        public void updateSegmentFailure(int number, string failure)
+        public void UpdateSegmentFailure(int number, string failure)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
-            temporaryTrackSegment.updateFailure(failure);
+            temporaryTrackSegment.SetFailure(failure);
         }
 
-        public void updateSegmentSwitchDirection(int number, string switchDirection)
+        public void UpdateSegmentSwitchDirection(int number, string switchDirection)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
-            temporaryTrackSegment.updateSwitchDirection(switchDirection);
+            temporaryTrackSegment.SetSwitchDirection(switchDirection);
         }
 
-        public void updateSegmentSpeedLimit(int number, int speedLimit)
+        public void UpdateSegmentSpeedLimit(int number, int speedLimit)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
-            temporaryTrackSegment.updateSpeedLimit(speedLimit);
+            temporaryTrackSegment.SetSpeedLimit(speedLimit);
         }
 
-        public void updateTrainRoute(ArrayList route, int number)
+        public void UpdateTrainRoute(ArrayList route, int number)
         {
-           trains[number].changeRoute(route);
+           trains[number].SetRoute(route);
         }
 
-        public void updateTrainSchedule(Dictionary<string, double> schedule, int number)
+        public void UpdateTrainSchedule(Dictionary<string, double> schedule, int number)
         {
-            trains[number].changeSchedule(schedule);
+            trains[number].SetSchedule(schedule);
         }
 
-        public ArrayList getTrains()
+        public ArrayList GetTrains()
         {
             ArrayList trainList = new ArrayList();
             foreach (KeyValuePair<int, Train> pair in trains)
@@ -141,7 +141,7 @@ namespace CTCOffice
             return trainList;
         }
 
-        public ArrayList getTrackSegments()
+        public ArrayList GetTrackSegments()
         {
             ArrayList segmentList = new ArrayList();
             foreach (KeyValuePair<int, TrackSegment> pair in trackSegments)
@@ -186,5 +186,16 @@ namespace CTCOffice
         {
             return segmentsInRoute[stations];
         }
+
+        public int GetNumberOfSegments()
+        {
+            return trackSegments.Count;
+        }
+
+        public int GetNumberOfTrains()
+        {
+            return trains.Count;
+        }
+
     }
 }

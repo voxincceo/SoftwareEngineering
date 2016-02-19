@@ -72,7 +72,7 @@
             this.scheduleConfirmButton.TabIndex = 6;
             this.scheduleConfirmButton.Text = "Confirm";
             this.scheduleConfirmButton.UseVisualStyleBackColor = true;
-            this.scheduleConfirmButton.Click += new System.EventHandler(this.scheduleConfirmButton_Click);
+            this.scheduleConfirmButton.Click += new System.EventHandler(this.ScheduleConfirmButton_Click);
             // 
             // labelNewTime
             // 
@@ -100,7 +100,7 @@
             this.comboBoxStation.Name = "comboBoxStation";
             this.comboBoxStation.Size = new System.Drawing.Size(121, 21);
             this.comboBoxStation.TabIndex = 2;
-            this.comboBoxStation.SelectedIndexChanged += new System.EventHandler(this.comboBoxStation_SelectedIndexChanged);
+            this.comboBoxStation.SelectedIndexChanged += new System.EventHandler(this.ComboBoxStation_SelectedIndexChanged);
             // 
             // labelCurrentTime
             // 

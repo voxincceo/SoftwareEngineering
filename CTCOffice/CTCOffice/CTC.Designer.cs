@@ -30,7 +30,6 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.moduleBox = new System.Windows.Forms.GroupBox();
-            this.trainControllerButton = new System.Windows.Forms.Button();
             this.trainModelButton = new System.Windows.Forms.Button();
             this.trackControllerButton = new System.Windows.Forms.Button();
             this.trackModelButton = new System.Windows.Forms.Button();
@@ -43,10 +42,11 @@
             this.openCloseButton = new System.Windows.Forms.Button();
             this.listViewTrack = new System.Windows.Forms.ListView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonDispatch = new System.Windows.Forms.Button();
             this.routeButton = new System.Windows.Forms.Button();
             this.scheduleButton = new System.Windows.Forms.Button();
             this.listViewTrains = new System.Windows.Forms.ListView();
-            this.buttonDispatch = new System.Windows.Forms.Button();
+            this.buttonTrainController = new System.Windows.Forms.Button();
             this.moduleBox.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -65,7 +65,6 @@
             // moduleBox
             // 
             this.moduleBox.Controls.Add(this.flowLayoutPanel1);
-            this.moduleBox.Controls.Add(this.trainControllerButton);
             this.moduleBox.Controls.Add(this.trainModelButton);
             this.moduleBox.Controls.Add(this.trackControllerButton);
             this.moduleBox.Controls.Add(this.trackModelButton);
@@ -76,16 +75,6 @@
             this.moduleBox.TabStop = false;
             this.moduleBox.Text = "Modules";
             // 
-            // trainControllerButton
-            // 
-            this.trainControllerButton.Location = new System.Drawing.Point(112, 57);
-            this.trainControllerButton.Name = "trainControllerButton";
-            this.trainControllerButton.Size = new System.Drawing.Size(100, 25);
-            this.trainControllerButton.TabIndex = 3;
-            this.trainControllerButton.Text = "Train Controller";
-            this.trainControllerButton.UseVisualStyleBackColor = true;
-            this.trainControllerButton.Click += new System.EventHandler(this.trainControllerButton_Click);
-            // 
             // trainModelButton
             // 
             this.trainModelButton.Location = new System.Drawing.Point(112, 19);
@@ -94,7 +83,7 @@
             this.trainModelButton.TabIndex = 2;
             this.trainModelButton.Text = "Train Model";
             this.trainModelButton.UseVisualStyleBackColor = true;
-            this.trainModelButton.Click += new System.EventHandler(this.trainModelButton_Click);
+            this.trainModelButton.Click += new System.EventHandler(this.TrainModelButton_Click);
             // 
             // trackControllerButton
             // 
@@ -104,7 +93,7 @@
             this.trackControllerButton.TabIndex = 1;
             this.trackControllerButton.Text = "Track Controller";
             this.trackControllerButton.UseVisualStyleBackColor = true;
-            this.trackControllerButton.Click += new System.EventHandler(this.trackControllerButton_Click);
+            this.trackControllerButton.Click += new System.EventHandler(this.TrackControllerButton_Click);
             // 
             // trackModelButton
             // 
@@ -114,7 +103,7 @@
             this.trackModelButton.TabIndex = 0;
             this.trackModelButton.Text = "Track Model";
             this.trackModelButton.UseVisualStyleBackColor = true;
-            this.trackModelButton.Click += new System.EventHandler(this.trackModelButton_Click);
+            this.trackModelButton.Click += new System.EventHandler(this.TrackModelButton_Click);
             // 
             // tabControl
             // 
@@ -148,7 +137,7 @@
             this.systemGraphics.Size = new System.Drawing.Size(854, 405);
             this.systemGraphics.TabIndex = 3;
             this.systemGraphics.TabStop = false;
-            this.systemGraphics.Paint += new System.Windows.Forms.PaintEventHandler(this.systemGraphics_Paint);
+            this.systemGraphics.Paint += new System.Windows.Forms.PaintEventHandler(this.SystemGraphics_Paint);
             // 
             // errorListView
             // 
@@ -186,7 +175,7 @@
             this.openCloseButton.TabIndex = 3;
             this.openCloseButton.Text = "Open/Close";
             this.openCloseButton.UseVisualStyleBackColor = true;
-            this.openCloseButton.Click += new System.EventHandler(this.openCloseButton_Click);
+            this.openCloseButton.Click += new System.EventHandler(this.OpenCloseButton_Click);
             // 
             // listViewTrack
             // 
@@ -195,10 +184,11 @@
             this.listViewTrack.Size = new System.Drawing.Size(862, 466);
             this.listViewTrack.TabIndex = 0;
             this.listViewTrack.UseCompatibleStateImageBehavior = false;
-            this.listViewTrack.SelectedIndexChanged += new System.EventHandler(this.listViewTrack_SelectedIndexChanged);
+            this.listViewTrack.SelectedIndexChanged += new System.EventHandler(this.ListViewTrack_SelectedIndexChanged);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.buttonTrainController);
             this.tabPage3.Controls.Add(this.buttonDispatch);
             this.tabPage3.Controls.Add(this.routeButton);
             this.tabPage3.Controls.Add(this.scheduleButton);
@@ -210,6 +200,16 @@
             this.tabPage3.Text = "Trains";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // buttonDispatch
+            // 
+            this.buttonDispatch.Location = new System.Drawing.Point(216, 479);
+            this.buttonDispatch.Name = "buttonDispatch";
+            this.buttonDispatch.Size = new System.Drawing.Size(100, 25);
+            this.buttonDispatch.TabIndex = 5;
+            this.buttonDispatch.Text = "Dispatch Train";
+            this.buttonDispatch.UseVisualStyleBackColor = true;
+            this.buttonDispatch.Click += new System.EventHandler(this.ButtonDispatch_Click);
+            // 
             // routeButton
             // 
             this.routeButton.Location = new System.Drawing.Point(110, 479);
@@ -218,7 +218,7 @@
             this.routeButton.TabIndex = 4;
             this.routeButton.Text = "Edit Route";
             this.routeButton.UseVisualStyleBackColor = true;
-            this.routeButton.Click += new System.EventHandler(this.routeButton_Click);
+            this.routeButton.Click += new System.EventHandler(this.RouteButton_Click);
             // 
             // scheduleButton
             // 
@@ -228,7 +228,7 @@
             this.scheduleButton.TabIndex = 2;
             this.scheduleButton.Text = "Edit Schedule";
             this.scheduleButton.UseVisualStyleBackColor = true;
-            this.scheduleButton.Click += new System.EventHandler(this.scheduleButton_Click);
+            this.scheduleButton.Click += new System.EventHandler(this.ScheduleButton_Click);
             // 
             // listViewTrains
             // 
@@ -238,15 +238,14 @@
             this.listViewTrains.TabIndex = 0;
             this.listViewTrains.UseCompatibleStateImageBehavior = false;
             // 
-            // buttonDispatch
+            // buttonTrainController
             // 
-            this.buttonDispatch.Location = new System.Drawing.Point(216, 479);
-            this.buttonDispatch.Name = "buttonDispatch";
-            this.buttonDispatch.Size = new System.Drawing.Size(100, 25);
-            this.buttonDispatch.TabIndex = 5;
-            this.buttonDispatch.Text = "Dispatch Train";
-            this.buttonDispatch.UseVisualStyleBackColor = true;
-            this.buttonDispatch.Click += new System.EventHandler(this.buttonDispatch_Click);
+            this.buttonTrainController.Location = new System.Drawing.Point(322, 479);
+            this.buttonTrainController.Name = "buttonTrainController";
+            this.buttonTrainController.Size = new System.Drawing.Size(100, 25);
+            this.buttonTrainController.TabIndex = 6;
+            this.buttonTrainController.Text = "View Controller";
+            this.buttonTrainController.UseVisualStyleBackColor = true;
             // 
             // CTC
             // 
@@ -274,7 +273,6 @@
         private System.Windows.Forms.Button trackControllerButton;
         private System.Windows.Forms.Button trackModelButton;
         private System.Windows.Forms.Button trainModelButton;
-        private System.Windows.Forms.Button trainControllerButton;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -288,6 +286,7 @@
         private System.Windows.Forms.ListView systemListView;
         private System.Windows.Forms.PictureBox systemGraphics;
         private System.Windows.Forms.Button buttonDispatch;
+        private System.Windows.Forms.Button buttonTrainController;
     }
 }
 

@@ -22,72 +22,72 @@ namespace CTCOffice
             switchDirection = "N/A";
         }
 
-        public void setLength(int value)
+        public void SetLength(int value)
         {
             length = value;
         }
 
-        public void setNumber(int value)
+        public void SetNumber(int value)
         {
             number = value;
         }
 
-        public void updateLine(string newLine)
+        public void SetLine(string newLine)
         {
             line = newLine;
         }
 
-        public void updateOpenClosed(string newOpenClosed)
+        public void SetOpenClosed(string newOpenClosed)
         {
             openClosed = newOpenClosed;
         }
 
-        public void updateFailure(string newFailure)
+        public void SetFailure(string newFailure)
         {
             failure = newFailure;
         }
 
-        public void updateSwitchDirection(string newSwitchDirection)
+        public void SetSwitchDirection(string newSwitchDirection)
         {
             switchDirection = newSwitchDirection;
         }
 
-        public void updateSpeedLimit(int newSpeedLimit)
+        public void SetSpeedLimit(int newSpeedLimit)
         {
             speedLimit = newSpeedLimit;
         }
 
-        public int getLength()
+        public int GetLength()
         {
             return length;
         }
 
-        public int getNumber()
+        public int GetNumber()
         {
             return number;
         }
 
-        public int getSpeedLimit()
+        public int GetSpeedLimit()
         {
             return speedLimit;
         }
 
-        public string getLine()
+        public string GetLine()
         {
             return line;
         }
 
-        public string getOpenClosed()
+        public string GetOpenClosed()
         {
             return openClosed;
         }
         
-        public string getFailure()
+        public string GetFailure()
         {
             return failure;
         }
 
-        public string getSwitchDirection()
+        public string GetSwitchDirection()
         {
             return switchDirection;
         }

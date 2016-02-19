@@ -9,7 +9,7 @@ namespace CTCOffice
 {
     class Train
     {
-        private int number, onSegment;
+        private int number, onSegment, listNumber;
         private double position, authority, timeOnSchedule, speed;
         private string direction, line;
         private System.Timers.Timer timer;
@@ -25,6 +25,7 @@ namespace CTCOffice
             speed = 0;
             authority = 0;
             timeOnSchedule = 0;
+            listNumber = 0;
             direction = "None";
             line = "Black";
 
@@ -33,96 +34,106 @@ namespace CTCOffice
             routeSegments = new Route();
 
             timer = new System.Timers.Timer(100);
-            timer.Elapsed += timer_Elapsed;
+            timer.Elapsed += Timer_Elapsed;
             timer.Enabled = true;
         }
 
-        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            calculatePositionAndAuthority();
+            CalculatePositionAndAuthority();
         }
 
-        public void setNumber(int value)
+        public void SetNumber(int value)
         {
             number = value;
         }
 
-        public void updateSegment(int newOnSegment)
+        public void SetSegment(int newOnSegment)
         {
             onSegment = newOnSegment;
         }
 
-        public void updateTrainSpeed(double newSpeed)
+        public void SetTrainSpeed(double newSpeed)
         {
             speed = newSpeed;
         }
 
-        public void updateAuthority(double newAuthority)
+        public void SetAuthority(double newAuthority)
         {
             authority = newAuthority;
         }
 
-        public void updateDirection(string newDirection)
+        public void SetDirection(string newDirection)
         {
             direction = newDirection;
         }
 
-        public void updateLine(string newLine)
+        public void SetLine(string newLine)
         {
             line = newLine;
         }
 
-        public void updatePosition(double newPosition)
+        public void SetPosition(double newPosition)
         {
             position = newPosition;
         }
 
-        public void setTimeOnSchedule(double time)
+        public void SetTimeOnSchedule(double time)
         {
             timeOnSchedule = time;
         }
 
-        public string getLine()
+        public void SetListNumber(int number)
+        {
+            listNumber = number;
+        }
+
+        public int GetListNumber()
+        {
+            return listNumber;
+        }
+
+        public string GetLine()
         {
             return line;
         }
 
-        public double getPosition()
+        public double GetPosition()
         {
             return position;
         }
 
-        public int getSegment()
+        public int GetSegment()
         {
             return onSegment;
         }
 
-        public int getNumber()
+        public int GetNumber()
         {
             return number;
         }
 
-        public double getSpeed()
+        public double GetSpeed()
         {
             return speed;
         }
 
-        public double getAuthority()
+        public double GetAuthority()
         {
             return authority;
         }
 
-        public string getDirection()
+        public string GetDirection()
         {
             return direction;
         }
 
-        public double getTimeOnSchedule()
+        public double GetTimeOnSchedule()
         {
             return timeOnSchedule;
         }
 
-        private void calculatePositionAndAuthority()
+        private void CalculatePositionAndAuthority()
         {
             double changeInPosition = (double) speed / 36;  // km/h * 1000m / 3600s / 1000ms * 100ms
 
@@ -139,27 +150,27 @@ namespace CTCOffice
             timeOnSchedule += 0.1;
         }
 
-        public void changeRoute(ArrayList newRoute)
+        public void SetRoute(ArrayList newRoute)
         {
             route = newRoute;
         }
 
-        public void changeSchedule(Dictionary<string, double> newSchedule)
+        public void SetSchedule(Dictionary<string, double> newSchedule)
         {
             schedule = newSchedule;
         }
 
-        public ArrayList getRoute()
+        public ArrayList GetRoute()
         {
             return route;
         }
 
-        public Dictionary<string, double> getSchedule()
+        public Dictionary<string, double> GetSchedule()
         {
             return schedule;
         }
 
-        public void ChangeRouteSegments(Route newRoute)
+        public void SetRouteSegments(Route newRoute)
         {
             routeSegments = newRoute;
         }

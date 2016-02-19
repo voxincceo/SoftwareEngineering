@@ -25,13 +25,13 @@ namespace CTCOffice
             office = update;
 
             InitializeComponent();
-            initializeScheduleList();
+            InitializeScheduleList();
 
             this.Text = "Train " + number.ToString();
             this.Update();
         }
 
-        private void scheduleConfirmButton_Click(object sender, EventArgs e)
+        private void ScheduleConfirmButton_Click(object sender, EventArgs e)
         {
             double resultDouble = 0;
             int resutltInt = 0, result = 0;
@@ -59,7 +59,7 @@ namespace CTCOffice
                 }
                 schedule[comboBoxStation.Text] = resultDouble;
 
-                office.updateScheduleFromForm(schedule, train);
+                office.SetScheduleFromForm(schedule, train);
 
                 foreach (ListViewItem lvi in listViewSchedules.Items)
                 {
@@ -76,7 +76,7 @@ namespace CTCOffice
             MessageBox.Show(message, title);
         }
 
-        private void initializeScheduleList()
+        private void InitializeScheduleList()
         {
             listViewSchedules.View = View.Details;
 
@@ -97,7 +97,7 @@ namespace CTCOffice
             }
         }
 
-        private void comboBoxStation_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxStation_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentTimeLabel.Text = schedule[comboBoxStation.SelectedItem.ToString()].ToString();
         }

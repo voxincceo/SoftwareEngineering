@@ -53,8 +53,8 @@ namespace CTCOffice
             segments.Add(4);
             segments.Add(5);
 
-            CTCOffice.initializeSystemTrains(trains);
-            CTCOffice.initializeSystemTrackSegments(segments);
+            CTCOffice.InitializeSystemTrains(trains);
+            CTCOffice.InitializeSystemTrackSegments(segments);
         }
 
         private void initializeInputList()
@@ -259,7 +259,7 @@ namespace CTCOffice
             {
                 listViewInputs.Items[4 * number].SubItems[1].Text = text;
             }));
-            CTCOffice.openCloseSegment(number, text);
+            CTCOffice.OpenCloseSegment(number, text);
         }
 
         public void updateTrainSegment(int number, int segment)
@@ -268,7 +268,7 @@ namespace CTCOffice
             {
                 listViewInputs.Items[1].SubItems[1].Text = segment.ToString();
             }));
-            CTCOffice.trainSegment(number, segment);
+            CTCOffice.SetTrainSegment(number, segment);
         }
 
         public void updateTrainSpeed(int number, double speed)
@@ -291,7 +291,7 @@ namespace CTCOffice
                 {
                     listViewInputs.Items[0].SubItems[1].Text = speed.ToString();
                 }));
-                CTCOffice.trainSpeed(number, speed);
+                CTCOffice.SetTrainSpeed(number, speed);
             }
         }
 
@@ -299,7 +299,7 @@ namespace CTCOffice
         {
             buttonPower.Enabled = true;
             buttonCircuit.Enabled = true;
-            CTCOffice.startSystemTest();
+            CTCOffice.StartSystemTest();
         }
 
         public void UpdateTrainAuthority(int number, double authority)
@@ -335,7 +335,7 @@ namespace CTCOffice
             }
 
             listViewInputs.Items[(4 * (int)Char.GetNumericValue(trackSegment[6])) + 1].SubItems[1].Text = status;
-            CTCOffice.UpdateTrackSegmentFailure((int)Char.GetNumericValue(trackSegment[6]), status);
+            CTCOffice.SetTrackSegmentFailure((int)Char.GetNumericValue(trackSegment[6]), status);
         }
 
         private void buttonPower_Click(object sender, EventArgs e)
@@ -353,7 +353,7 @@ namespace CTCOffice
             }
 
             listViewInputs.Items[23].SubItems[1].Text = newText;
-            CTCOffice.UpdatePowerFailure(newText);
+            CTCOffice.SetPowerFailure(newText);
         }
 
         private void buttonCircuit_Click(object sender, EventArgs e)
@@ -371,7 +371,7 @@ namespace CTCOffice
             }
 
             listViewInputs.Items[24].SubItems[1].Text = newText;
-            CTCOffice.UpdateTrackCiruitFailure(newText);
+            CTCOffice.SetTrackCiruitFailure(newText);
         }
 
         private void buttonHeater_Click(object sender, EventArgs e)
@@ -389,7 +389,7 @@ namespace CTCOffice
             }
 
             listViewInputs.Items[2].SubItems[1].Text = newText;
-            CTCOffice.UpdateTrackHeater(newText);
+            CTCOffice.SetTrackHeater(newText);
         }
 
         private void comboBoxSegments_SelectedIndexChanged(object sender, EventArgs e)

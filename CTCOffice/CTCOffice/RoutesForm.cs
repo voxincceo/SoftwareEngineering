@@ -24,13 +24,13 @@ namespace CTCOffice
             office = update;
 
             InitializeComponent();
-            initializeRouteList();
+            InitializeRouteList();
 
             this.Text = "Train " + number.ToString();
             this.Update();
         }
 
-        private void confirmRouteButton_Click(object sender, EventArgs e)
+        private void ConfirmRouteButton_Click(object sender, EventArgs e)
         {
             string message, title;
 
@@ -50,9 +50,9 @@ namespace CTCOffice
                     newRoute.Add(comboBoxStart.SelectedItem.ToString());
                     newRoute.Add(comboBoxEnd.SelectedItem.ToString());
 
-                    office.updateRouteFromForm(newRoute, train);
+                    office.SetRouteFromForm(newRoute, train);
                     route = newRoute;
-                    updateRoute();
+                    UpdateRoute();
                 }
             }
             else
@@ -66,7 +66,7 @@ namespace CTCOffice
 
         }
 
-        private void initializeRouteList()
+        private void InitializeRouteList()
         {
             listViewRoutes.View = View.Details;
 
@@ -87,7 +87,7 @@ namespace CTCOffice
             comboBoxEnd.Items.Add(route[2].ToString());
         }
 
-        private void updateRoute()
+        private void UpdateRoute()
         {
             listViewRoutes.Items[0].SubItems[1].Text = route[1].ToString();
             listViewRoutes.Items[0].SubItems[2].Text = route[2].ToString();
