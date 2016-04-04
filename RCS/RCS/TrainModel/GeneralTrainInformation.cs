@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CTCOffice
+namespace TheTrainModule
 {
-    public partial class SampleModule : Form
+    public partial class GeneralTrainInformation : Form
     {
-        public SampleModule()
+        public GeneralTrainInformation()
         {
             InitializeComponent();
+        }
+
+        private void GeneralTrainInformation_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

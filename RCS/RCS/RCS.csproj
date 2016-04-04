@@ -46,14 +46,118 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="..\..\CTCOffice\CTCOffice\ControlSystem.cs">
+      <Link>CTC\ControlSystem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\CTC.cs">
+      <Link>CTC\CTC.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="..\..\CTCOffice\CTCOffice\CTC.Designer.cs">
+      <Link>CTC\CTC.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\Route.cs">
+      <Link>CTC\Route.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\RoutesForm.cs">
+      <Link>CTC\RoutesForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\RoutesForm.Designer.cs">
+      <Link>CTC\RoutesForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\SampleModule.cs">
+      <Link>CTC\SampleModule.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\SampleModule.Designer.cs">
+      <Link>CTC\SampleModule.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\ScheduleForm.cs">
+      <Link>CTC\ScheduleForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\ScheduleForm.Designer.cs">
+      <Link>CTC\ScheduleForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\TestingForm.cs">
+      <Link>CTC\TestingForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\TestingForm.Designer.cs">
+      <Link>CTC\TestingForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\TrackSegment.cs">
+      <Link>CTC\TrackSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\Train.cs">
+      <Link>CTC\Train.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\TrainDispatch.cs">
+      <Link>CTC\TrainDispatch.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\CTCOffice\CTCOffice\TrainDispatch.Designer.cs">
+      <Link>CTC\TrainDispatch.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TrackModel\Block.cs">
+      <Link>TrackModel\Block.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TrackModel\Crossing.cs">
+      <Link>TrackModel\Crossing.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TrackModel\Switch.cs">
+      <Link>TrackModel\Switch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TrackModel\TestForm.cs">
+      <Link>TrackModel\TestForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\TrackModel\TestForm.Designer.cs">
+      <Link>TrackModel\TestForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TrackModel\Track.cs">
+      <Link>TrackModel\Track.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TrackModel\TrackModelForm.cs">
+      <Link>TrackModel\TrackModelForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\TrackModel\TrackModelForm.Designer.cs">
+      <Link>TrackModel\TrackModelForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="RCS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RCS.Designer.cs">
+      <DependentUpon>RCS.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\CTC.resx">
+      <Link>CTC\CTC.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\RoutesForm.resx">
+      <Link>CTC\RoutesForm.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\SampleModule.resx">
+      <Link>CTC\SampleModule.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\ScheduleForm.resx">
+      <Link>CTC\ScheduleForm.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\TestingForm.resx">
+      <Link>CTC\TestingForm.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\TrainDispatch.resx">
+      <Link>CTC\TrainDispatch.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\TrackModel\TestForm.resx">
+      <Link>TrackModel\TestForm.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\TrackModel\TrackModelForm.resx">
+      <Link>TrackModel\TrackModelForm.resx</Link>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +166,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RCS.resx">
+      <DependentUpon>RCS.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TrackController\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

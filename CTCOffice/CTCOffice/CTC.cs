@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackModelPrototype;
+using TheTrainModule;
+using TrainController;
 
 namespace CTCOffice
 {
@@ -15,14 +18,15 @@ namespace CTCOffice
     {
         private ControlSystem central;
         private TestingForm testingForm;
-        private TrackController trackController;
-        private TrackModel trackModel;
-        private TrainController trainController;
-        private TrainModel trainModel;
+        private RCS.RCS formParent;
+        //private TrackController trackController;
+        private TrackModelForm trackModel;
+        private TrainControllerForm trainController;
+        private TrainModelForm trainModel;
         private System.Timers.Timer systemTimer;
         private int systemSpeed;
 
-        public CTC()
+        public CTC(RCS.RCS main)
         {
             InitializeComponent();
             systemTimer = new System.Timers.Timer(50);
@@ -34,11 +38,12 @@ namespace CTCOffice
             InitializeTrainList();
 
             central = new ControlSystem();
+            formParent = main;
 
             systemSpeed = 1;
 
-            testingForm = new TestingForm(this);
-            testingForm.Show();
+            //testingForm = new TestingForm(this);
+            //testingForm.Show();
         }
 
         void SystemTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -202,35 +207,35 @@ namespace CTCOffice
 
         private void TrackModelButton_Click(object sender, EventArgs e)
         {
-            trackModel.show();
+            trackModel.Show();
         }
 
         private void TrainModelButton_Click(object sender, EventArgs e)
         {
-            trainModel.show();
+            //trainModel.Show();
         }
 
         private void TrackControllerButton_Click(object sender, EventArgs e)
         {
-            trackController.show();
+            //trackController.show();
         }
 
         private void InitializeSystemComponents()
         {
-            trackController = new TrackController(systemTimer);
-            trackModel = new TrackModel(systemTimer);
-            trainModel = new TrainModel(systemTimer);
-            trainController = new TrainController(systemTimer);
+            //trackController = new TrackController(systemTimer);
+            trackModel = new TrackModelForm();
+            //trainModel = new TrainModel(systemTimer);
+            //trainController = new TrainController(systemTimer);
 
-            trackController.SetSystemSpeed(systemSpeed);
-            trackModel.SetSystemSpeed(systemSpeed);
-            trainModel.SetSystemSpeed(systemSpeed);
-            trainController.SetSystemSpeed(systemSpeed);
+            //trackController.SetSystemSpeed(systemSpeed);
+            //trackModel.SetSystemSpeed(systemSpeed);
+            //trainModel.SetSystemSpeed(systemSpeed);
+            //trainController.SetSystemSpeed(systemSpeed);
 
-            trackController.SendModules(this, trackModel);
-            trackModel.SendModules(trackController, trainModel);
-            trainModel.SendModules(trackModel, trainController);
-            trainController.SendModules(trainModel);
+            //trackController.SendModules(this, trackModel);
+            //trackModel.SendModules(trackController, trainModel);
+            //trainModel.SendModules(trackModel, trainController);
+            //trainController.SendModules(trainModel);
         }
 
         private void InitializeErrorList()
@@ -304,12 +309,12 @@ namespace CTCOffice
                 if(openClosed.Equals("Open"))
                 {
 
-                    trackController.SuggestSegmentOpenclosed(segment.GetNumber(), "Closed");
+                    //trackController.SuggestSegmentOpenclosed(segment.GetNumber(), "Closed");
                     OpenCloseSegment(segment.GetNumber(), "Closed");
                 }
                 else
                 {
-                    trackController.SuggestSegmentOpenclosed(segment.GetNumber(), "Open");
+                    //trackController.SuggestSegmentOpenclosed(segment.GetNumber(), "Open");
                     OpenCloseSegment(segment.GetNumber(), "Open");
                 }
             }
@@ -419,7 +424,8 @@ namespace CTCOffice
 
         private void CTC_FormClosed(object sender, FormClosedEventArgs e)
         {
-            testingForm.Dispose();
+            //testingForm.Dispose();
+            formParent.Dispose();
         }
 
         public void SetTrackHeater(string text)
@@ -634,7 +640,7 @@ namespace CTCOffice
                         }
                     }
 
-                    trackController.SuggestTrainAuthority(train.GetNumber(), leastAuthority);
+                    //trackController.SuggestTrainAuthority(train.GetNumber(), leastAuthority);
                     SetTrainAuthority(train.GetNumber(), leastAuthority);
 
                     if (train.GetPosition() >= central.GetTrackSegment(train.GetSegment()).GetLength())
@@ -664,19 +670,19 @@ namespace CTCOffice
 
                     if (speed > central.GetTrackSegment(train.GetSegment()).GetSpeedLimit() || speed < 0)
                     {
-                        trackController.SuggestTrainSpeed(train.GetNumber(), central.GetTrackSegment(train.GetSegment()).GetSpeedLimit());
+                        //trackController.SuggestTrainSpeed(train.GetNumber(), central.GetTrackSegment(train.GetSegment()).GetSpeedLimit());
                         SetTrainSpeed(train.GetNumber(), central.GetTrackSegment(train.GetSegment()).GetSpeedLimit());
                     }
                     else
                     {
                         if (train.GetAuthority() <= 0)
                         {
-                            trackController.SuggestTrainSpeed(train.GetNumber(), 0);
+                            //trackController.SuggestTrainSpeed(train.GetNumber(), 0);
                             SetTrainSpeed(train.GetNumber(), 0);
                         }
                         else
                         {
-                            trackController.SuggestTrainSpeed(train.GetNumber(), speed);
+                            //trackController.SuggestTrainSpeed(train.GetNumber(), speed);
                             SetTrainSpeed(train.GetNumber(), speed);
                         }
                     }
@@ -685,8 +691,8 @@ namespace CTCOffice
                     {
                         SetTrainSpeed(train.GetNumber(), 0);
                         SetTrainAuthority(train.GetNumber(), 0);
-                        trackController.SuggestTrainSpeed(train.GetNumber(), 0);
-                        trackController.SuggestTrainAuthority(train.GetNumber(), 0);
+                        //trackController.SuggestTrainSpeed(train.GetNumber(), 0);
+                        //trackController.SuggestTrainAuthority(train.GetNumber(), 0);
 
                         train.SetActiveRoute(0);
                     }

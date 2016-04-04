@@ -7,14 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CTCOffice;
 
 namespace RCS
 {
-    public partial class Form1 : Form
+    public partial class RCS : Form
     {
-        public Form1()
+        CTC entry;
+        public RCS()
         {
             InitializeComponent();
+            this.Hide();
+            entry = new CTC(this);
+            entry.Show();
+        }
+
+        private void RCS_Shown(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

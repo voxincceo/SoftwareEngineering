@@ -37,7 +37,7 @@ namespace TrackModelPrototype
             ArrayList currentBlocks = null;
             Block currentBlock = null;
             Block currentYard = null;
-
+            
             System.IO.StreamReader fileT = new System.IO.StreamReader(@"\\Mac\Home\Downloads\" + file);
             while ((text = fileT.ReadLine()) != null)
             {
