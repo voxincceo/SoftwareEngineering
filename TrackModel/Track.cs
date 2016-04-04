@@ -23,8 +23,9 @@ namespace TrackModelPrototype
 
         public Track()
         {
-            LoadTrack("GreenLineVF.csv");
-            LoadTrack("RedLineVF.csv");
+            //LoadTrack("GreenLineVF.csv");
+            //LoadTrack("RedLineVF.csv");
+            LoadTrack("SystemPrototype.csv");
         }
 
         public void LoadTrack(string trackFile)
