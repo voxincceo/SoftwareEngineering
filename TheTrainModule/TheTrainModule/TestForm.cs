@@ -16,7 +16,7 @@ namespace TheTrainModule
 
         public TestForm()
         {
-            trainModel = new TrainModel();
+            trainModel = new TrainModel(new System.Timers.Timer(1000));
             InitializeComponent();
         }
 

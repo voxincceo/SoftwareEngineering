@@ -18,8 +18,9 @@ namespace TheTrainModule
         private Train train = null;
         //private DateTime clock;
         //private int clockSpeed = 1000;
+        private bool trainChosen = false;
 
-        private int power = 0;
+        private double power = 0;
         private double acceleration = 0;
         private double velocity = 0;
         private string brakes = "------";
@@ -32,6 +33,7 @@ namespace TheTrainModule
         string block = "------";
         string nextStation = "------";
         string failure = "------";
+        private double force = 0;
 
         public TrainModelForm()
         {
@@ -58,16 +60,16 @@ namespace TheTrainModule
 
         private void TrainChosen(object sender, ToolStripItemClickedEventArgs e)
         {
-            string inactive = "ACTIVE";
+            trainChosen = true;
+            string inactive = "INACTIVE";
             string name = e.ClickedItem.Text;
             string[] trainid = name.Split(' ');
             train = trainDatabase.GetTrain(Convert.ToInt32(trainid[1]));
             trainText.Text = name;
 
-            if (!train.active)
-                inactive = "INACTIVE";
+            if (train.active)
+                inactive = "ACTIVE";
             activeText.Text = inactive;
-            updateTrainInformation();
             showTrainInformation();
         }
 
@@ -82,9 +84,9 @@ namespace TheTrainModule
             trainDatabase = td;
         }
 
-        public void updateTrainInformation()
+        private void updateTrainInformation()
         {
-           power = train.setPower;
+           power = train.power;
            acceleration = train.acceleration;
            velocity = train.velocity;
 
@@ -116,10 +118,14 @@ namespace TheTrainModule
                 failure = "Signal Pickup";
             else if (train.failureMode == 3)
                 failure = "Brake";
+
+            force = train.force;
         }
 
         private void showTrainInformation()
-        { 
+        {
+            updateTrainInformation();
+            //MessageBox.Show("Force: " + force);
             this.powerText.Text = Convert.ToString(power);
             this.accelerationText.Text = Convert.ToString(acceleration);
             this.velocityText.Text = Convert.ToString(Math.Ceiling(velocity * Constants.MSTOMH));

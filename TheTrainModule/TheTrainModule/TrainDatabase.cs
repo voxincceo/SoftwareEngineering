@@ -75,7 +75,12 @@ namespace TheTrainModule
             return !(this.GetTrain(id) == null);
         }
 
-        public void update()
+        public void updateTrain(int id)
+        {
+            GetTrain(id).update();
+        }
+
+        public void driveTrains()
         {
             List<Train> listOfTrains = new List<Train>(trains.Keys);
 
@@ -86,7 +91,7 @@ namespace TheTrainModule
                     if (t == null)
                         break;
 
-                    t.update();
+                    t.driveTrain();
                 }
             }
         }

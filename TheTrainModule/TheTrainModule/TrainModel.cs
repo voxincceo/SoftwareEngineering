@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Timers;
 
 namespace TheTrainModule
 {
@@ -11,18 +11,26 @@ namespace TheTrainModule
     {
         private TrainModelForm trainModelForm = null;
         private TrainDatabase trainDatabase = null;
-        // private TrackModelForm trackModelForm = null;
-        // private TrainControllerForm trainControllerForm = null;
+        private TrackModelForm trackModelForm = null;
+        private TrainControllerForm trainControllerForm = null;
         private Timer timer = null;
+        private int interval = 1000;
 
-        public TrainModel()
+        public TrainModel(Timer time)
         {
             trainModelForm = new TrainModelForm();
             trainDatabase = new TrainDatabase();
-            timer = new Timer();
-            timer.Tick += Timer_Tick;
+            timer = time;
+            timer.Elapsed += Timer_Elapsed;
             timer.Interval = 1000;
+            timer.AutoReset = true;
             timer.Start();
+        }
+
+        public void SetSystemSpeed(int speed)
+        {
+            interval *= speed;
+            timer.Interval = interval;
         }
 
         public TrainDatabase GetTrainDatabase()
@@ -32,15 +40,21 @@ namespace TheTrainModule
 
         //------------------------PUBLIC METHODS------------------------------------//
 
-        /*  public void GetModuleObjects(TrackModelForm tr, TrainControllerForm tc)
+          public void sendModules(TrackModelForm tr, TrainControllerForm tc)
           {
-              trf = tr;
-              tcf = tc;
-          } */
+              trackModelForm = tr;
+              trainControllerForm = tc;
+          } 
 
         public void SetPower(int id, int power)
         {
-            trainDatabase.GetTrain(id).setPower = power;
+            Train t = trainDatabase.GetTrain(id);
+            t.power = power;
+
+            if(!t.active)
+                t.active = true;
+
+            trainDatabase.updateTrain(id);
         }
 
         public void SetVelocity(int id, double velocity)
@@ -140,10 +154,10 @@ namespace TheTrainModule
             trainModelForm.Show();
         }
 
-        private void Timer_Tick(Object sender, EventArgs e)
+        private void Timer_Elapsed(Object sender, EventArgs e)
         {
-            trainDatabase.update();
-            trainModelForm.updateTrainDatabase(trainDatabase);
+            trainDatabase.driveTrains();
+            trainModelForm.updateTrainDatabase(trainDatabase);          
         }
 
         //---------------------------PRIVATE METHODS----------------------------------//

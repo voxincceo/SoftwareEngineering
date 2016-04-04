@@ -37,9 +37,9 @@ namespace TheTrainModule
         public const double KGTOLB = 2.20462;           // kg to lb
         public const double HUMAN_MASS = 88.3;          // average mass of one human in kg
         public const double aMAX = 0.5;                 // max acceleration of train in m/s^2 at 2/3 capacity
-        public const double FMAX = 9994.582583;         // max force of train in N at 2/3 capacity
-        public const double vMAX = 19.44446;            // max velocity of the train in m/s
-        public const double PMAX = 514;                 // max power of train in W at 2/3 capacity
+        public const double FMAX = 60679.2;             // max force of train in N at 2/3 capacity
+        public const double vMAX = 19.44;               // max velocity of the train in m/s
+        public const double PMAX = 3120.65;             // max power of train in W at 2/3 capacity
         public const double EMPTY_MASS = 40188.2955;    // empty mass of train in kg
         public const double dMAXN = -1.2;               // max deceleration under normal brakes
         public const double dMAXE = -2.73;              // max deceleration under emergency brakes

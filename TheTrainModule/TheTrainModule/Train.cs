@@ -15,13 +15,13 @@ namespace TheTrainModule
         public double acceleration { get; set; }
         public double force { get; set; }
         public double velocity { get; set; }
+        public double power { get; set; }
 
         public double commandedSpeed { get; set; }
 
         public int crewCount { get; set; }
         public int passengerCount { get; set; }
         public int failureMode { get; set; }
-        public int setPower { get; set; }
         public int authority { get; set; }
         public int ejected { get; set; }
 
@@ -32,13 +32,7 @@ namespace TheTrainModule
         public string beacon { get; set; }
 
         private double mass = Constants.EMPTY_MASS;
-        private double distanceTraveled = 0;
-        private double power = 0;
-        private double currentPower = 0;
-
-        private int time =0;
-        private int temptime = 0;
-        
+        private double distanceTraveled = 0;     
 
         public Train()
         {
@@ -48,52 +42,31 @@ namespace TheTrainModule
             serviceBrakes = false;
             emergencyBrakes = false;
             acceleration = 0;
-            temperature = 0;
+            temperature = 69;
             velocity = 0;
             crewCount = 2;
             passengerCount = 0;
             ejected = 0;
             failureMode = Constants.NONE;
-            currentBlock = null;
-            nextStation = null;
+            currentBlock = "";
+            nextStation = "";
             authority = 0;
             commandedSpeed = 0;
             beacon = "";
-            setPower = 0;
-            currentPower = setPower;
+            power = 0;
         }
 
         public void update()
         {
-            if (currentPower != power)
-            {
-                time = 1;
-                temptime = 1;
-                power = currentPower;
-            }
-            else
-            {
-                temptime++;
-                time++;
-            }
-
-            if (power == 0 && velocity == 0)
-                ejectPassengers();
-
-            if (!airConditioning && time > 1799)
-            {
-                temperature++;
-                temptime = 0;
-            }
-            else if (time > 1799)
-            {
-                temperature--;
-                temptime = 0;
-            }
-
             calculateMass();
             calculateForce();
             calculateAcceleration();
+            calculateVelocity();
+            calculateDistance();
+        }
+
+        public void driveTrain()
+        {
             calculateVelocity();
             calculateDistance();
         }
@@ -106,15 +79,29 @@ namespace TheTrainModule
             double m = mass;
 
             if (v == 0 && (serviceBrakes || emergencyBrakes))
+            {
                 f = 0;
+            }
+            else if(v== 0 && p == 0)
+            {
+                f = 0;
+            }
             else if (v == 0)
+            {
                 f = Constants.FMAX;
+            }
             else if (serviceBrakes)
+            {
                 f = m * Constants.dMAXN;
+            }
             else if (emergencyBrakes)
+            {
                 f = m * Constants.dMAXE;
+            }
             else
+            {
                 f = p / v;
+            }
 
            force = f;
         }
@@ -126,30 +113,37 @@ namespace TheTrainModule
 
         private void calculateAcceleration()
         {
-           acceleration = force/mass;
+            acceleration = force/mass;
+
+            if (acceleration > Constants.aMAX)
+                acceleration = Constants.aMAX;
+            else if (serviceBrakes && acceleration < Constants.dMAXN)
+                acceleration = Constants.dMAXN;
+            else if (emergencyBrakes && acceleration < Constants.dMAXE)
+                acceleration = Constants.dMAXE;
         }
 
         private void calculateVelocity()
         {
             if (serviceBrakes)
                 while (velocity > 0)
-                    velocity += Math.Ceiling(Constants.dMAXN * time);
+                    velocity += Constants.dMAXN;
             else if (emergencyBrakes)
                 while (velocity > 0)
-                    velocity += Math.Ceiling(Constants.dMAXE * time);
+                    velocity += Constants.dMAXE;
             else
-                velocity += Math.Ceiling(acceleration * time);
+                velocity += acceleration;
 
             if (velocity < 0)
                 velocity = 0;
             else if (velocity > Constants.vMAX)
                 velocity = Constants.vMAX;
-
         }
 
         private void calculateDistance()
         {
-            distanceTraveled += velocity * time + 0.5 * acceleration * Math.Pow(time, 2);
+            double distance = velocity;
+            distanceTraveled += distance;
         }
 
         private void ejectPassengers()

@@ -37,6 +37,7 @@
             this.authorityText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -59,9 +60,10 @@
             this.ACText = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
             this.idText = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -188,6 +190,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.CTCSend_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(81, 165);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Send";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.TrackModelSend_Click);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -286,6 +298,8 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.label13);
+            this.splitContainer3.Panel2.Controls.Add(this.textBox1);
             this.splitContainer3.Panel2.Controls.Add(this.idText);
             this.splitContainer3.Panel2.Controls.Add(this.label12);
             this.splitContainer3.Size = new System.Drawing.Size(273, 419);
@@ -392,15 +406,12 @@
             this.label11.TabIndex = 9;
             this.label11.Text = "Next Station";
             // 
-            // button4
+            // idText
             // 
-            this.button4.Location = new System.Drawing.Point(81, 165);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Send";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.TrackModelSend_Click);
+            this.idText.Location = new System.Drawing.Point(63, 19);
+            this.idText.Name = "idText";
+            this.idText.Size = new System.Drawing.Size(100, 20);
+            this.idText.TabIndex = 1;
             // 
             // label12
             // 
@@ -411,12 +422,22 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "TrainID";
             // 
-            // idText
+            // textBox1
             // 
-            this.idText.Location = new System.Drawing.Point(63, 19);
-            this.idText.Name = "idText";
-            this.idText.Size = new System.Drawing.Size(100, 20);
-            this.idText.TabIndex = 1;
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(63, 54);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 2;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(15, 61);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Force";
             // 
             // TestForm
             // 
@@ -482,6 +503,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox idText;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
