@@ -1,0 +1,12 @@
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\bin\Debug\TrackModelPrototype.exe.config
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\bin\Debug\TrackModelPrototype.exe
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\bin\Debug\TrackModelPrototype.pdb
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\obj\Debug\TrackModelPrototype.csprojResolveAssemblyReference.cache
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\obj\Debug\TrackModelPrototype.Properties.Resources.resources
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\obj\Debug\TrackModelPrototype.csproj.GenerateResource.Cache
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\obj\Debug\TrackModelPrototype.exe
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\obj\Debug\TrackModelPrototype.pdb
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\obj\Debug\TrackModelPrototype.TrackModelForm.resources
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\obj\Debug\TrackModelPrototype.TestForm.resources
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\bin\Debug\TrackModel.mdf
+\\mac\home\documents\visual studio 2015\Projects\TrackModelPrototype\TrackModelPrototype\bin\Debug\TrackModel_log.ldf
