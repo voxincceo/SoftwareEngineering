@@ -28,7 +28,7 @@ namespace CTCOffice
 
             breakSegmentButton.Enabled = false;
 
-            CTCOffice.DevelopTestSchedule();
+            //CTCOffice.DevelopTestSchedule();
         }
 
         private void initializeTrainsAndTrack()

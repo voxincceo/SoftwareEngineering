@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,28 +7,26 @@ using System.Threading.Tasks;
 
 namespace CTCOffice
 {
-    class Route
+    public class Route
     {
-        Dictionary<int, TrackSegment> route;
+        private Dictionary<int, ArrayList> routes;
         private int start, end;
-        private string stationEnd;
 
         public Route()
         {
-            route = new Dictionary<int, TrackSegment>();
+            routes = new Dictionary<int, ArrayList>();
             start = 0;
             end = 0;
-            stationEnd = "";
         }
 
-        public void UpdateRoute(Dictionary<int, TrackSegment> newRoute)
+        public void SetRoute(int number, ArrayList newRoute)
         {
-            route = newRoute;
+            routes[number] = newRoute;
         }
 
-        public Dictionary<int, TrackSegment> GetRoute()
+        public ArrayList GetRoute(int number)
         {
-            return route;
+            return routes[number];
         }
 
         public int GetStart()
@@ -40,11 +39,6 @@ namespace CTCOffice
             return end;
         }
 
-        public string GetStationEnd()
-        {
-            return stationEnd;
-        }
-
         public void SetStart(int value)
         {
             start = value;
@@ -55,14 +49,9 @@ namespace CTCOffice
             end = value;
         }
 
-        public void SetStationEnd(string value)
+        public int GetNumberOfPossibleRoutes()
         {
-            stationEnd = value;
-        }
-
-        public int GetNumberOfSegmentsInRoute()
-        {
-            return route.Count;
+            return routes.Count;
         }
     }
 }

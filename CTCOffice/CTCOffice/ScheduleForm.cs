@@ -14,10 +14,10 @@ namespace CTCOffice
     {
         private int train;
         private string line;
-        private Dictionary<string, double> schedule;
+        private Dictionary<int, double> schedule;
         private CTC office;
 
-        public ScheduleForm(int number, string trainLine, Dictionary<string, double> trainSchedule, CTC update)
+        public ScheduleForm(int number, string trainLine, Dictionary<int, double> trainSchedule, CTC update)
         {
             train = number;
             line = trainLine;
@@ -57,7 +57,7 @@ namespace CTCOffice
                 {
                     resultDouble = resutltInt;
                 }
-                schedule[comboBoxStation.Text] = resultDouble;
+                schedule[int.Parse(comboBoxStation.SelectedItem.ToString())] = resultDouble;
 
                 office.SetScheduleFromForm(schedule, train);
 
@@ -84,11 +84,11 @@ namespace CTCOffice
             listViewSchedules.Columns.Add("Infrastructure", 100);
             listViewSchedules.Columns.Add("Total Time To Station With Dwell (Minutes)", 230);
 
-            foreach (KeyValuePair<string, double> pair in schedule)
+            foreach (KeyValuePair<int, double> pair in schedule)
             {
                 ListViewItem scheduleLVI = new ListViewItem();
                 scheduleLVI.Text = line;
-                scheduleLVI.SubItems.Add(pair.Key);
+                scheduleLVI.SubItems.Add("Station at : " + pair.Key.ToString());
                 scheduleLVI.SubItems.Add(pair.Value.ToString());
 
                 listViewSchedules.Items.Add(scheduleLVI);
@@ -99,7 +99,7 @@ namespace CTCOffice
 
         private void ComboBoxStation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            currentTimeLabel.Text = schedule[comboBoxStation.SelectedItem.ToString()].ToString();
+            currentTimeLabel.Text = schedule[int.Parse(comboBoxStation.SelectedItem.ToString())].ToString();
         }
     }
 }

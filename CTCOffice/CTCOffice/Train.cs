@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace CTCOffice
 {
-    class Train
+    public class Train
     {
-        private int number, onSegment, listNumber;
+        private int number, onSegment, listNumber, destination, nextStation, activeRoute;
         private double position, authority, timeOnSchedule, speed;
         private string direction, line;
         private System.Timers.Timer timer;
-        private ArrayList route;
-        private Dictionary<string, double> schedule;
+        //private ArrayList route;
+        private Dictionary<int, double> schedule;
         private Route routeSegments;
 
         public Train()
@@ -28,9 +28,10 @@ namespace CTCOffice
             listNumber = 0;
             direction = "None";
             line = "Black";
+            nextStation = 0;
+            activeRoute = 0;
 
-            route = new ArrayList();
-            schedule = new Dictionary<string, double>();
+            schedule = new Dictionary<int, double>();
             routeSegments = new Route();
 
             timer = new System.Timers.Timer(100);
@@ -51,6 +52,11 @@ namespace CTCOffice
         public void SetSegment(int newOnSegment)
         {
             onSegment = newOnSegment;
+        }
+
+        public void SetDestination(int number)
+        {
+            destination = number;
         }
 
         public void SetTrainSpeed(double newSpeed)
@@ -88,6 +94,16 @@ namespace CTCOffice
             listNumber = number;
         }
 
+        public void SetNextStation(int station)
+        {
+            nextStation = station;
+        }
+
+        public void SetActiveRoute(int value)
+        {
+            activeRoute = value;
+        }
+
         public int GetListNumber()
         {
             return listNumber;
@@ -106,6 +122,11 @@ namespace CTCOffice
         public int GetSegment()
         {
             return onSegment;
+        }
+
+        public int GetDestination()
+        {
+            return destination;
         }
 
         public int GetNumber()
@@ -133,6 +154,16 @@ namespace CTCOffice
             return timeOnSchedule;
         }
 
+        public int GetNextStation()
+        {
+            return nextStation;
+        }
+
+        public int GetActiveRoute()
+        {
+            return activeRoute;
+        }
+
         private void CalculatePositionAndAuthority()
         {
             double changeInPosition = (double) speed / 36;  // km/h * 1000m / 3600s / 1000ms * 100ms
@@ -150,27 +181,17 @@ namespace CTCOffice
             timeOnSchedule += 0.1;
         }
 
-        public void SetRoute(ArrayList newRoute)
-        {
-            route = newRoute;
-        }
-
-        public void SetSchedule(Dictionary<string, double> newSchedule)
+        public void SetSchedule(Dictionary<int, double> newSchedule)
         {
             schedule = newSchedule;
         }
 
-        public ArrayList GetRoute()
-        {
-            return route;
-        }
-
-        public Dictionary<string, double> GetSchedule()
+        public Dictionary<int, double> GetSchedule()
         {
             return schedule;
         }
 
-        public void SetRouteSegments(Route newRoute)
+        public void SetRoute(Route newRoute)
         {
             routeSegments = newRoute;
         }

@@ -13,14 +13,16 @@ namespace CTCOffice
 {
     public partial class RoutesForm : Form
     {
-        private int train;
-        private ArrayList route;
+        private int trainNumber;
+        private Train train;
+        private ArrayList segments;
         private CTC office;
 
-        public RoutesForm(int number, ArrayList trainRoute, CTC update)
+        public RoutesForm(Train number, ArrayList segmentList, CTC update)
         {
             train = number;
-            route = trainRoute;
+            trainNumber = train.GetNumber();
+            segments = segmentList;
             office = update;
 
             InitializeComponent();
@@ -38,20 +40,15 @@ namespace CTCOffice
             {
                 if (comboBoxStart.SelectedItem.Equals(comboBoxEnd.SelectedItem))
                 {
-                    message = "The stations cannot be identical.";
+                    message = "The segments cannot be identical.";
                     title = "Error";
                 }
                 else
                 {
                     message = "Route changed to Start: " + comboBoxStart.SelectedItem.ToString() + " to End: " + comboBoxEnd.SelectedItem.ToString();
                     title = "Confirm";
-                    ArrayList newRoute = new ArrayList();
-                    newRoute.Add(route[0]);
-                    newRoute.Add(comboBoxStart.SelectedItem.ToString());
-                    newRoute.Add(comboBoxEnd.SelectedItem.ToString());
 
-                    office.SetRouteFromForm(newRoute, train);
-                    route = newRoute;
+                    office.SetRouteFromForm(trainNumber, int.Parse(comboBoxEnd.SelectedItem.ToString()));
                     UpdateRoute();
                 }
             }
@@ -75,22 +72,23 @@ namespace CTCOffice
             listViewRoutes.Columns.Add("End", 100);
 
             ListViewItem routeLVI = new ListViewItem();
-            routeLVI.Text = route[0].ToString();
-            routeLVI.SubItems.Add(route[1].ToString());
-            routeLVI.SubItems.Add(route[2].ToString());
+            routeLVI.Text = train.GetLine();
+            routeLVI.SubItems.Add(train.GetRouteSegments().GetStart().ToString());
+            routeLVI.SubItems.Add(train.GetRouteSegments().GetEnd().ToString());
 
             listViewRoutes.Items.Add(routeLVI);
 
-            comboBoxStart.Items.Add(route[1].ToString());
-            comboBoxStart.Items.Add(route[2].ToString());
-            comboBoxEnd.Items.Add(route[1].ToString());
-            comboBoxEnd.Items.Add(route[2].ToString());
+            foreach(TrackSegment s in segments)
+            {
+                comboBoxStart.Items.Add(s.GetNumber().ToString());
+                comboBoxEnd.Items.Add(s.GetNumber().ToString());
+            }
         }
 
         private void UpdateRoute()
         {
-            listViewRoutes.Items[0].SubItems[1].Text = route[1].ToString();
-            listViewRoutes.Items[0].SubItems[2].Text = route[2].ToString();
+            listViewRoutes.Items[0].SubItems[1].Text = train.GetRouteSegments().GetStart().ToString();
+            listViewRoutes.Items[0].SubItems[2].Text = train.GetRouteSegments().GetEnd().ToString();
         }
     }
 }
