@@ -11,13 +11,15 @@ namespace CTCOffice
     {
         Dictionary<int, Train> trains;
         Dictionary<int, TrackSegment> trackSegments;
-        Dictionary<string, Route> segmentsInRoute;
+        Dictionary<double, Route> routes;
+        LinkedList<int> stations;
 
         public ControlSystem()
         {
             trains = new Dictionary<int,Train>();
             trackSegments = new Dictionary<int, TrackSegment>();
-            segmentsInRoute = new Dictionary<string, Route>();
+            routes = new Dictionary<double, Route>();
+            stations = new LinkedList<int>();
         }
 
         public void CreateTrain(int number)
@@ -46,7 +48,7 @@ namespace CTCOffice
             return trackSegments[number];
         }
 
-        public void UpdateTrainSpeed(int number, int speed)
+        public void SetTrainSpeed(int number, int speed)
         {
             Train temporaryTrain = trains[number];
             /*int oldOnSegment = temporaryTrain.getSegment();
@@ -71,61 +73,61 @@ namespace CTCOffice
             temporaryTrain.SetTrainSpeed(speed);
         }
 
-        public void UpdateTrainSegment(int number, int segment)
+        public void SetTrainSegment(int number, int segment)
         {
             Train temporaryTrain = trains[number];
 
             temporaryTrain.SetSegment(segment);
         }
 
-        public void UpdateTrainAuthority(int number, int authority)
+        public void SetTrainAuthority(int number, int authority)
         {
             Train temporaryTrain = trains[number];
 
             temporaryTrain.SetAuthority(authority);
         }
 
-        public void UpdateSegmentLine(int number, string line)
+        public void SetSegmentLine(int number, string line)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
             temporaryTrackSegment.SetLine(line);
         }
 
-        public void UpdateSegmentOpenClosed(int number, string open)
+        public void SetSegmentOpenClosed(int number, string open)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
             temporaryTrackSegment.SetOpenClosed(open);
         }
 
-        public void UpdateSegmentFailure(int number, string failure)
+        public void SetSegmentFailure(int number, string failure)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
             temporaryTrackSegment.SetFailure(failure);
         }
 
-        public void UpdateSegmentSwitchDirection(int number, string switchDirection)
+        public void SetSegmentSwitch(int number, string switchDirection)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
             temporaryTrackSegment.SetSwitchDirection(switchDirection);
         }
 
-        public void UpdateSegmentSpeedLimit(int number, int speedLimit)
+        public void SetSegmentSpeedLimit(int number, int speedLimit)
         {
             TrackSegment temporaryTrackSegment = trackSegments[number];
 
             temporaryTrackSegment.SetSpeedLimit(speedLimit);
         }
 
-        public void UpdateTrainRoute(ArrayList route, int number)
+        public void SetTrainRoute(int number, Route route)
         {
            trains[number].SetRoute(route);
         }
 
-        public void UpdateTrainSchedule(Dictionary<string, double> schedule, int number)
+        public void SetTrainSchedule(int number, Dictionary<int, double> schedule)
         {
             trains[number].SetSchedule(schedule);
         }
@@ -154,17 +156,22 @@ namespace CTCOffice
 
         public void GenerateRoutes()
         {
-            string stations = "Station1:Station2";
+            double stations = 1.5;
 
             Route newRoute = new Route();
-            newRoute.UpdateRoute(trackSegments);
+            ArrayList routeMakeUp = new ArrayList();
+            routeMakeUp.Add(trackSegments[1]);
+            routeMakeUp.Add(trackSegments[2]);
+            routeMakeUp.Add(trackSegments[3]);
+            routeMakeUp.Add(trackSegments[4]);
+            routeMakeUp.Add(trackSegments[5]);
             newRoute.SetStart(1);
             newRoute.SetEnd(5);
-            newRoute.SetStationEnd("Station 2");
+            newRoute.SetRoute(newRoute.GetNumberOfPossibleRoutes() + 1, routeMakeUp);
 
-            segmentsInRoute.Add(stations, newRoute);
+            routes.Add(stations, newRoute);
 
-            stations = "Station2:Station1";
+            /*stations = "Station2:Station1";
 
             newRoute = new Route();
             Dictionary<int, TrackSegment> segments = new Dictionary<int, TrackSegment>();
@@ -179,12 +186,32 @@ namespace CTCOffice
             newRoute.SetEnd(1);
             newRoute.SetStationEnd("Station 1");
 
-            segmentsInRoute.Add(stations, newRoute);
+            routes.Add(stations, newRoute);*/
         }
 
-        public Route GetRoute(string stations)
+        public void GenertateStations()
         {
-            return segmentsInRoute[stations];
+            LinkedListNode<int> node = new LinkedListNode<int>(0);
+            foreach(KeyValuePair<int, TrackSegment> ts in trackSegments)
+            {
+                if(ts.Value.IsStation())
+                {
+                    if(stations.Count == 0)
+                    {
+                        stations.AddFirst(ts.Value.GetNumber());
+                        node = stations.First;
+                    }
+                    else
+                    {
+                        stations.AddAfter(node, ts.Value.GetNumber());
+                    }
+                }
+            }
+        }
+
+        public Route GetRoute(double stations)
+        {
+            return routes[stations];
         }
 
         public int GetNumberOfSegments()
@@ -195,6 +222,34 @@ namespace CTCOffice
         public int GetNumberOfTrains()
         {
             return trains.Count;
+        }
+
+        public void UpdateTrainRoute(int number)
+        {
+            Train train = trains[number];
+           
+            if(train.GetSegment() != train.GetDestination())
+            {
+                if (train.GetSegment() != 1)    //check if fresh out of yard
+                {
+                    train.SetNextStation(stations.Find(train.GetNextStation()).Next.Value);
+                }
+                else
+                {
+                    train.SetNextStation(stations.First.Next.Value);
+                }
+
+                if (routes.ContainsKey(train.GetSegment() + ((double)train.GetNextStation() / 10)))
+                {
+                    train.SetRoute(GetRoute(train.GetSegment() + ((double)train.GetNextStation() / 10)));
+                    train.SetActiveRoute(1);
+                }
+                else if (routes.ContainsKey(train.GetNextStation() + ((double)train.GetSegment() / 10))) 
+                {
+                    train.SetRoute(GetRoute(train.GetNextStation() + ((double)train.GetSegment() / 10)));
+                    train.SetActiveRoute(1);
+                }
+            }
         }
 
     }

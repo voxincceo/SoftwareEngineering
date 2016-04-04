@@ -15,242 +15,35 @@ namespace CTCOffice
     {
         private ControlSystem central;
         private TestingForm testingForm;
+        private TrackController trackController;
+        private TrackModel trackModel;
+        private TrainController trainController;
+        private TrainModel trainModel;
         private System.Timers.Timer systemTimer;
+        private int systemSpeed;
 
         public CTC()
         {
             InitializeComponent();
+            systemTimer = new System.Timers.Timer(50);
 
+            InitializeSystemComponents();
             InitializeErrorList();
             InitializeSystemList();
             InitializeTrackSegmentList();
             InitializeTrainList();
-            InitializeSystemObjects();
 
             central = new ControlSystem();
 
-            //testingForm = new TestingForm(this);
-            //testingForm.Show();
+            systemSpeed = 1;
+
+            testingForm = new TestingForm(this);
+            testingForm.Show();
         }
 
         void SystemTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            ArrayList trainList = central.GetTrains();
-            ArrayList segmentList = central.GetTrackSegments();
-            int authority = 0, number = 0;
-            double speed = 0;
-
-            foreach (Train train in trainList)
-            {
-                if (train.GetSegment() == 0)
-                {
-                    number = train.GetNumber();
-
-                    testingForm.updateTrainSegment(number, 1);      //should be set to first track outside yard
-                    
-                    foreach (TrackSegment segment in segmentList)   //this should be changed to the trains schedule
-                    {
-                        authority += segment.GetLength();
-                    }
-                    testingForm.UpdateTrainAuthority(number, authority);
-                    train.SetAuthority(authority);
-
-                    speed = (authority / (train.GetSchedule()["Station 2"] - 1.2) / 60);    //"station 2" text should be changed to train.GetNextStation()
-
-                    if (speed > (double) central.GetTrackSegment(1).GetSpeedLimit() / 3.6)  //1 should be changed to first segment outside yard
-                    {
-                        testingForm.updateTrainSpeed(number, (double) central.GetTrackSegment(1).GetSpeedLimit()); //here agagin
-                    }
-                    else
-                    {
-                        testingForm.updateTrainSpeed(number, speed);
-                    }
-
-                    this.Invoke(new MethodInvoker(delegate()
-                    {
-                        listViewTrains.Items[train.GetListNumber()].SubItems[4].Text = authority.ToString();
-                        listViewTrains.Items[train.GetListNumber()].SubItems[3].Text = "East";          //assuming initial direction is east
-                    }));
-                    train.SetDirection("East");
-                }
-                else
-                {
-                    int closedSegment = 0, errorOnClosed = 0;
-                    double newAuthority = 0;
-
-                    if (train.GetAuthority() <= 0 && train.GetRouteSegments().GetEnd() == train.GetSegment() && train.GetTimeOnSchedule() >= train.GetSchedule()[train.GetRouteSegments().GetStationEnd()] * 60)
-                    {
-                        //Check to reverse route
-                        Dictionary<string, double> schedule = new Dictionary<string,double>();
-                        string direction, routingList;
-
-                        if (train.GetRouteSegments().GetEnd() == train.GetRouteSegments().GetNumberOfSegmentsInRoute())
-                        {
-                            schedule.Add("Station 1", 2.4);     //changed to initial station
-                            direction = "West";
-                            routingList = "Station2:Station1";
-                        }
-                        else
-                        {
-                            schedule.Add("Station 2", 2.4);     //changed to initial final station
-                            direction = "East";
-                            routingList = "Station1:Station2";
-                        }
-
-                        train.SetDirection(direction);
-                        this.Invoke(new MethodInvoker(delegate()
-                        {
-                            listViewTrains.Items[train.GetListNumber()].SubItems[3].Text = direction;
-                        }));
-                        train.SetSchedule(schedule);
-                        train.SetRouteSegments(central.GetRoute(routingList));
-                        train.SetTimeOnSchedule(0);
-                        train.SetPosition(0);
-                    }
-
-                    double leastAuthority = 100000000000;
-
-                    foreach (KeyValuePair<int, TrackSegment> pair in train.GetRouteSegments().GetRoute())
-                    {
-                        if (pair.Value.GetOpenClosed().Equals("Closed") || pair.Value.GetFailure().Equals("Failure"))
-                        {
-                            closedSegment = 1;
-                            if (pair.Value.Equals(central.GetTrackSegment(train.GetSegment())))
-                            {
-                                leastAuthority = 0;
-                                errorOnClosed = 1;
-                            }
-                            else
-                            {
-                                if (errorOnClosed == 0)
-                                {
-                                    newAuthority = central.GetTrackSegment(train.GetSegment()).GetLength() - train.GetPosition();
-                                    if(train.GetDirection().Equals("East"))
-                                    {
-                                        if (train.GetSegment() + 1 != train.GetRouteSegments().GetEnd() + 1)
-                                        {
-                                            for (int i = 1; !pair.Value.Equals(central.GetTrackSegment(train.GetSegment() + i)) && (train.GetSegment() + i) < train.GetRouteSegments().GetEnd() + 1; i++)
-                                            {
-                                                newAuthority += central.GetTrackSegment(train.GetSegment() + i).GetLength();
-                                                if (train.GetSegment() + i + 1 > train.GetRouteSegments().GetEnd())
-                                                {
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (train.GetSegment() - 1 != 0)
-                                        {
-                                            for (int i = 1; !pair.Value.Equals(central.GetTrackSegment(train.GetSegment() - i)); i++)
-                                            {
-                                                newAuthority += central.GetTrackSegment(train.GetSegment() - i).GetLength();
-                                                if (train.GetSegment() - i - 1 < 1)
-                                                {
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (newAuthority < leastAuthority)
-                            {
-                                leastAuthority = newAuthority;
-                            }
-                        }
-
-                        if (closedSegment == 0)
-                        {
-                            if(train.GetDirection().Equals("East"))
-                            {
-                                newAuthority = central.GetTrackSegment(train.GetSegment()).GetLength() - train.GetPosition();
-                                if (train.GetSegment() + 1 != train.GetRouteSegments().GetEnd() + 1)
-                                {
-                                    for (int i = 1; (train.GetSegment() + i) < train.GetRouteSegments().GetEnd() + 1; i++)
-                                    {
-                                        newAuthority += central.GetTrackSegment(train.GetSegment() + i).GetLength();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                newAuthority = central.GetTrackSegment(train.GetSegment()).GetLength() - train.GetPosition();
-                                if (train.GetSegment() - 1 != 0)
-                                {
-                                    for (int i = 1; (train.GetSegment() - i) > 0; i++)
-                                    {
-                                        newAuthority += central.GetTrackSegment(train.GetSegment() - i).GetLength();
-                                    }
-                                }
-                            }
-                            if (newAuthority < leastAuthority)
-                            {
-                                leastAuthority = newAuthority;
-                            }
-                        }
-
-                        testingForm.UpdateTrainAuthority(train.GetNumber(), leastAuthority);
-                        train.SetAuthority(leastAuthority);
-                    }
-
-                    if (train.GetPosition() >= central.GetTrackSegment(train.GetSegment()).GetLength())
-                    {
-                        if (train.GetSegment() != train.GetRouteSegments().GetEnd())
-                        {
-                            int segmentNumber = 0;
-
-                            train.SetPosition(train.GetPosition() - central.GetTrackSegment(train.GetSegment()).GetLength());
-
-                            if(train.GetDirection().Equals("East"))
-                            { 
-                                segmentNumber = train.GetSegment() + 1;
-                            }
-                            else
-                            {
-                                segmentNumber = train.GetSegment() - 1;
-                            }
-
-                            testingForm.updateTrainSegment(train.GetNumber(), segmentNumber);
-                        }
-                    }
-
-                    speed = (train.GetAuthority() / (train.GetSchedule()[train.GetRouteSegments().GetStationEnd()] - 1.2 - (train.GetTimeOnSchedule() / 60)) / 60);
-
-                    speed *= 3.6;
-
-                    if (speed > central.GetTrackSegment(train.GetSegment()).GetSpeedLimit() || speed < 0)
-                    {
-                        testingForm.updateTrainSpeed(train.GetNumber(), central.GetTrackSegment(train.GetSegment()).GetSpeedLimit());
-                    }
-                    else
-                    {
-                        if (train.GetAuthority() <= 0)
-                        {
-                            testingForm.updateTrainSpeed(train.GetNumber(), 0);
-                        }
-                        else
-                        {
-                            testingForm.updateTrainSpeed(train.GetNumber(), speed);
-                        }
-                    }
-                    if (IsHandleCreated && !IsDisposed)
-                    {
-                        this.Invoke(new MethodInvoker(delegate()
-                        {
-                            int temporaryNumber = train.GetNumber(), listNumber = train.GetListNumber();
-                            testingForm.UpdateTrainAuthority(train.GetNumber(), train.GetAuthority());
-                            systemListView.Items[listNumber].SubItems[1].Text = (60 / central.GetTrain(temporaryNumber).GetSchedule()[central.GetTrain(temporaryNumber).GetRouteSegments().GetStationEnd()]).ToString();
-                            listViewTrains.Items[listNumber].SubItems[4].Text = train.GetAuthority().ToString();
-                            listViewTrains.Items[listNumber].SubItems[1].Text = train.GetSegment().ToString();
-                            listViewTrains.Items[listNumber].SubItems[2].Text = train.GetSpeed().ToString();
-                            systemGraphics.Refresh();
-                        }));
-                    }
-                }
-            }
+            UpdateSystem();
         }
 
         public void SetTrainSegment(int train, int segment)
@@ -271,6 +64,15 @@ namespace CTCOffice
             }));
         }
 
+        public void SetTrainAuthority(int train, double authority)
+        {
+            central.GetTrain(train).SetAuthority(authority);
+            this.Invoke(new Action(() =>
+            {
+                listViewTrains.Items[0].SubItems[4].Text = authority.ToString();
+            }));
+        }
+
         public void InitializeSystemTrains(ArrayList trains)
         {
             Train temporaryTrain;
@@ -280,6 +82,8 @@ namespace CTCOffice
             {
                 central.CreateTrain(number);
                 central.GetTrain(number).SetListNumber(central.GetNumberOfTrains() - 1);
+                central.GetTrain(number).SetSegment(1); //first from yard
+                DevelopTestSchedule(number);                //check this for actual schedules ?
                 temporaryTrain = central.GetTrain(number);
 
                 temporaryTrainLVI = new ListViewItem();
@@ -352,60 +156,81 @@ namespace CTCOffice
 
         public void StartSystemTest()
         {
-            systemTimer = new System.Timers.Timer(50);
             systemTimer.Elapsed += SystemTimer_Elapsed;
             systemTimer.Enabled = true;
 
-            central.GetTrain(1).SetTimeOnSchedule(0);
+            //central.GetTrain(1).SetTimeOnSchedule(0);
         }
 
-        public void DevelopTestSchedule()
+        public void DevelopTestSchedule(int number)
         {
-            ArrayList route = new ArrayList();
+            //dead from testfrom
+           /*ArrayList route = new ArrayList();
             route.Add("Black");
             route.Add("Station 1");
             route.Add("Station 2");
-
-            Dictionary<string, double> schedule = new Dictionary<string, double>();
-            schedule.Add("Station 2", 2.4);
-
-            central.UpdateTrainRoute(route, 1);
-            central.UpdateTrainSchedule(schedule, 1);
+            */
+            Dictionary<int, double> schedule = new Dictionary<int, double>();
+            schedule.Add(5, 2.4);
+            central.SetTrainSchedule(number, schedule);
+            /*
+            central.SetTrainRoute(route, 1);
+           
 
             string stations = "Station1:Station2";
 
-            central.GetTrain(1).SetRouteSegments(central.GetRoute(stations));
+            central.GetTrain(1).SetRoute(central.GetRoute(stations));*/
         }
 
-        public void SetRouteFromForm(ArrayList route, int train)
+        public void SetRouteFromForm(int number, int destination)
         {
-            central.UpdateTrainRoute(route, train);
+            Train train = central.GetTrain(number);
+            train.SetDestination(destination);
+            central.UpdateTrainRoute(train.GetNumber());
         }
 
-        public void SetScheduleFromForm(Dictionary<string, double> schedule, int train)
+        public void SetScheduleFromForm(Dictionary<int, double> schedule, int train)
         {
-            central.UpdateTrainSchedule(schedule, train);
+            central.SetTrainSchedule(train, schedule);
         }
 
-        private void ShowSampleModule()
+        /*private void ShowSampleModule()
         {
             Form sampleForm = new SampleModule();
             sampleForm.Show();
-        }
+        }*/
 
         private void TrackModelButton_Click(object sender, EventArgs e)
         {
-            ShowSampleModule();
+            trackModel.show();
         }
 
         private void TrainModelButton_Click(object sender, EventArgs e)
         {
-            ShowSampleModule();
+            trainModel.show();
         }
 
         private void TrackControllerButton_Click(object sender, EventArgs e)
         {
-            ShowSampleModule();
+            trackController.show();
+        }
+
+        private void InitializeSystemComponents()
+        {
+            trackController = new TrackController(systemTimer);
+            trackModel = new TrackModel(systemTimer);
+            trainModel = new TrainModel(systemTimer);
+            trainController = new TrainController(systemTimer);
+
+            trackController.SetSystemSpeed(systemSpeed);
+            trackModel.SetSystemSpeed(systemSpeed);
+            trainModel.SetSystemSpeed(systemSpeed);
+            trainController.SetSystemSpeed(systemSpeed);
+
+            trackController.SendModules(this, trackModel);
+            trackModel.SendModules(trackController, trainModel);
+            trainModel.SendModules(trackModel, trainController);
+            trainController.SendModules(trainModel);
         }
 
         private void InitializeErrorList()
@@ -469,11 +294,6 @@ namespace CTCOffice
             listViewTrains.Columns.Add("Authority", 100);
         }
 
-        private void InitializeSystemObjects()
-        {
-            //call everyones object
-        }
-
         private void OpenCloseButton_Click(object sender, EventArgs e)
         {
             if (listViewTrack.SelectedItems.Count > 0)
@@ -484,11 +304,13 @@ namespace CTCOffice
                 if(openClosed.Equals("Open"))
                 {
 
-                    testingForm.updateSegment(segment.GetNumber(), "Closed");
+                    trackController.SuggestSegmentOpenclosed(segment.GetNumber(), "Closed");
+                    OpenCloseSegment(segment.GetNumber(), "Closed");
                 }
                 else
                 {
-                    testingForm.updateSegment(segment.GetNumber(), "Open");
+                    trackController.SuggestSegmentOpenclosed(segment.GetNumber(), "Open");
+                    OpenCloseSegment(segment.GetNumber(), "Open");
                 }
             }
         }
@@ -498,7 +320,7 @@ namespace CTCOffice
             if(listViewTrains.SelectedItems.Count > 0)
             {
                 Train train = central.GetTrain(Int32.Parse(listViewTrains.SelectedItems[0].Text));
-                Form routeForm = new RoutesForm(train.GetNumber(), train.GetRoute(), this);
+                Form routeForm = new RoutesForm(train, central.GetTrackSegments(), this);
                 routeForm.Show();
             }
         }
@@ -639,7 +461,7 @@ namespace CTCOffice
 
         public void SetTrackSegmentFailure(int number, string text)
         {
-            central.UpdateSegmentFailure(number, text);
+            central.SetSegmentFailure(number, text);
             listViewTrack.Items[number - 1].SubItems[4].Text = text;
         }
 
@@ -647,6 +469,243 @@ namespace CTCOffice
         {
             TrainDispatch trainDispatch = new TrainDispatch(this);
             trainDispatch.Show();
+        }
+
+        private void UpdateSystem()
+        {
+            ArrayList trainList = central.GetTrains();
+            ArrayList segmentList; // = central.GetTrackSegments();
+            int authority = 0, number = 0;
+            double speed = 0;
+
+            foreach (Train train in trainList)
+            {
+                if (train.GetActiveRoute() == 0)
+                {
+
+                    /*number = train.GetNumber();
+                    segmentList = train.GetRouteSegments().GetRoute(1);
+
+                    //testingForm.updateTrainSegment(number, 1);      //should be set to first track outside yard * gets handled by the track controller
+
+                    foreach (TrackSegment segment in segmentList)   //this should be changed to the trains schedule
+                    {
+                        authority += segment.GetLength();
+                    }
+                    trackController.UpdateTrainAuthority(number, authority);
+                    train.SetAuthority(authority);
+
+                    speed = (authority / (train.GetSchedule()[train.GetNextStation()] - 1.2) / 60);    //"station 2" text should be changed to train.GetNextStation()
+
+                    if (speed > (double)central.GetTrackSegment(1).GetSpeedLimit() / 3.6)  //1 should be changed to first segment outside yard
+                    {
+                        trackController.updateTrainSpeed(number, (double)central.GetTrackSegment(1).GetSpeedLimit()); //here agagin
+                    }
+                    else
+                    {
+                        testingForm.updateTrainSpeed(number, speed);
+                    }
+
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        listViewTrains.Items[train.GetListNumber()].SubItems[4].Text = authority.ToString();
+                        listViewTrains.Items[train.GetListNumber()].SubItems[3].Text = "East";          //assuming initial direction is east
+                    }));
+                    train.SetDirection("East");*/
+                }
+                else
+                {
+                    int closedSegment = 0, errorOnClosed = 0;
+                    double newAuthority = 0;
+
+                    /*if (train.GetAuthority() <= 0 && train.GetRouteSegments().GetEnd() == train.GetSegment() && train.GetTimeOnSchedule() >= train.GetSchedule()[train.GetRouteSegments().GetStationEnd()] * 60)
+                    {
+                        //Check to reverse route
+                        Dictionary<string, double> schedule = new Dictionary<string, double>();
+                        string direction, routingList;
+
+                        if (train.GetRouteSegments().GetEnd() == train.GetRouteSegments().GetNumberOfSegmentsInRoute())
+                        {
+                            schedule.Add("Station 1", 2.4);     //changed to initial station
+                            direction = "West";
+                            routingList = "Station2:Station1";
+                        }
+                        else
+                        {
+                            schedule.Add("Station 2", 2.4);     //changed to initial final station
+                            direction = "East";
+                            routingList = "Station1:Station2";
+                        }
+
+                        train.SetDirection(direction);
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            listViewTrains.Items[train.GetListNumber()].SubItems[3].Text = direction;
+                        }));
+                        train.SetSchedule(schedule);
+                        train.SetRoute(central.GetRoute(routingList));
+                        train.SetTimeOnSchedule(0);
+                        train.SetPosition(0);
+                    }*/
+
+                    double leastAuthority = 100000000000;
+
+                    foreach (TrackSegment s in train.GetRouteSegments().GetRoute(train.GetActiveRoute()))
+                    {
+                        if (s.GetOpenClosed().Equals("Closed") ||s.GetFailure().Equals("Failure"))
+                        {
+                            closedSegment = 1;
+                            if (s.Equals(central.GetTrackSegment(train.GetSegment())))
+                            {
+                                leastAuthority = 0;
+                                errorOnClosed = 1;
+                            }
+                            else
+                            {
+                                if (errorOnClosed == 0)
+                                {
+                                    newAuthority = central.GetTrackSegment(train.GetSegment()).GetLength() - train.GetPosition();
+                                    if (train.GetDirection().Equals("East"))
+                                    {
+                                        if (train.GetSegment() + 1 != train.GetRouteSegments().GetEnd() + 1)
+                                        {
+                                            for (int i = 1; !s.Equals(central.GetTrackSegment(train.GetSegment() + i)) && (train.GetSegment() + i) < train.GetRouteSegments().GetEnd() + 1; i++)
+                                            {
+                                                newAuthority += central.GetTrackSegment(train.GetSegment() + i).GetLength();
+                                                if (train.GetSegment() + i + 1 > train.GetRouteSegments().GetEnd())
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (train.GetSegment() - 1 != 0)
+                                        {
+                                            for (int i = 1; !s.Equals(central.GetTrackSegment(train.GetSegment() - i)); i++)
+                                            {
+                                                newAuthority += central.GetTrackSegment(train.GetSegment() - i).GetLength();
+                                                if (train.GetSegment() - i - 1 < 1)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (newAuthority < leastAuthority)
+                            {
+                                leastAuthority = newAuthority;
+                            }
+                        }
+
+                        if (closedSegment == 0)
+                        {
+                            if (train.GetDirection().Equals("East"))
+                            {
+                                newAuthority = central.GetTrackSegment(train.GetSegment()).GetLength() - train.GetPosition();
+                                if (train.GetSegment() + 1 != train.GetRouteSegments().GetEnd() + 1)
+                                {
+                                    for (int i = 1; (train.GetSegment() + i) < train.GetRouteSegments().GetEnd() + 1; i++)
+                                    {
+                                        newAuthority += central.GetTrackSegment(train.GetSegment() + i).GetLength();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                newAuthority = central.GetTrackSegment(train.GetSegment()).GetLength() - train.GetPosition();
+                                if (train.GetSegment() - 1 != 0)
+                                {
+                                    for (int i = 1; (train.GetSegment() - i) > 0; i++)
+                                    {
+                                        newAuthority += central.GetTrackSegment(train.GetSegment() - i).GetLength();
+                                    }
+                                }
+                            }
+
+                            if (newAuthority < leastAuthority)
+                            {
+                                leastAuthority = newAuthority;
+                            }
+                        }
+                    }
+
+                    trackController.SuggestTrainAuthority(train.GetNumber(), leastAuthority);
+                    SetTrainAuthority(train.GetNumber(), leastAuthority);
+
+                    if (train.GetPosition() >= central.GetTrackSegment(train.GetSegment()).GetLength())
+                    {
+                        if (train.GetSegment() != train.GetRouteSegments().GetEnd())
+                        {
+                            int segmentNumber = 0;
+
+                            train.SetPosition(train.GetPosition() - central.GetTrackSegment(train.GetSegment()).GetLength());
+
+                            if (train.GetDirection().Equals("East"))
+                            {
+                                segmentNumber = train.GetSegment() + 1;
+                            }
+                            else
+                            {
+                                segmentNumber = train.GetSegment() - 1;
+                            }
+
+                            //testingForm.updateTrainSegment(train.GetNumber(), segmentNumber);
+                        }
+                    }
+
+                    speed = (train.GetAuthority() / (train.GetSchedule()[train.GetRouteSegments().GetEnd()] - 1.2 - (train.GetTimeOnSchedule() / 60)) / 60);
+
+                    speed *= 3.6;
+
+                    if (speed > central.GetTrackSegment(train.GetSegment()).GetSpeedLimit() || speed < 0)
+                    {
+                        trackController.SuggestTrainSpeed(train.GetNumber(), central.GetTrackSegment(train.GetSegment()).GetSpeedLimit());
+                        SetTrainSpeed(train.GetNumber(), central.GetTrackSegment(train.GetSegment()).GetSpeedLimit());
+                    }
+                    else
+                    {
+                        if (train.GetAuthority() <= 0)
+                        {
+                            trackController.SuggestTrainSpeed(train.GetNumber(), 0);
+                            SetTrainSpeed(train.GetNumber(), 0);
+                        }
+                        else
+                        {
+                            trackController.SuggestTrainSpeed(train.GetNumber(), speed);
+                            SetTrainSpeed(train.GetNumber(), speed);
+                        }
+                    }
+
+                    if (train.GetDestination() == train.GetSegment())
+                    {
+                        SetTrainSpeed(train.GetNumber(), 0);
+                        SetTrainAuthority(train.GetNumber(), 0);
+                        trackController.SuggestTrainSpeed(train.GetNumber(), 0);
+                        trackController.SuggestTrainAuthority(train.GetNumber(), 0);
+
+                        train.SetActiveRoute(0);
+                    }
+
+                    if (IsHandleCreated && !IsDisposed)
+                    {
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            int temporaryNumber = train.GetNumber(), listNumber = train.GetListNumber();
+                            //trackController.SuggestTrainAuthority(train.GetNumber(), train.GetAuthority());
+                            systemListView.Items[listNumber].SubItems[1].Text = (60 / central.GetTrain(temporaryNumber).GetSchedule()[central.GetTrain(temporaryNumber).GetRouteSegments().GetEnd()]).ToString();
+                            listViewTrains.Items[listNumber].SubItems[4].Text = train.GetAuthority().ToString();
+                            listViewTrains.Items[listNumber].SubItems[1].Text = train.GetSegment().ToString();
+                            listViewTrains.Items[listNumber].SubItems[2].Text = train.GetSpeed().ToString();
+                            systemGraphics.Refresh();
+                        }));
+                    }
+                }
+            }
         }
     }
 }

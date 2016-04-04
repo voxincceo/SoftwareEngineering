@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace CTCOffice
 {
-    class TrackSegment
+    public class TrackSegment
     {
         private int number, speedLimit, length;
         private string line, openClosed, failure, switchDirection;
+        private bool isStation;
 
         public TrackSegment()
         {
@@ -20,6 +21,7 @@ namespace CTCOffice
             openClosed = "Open";
             failure = "None";
             switchDirection = "N/A";
+            isStation = false;
         }
 
         public void SetLength(int value)
@@ -56,6 +58,11 @@ namespace CTCOffice
         {
             speedLimit = newSpeedLimit;
         }
+        
+        public void SetIsStation(bool change)
+        {
+            isStation = change;
+        }
 
         public int GetLength()
         {
@@ -90,6 +97,11 @@ namespace CTCOffice
         public string GetSwitchDirection()
         {
             return switchDirection;
+        }
+
+        public bool IsStation()
+        {
+            return isStation;
         }
     }
 }
