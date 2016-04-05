@@ -171,6 +171,23 @@ namespace CTCOffice
 
             routes.Add(stations, newRoute);
 
+            stations = 6.13;
+            newRoute = new Route();
+            routeMakeUp = new ArrayList();
+            routeMakeUp.Add(trackSegments[6]);
+            routeMakeUp.Add(trackSegments[7]);
+            routeMakeUp.Add(trackSegments[8]);
+            routeMakeUp.Add(trackSegments[9]);
+            routeMakeUp.Add(trackSegments[10]);
+            routeMakeUp.Add(trackSegments[11]);
+            routeMakeUp.Add(trackSegments[12]);
+            routeMakeUp.Add(trackSegments[13]);
+            newRoute.SetStart(6);
+            newRoute.SetEnd(13);
+            newRoute.SetRoute(newRoute.GetNumberOfPossibleRoutes() + 1, routeMakeUp);
+
+            routes.Add(stations, newRoute);
+
             /*stations = "Station2:Station1";
 
             newRoute = new Route();
@@ -189,7 +206,7 @@ namespace CTCOffice
             routes.Add(stations, newRoute);*/
         }
 
-        public void GenertateStations()
+        public void GenerateStations()
         {
             LinkedListNode<int> node = new LinkedListNode<int>(0);
             foreach(KeyValuePair<int, TrackSegment> ts in trackSegments)

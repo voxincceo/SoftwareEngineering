@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TrackModelPrototype;
-using TheTrainModule;
-using TrainController;
+//using TrackModelPrototype;
+//using TheTrainModule;
+//using TrainController;
 
 namespace CTCOffice
 {
@@ -18,15 +18,15 @@ namespace CTCOffice
     {
         private ControlSystem central;
         private TestingForm testingForm;
-        private RCS.RCS formParent;
+        //private RCS.RCS formParent;
         //private TrackController trackController;
-        private TrackModelForm trackModel;
-        private TrainControllerForm trainController;
-        private TrainModelForm trainModel;
+        //private TrackModelForm trackModel;
+        //private TrainControllerForm trainController;
+        //private TrainModelForm trainModel;
         private System.Timers.Timer systemTimer;
         private int systemSpeed;
 
-        public CTC(RCS.RCS main)
+        public CTC()//RCS.RCS main)
         {
             InitializeComponent();
             systemTimer = new System.Timers.Timer(50);
@@ -38,12 +38,43 @@ namespace CTCOffice
             InitializeTrainList();
 
             central = new ControlSystem();
-            formParent = main;
+            ParseTrackFile("SystemPrototype.csv");
+            //formParent = main;
 
             systemSpeed = 1;
+            StartSystemTest();
 
             //testingForm = new TestingForm(this);
             //testingForm.Show();
+        }
+
+        private void ParseTrackFile(string filename)
+        {
+            string line;
+            string[] segment;
+            TrackSegment tempSegment;
+            ArrayList parsedSegments = new ArrayList();
+
+            System.IO.StreamReader file = new System.IO.StreamReader("../../" + filename); //go up from bin\debug\
+            while ((line = file.ReadLine()) != null)
+            {
+                segment = line.Split(',');
+
+                central.CreateTrackSegment(int.Parse(segment[2]));
+                tempSegment = central.GetTrackSegment(int.Parse(segment[2]));
+
+                tempSegment.SetLine(segment[0]);
+                tempSegment.SetLength(int.Parse(segment[3]));
+                tempSegment.SetSpeedLimit(int.Parse(segment[4]));
+                if(segment[5] != "")
+                {
+                    tempSegment.SetIsStation(true);
+                }
+
+                parsedSegments.Add(tempSegment);
+            }
+
+            InitializeSystemTrackSegments(parsedSegments);
         }
 
         void SystemTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -104,12 +135,12 @@ namespace CTCOffice
 
         public void InitializeSystemTrackSegments(ArrayList trackSegments)
         {
-            TrackSegment temporarySegment;
+            //TrackSegment temporarySegment;
             ListViewItem temporarySegmentLVI;
 
-            foreach (int number in trackSegments)
+            foreach (TrackSegment temporarySegment in trackSegments)
             {
-                central.CreateTrackSegment(number);
+                /*central.CreateTrackSegment(number);
                 temporarySegment = central.GetTrackSegment(number);
 
                 switch (number)
@@ -135,7 +166,7 @@ namespace CTCOffice
                         temporarySegment.SetLength(35);
                         break;
                 }
-
+                */
                 temporarySegmentLVI = new ListViewItem();
                 temporarySegmentLVI.Text = temporarySegment.GetNumber().ToString();
                 temporarySegmentLVI.SubItems.Add(temporarySegment.GetLine());
@@ -148,6 +179,7 @@ namespace CTCOffice
             }
 
             central.GenerateRoutes();
+            central.GenerateStations();
         }
 
         public void OpenCloseSegment(int number, string text)
@@ -178,6 +210,10 @@ namespace CTCOffice
             Dictionary<int, double> schedule = new Dictionary<int, double>();
             schedule.Add(5, 2.4);
             central.SetTrainSchedule(number, schedule);
+
+            schedule = new Dictionary<int, double>();
+            schedule.Add(13, 8.4);
+            central.SetTrainSchedule(number, schedule);
             /*
             central.SetTrainRoute(route, 1);
            
@@ -207,7 +243,7 @@ namespace CTCOffice
 
         private void TrackModelButton_Click(object sender, EventArgs e)
         {
-            trackModel.Show();
+            //trackModel.Show();
         }
 
         private void TrainModelButton_Click(object sender, EventArgs e)
@@ -223,7 +259,7 @@ namespace CTCOffice
         private void InitializeSystemComponents()
         {
             //trackController = new TrackController(systemTimer);
-            trackModel = new TrackModelForm();
+            //trackModel = new TrackModelForm();
             //trainModel = new TrainModel(systemTimer);
             //trainController = new TrainController(systemTimer);
 
@@ -364,7 +400,7 @@ namespace CTCOffice
             SolidBrush orangeBrush = new SolidBrush(Color.Orange);
             SolidBrush colorBrush;
             Pen trainPen = new Pen(Color.DeepSkyBlue, 4);
-            int startX = 250, startY = 200;
+            int startX = 0, startY = 200;
 
             foreach (TrackSegment segment in central.GetTrackSegments())
             {
@@ -381,8 +417,8 @@ namespace CTCOffice
                     colorBrush = blackBrush;
                 }
 
-                e.Graphics.FillRectangle(colorBrush, new Rectangle(startX, startY, segment.GetLength(), 10));
-                startX += segment.GetLength() + 5;
+                e.Graphics.FillRectangle(colorBrush, new Rectangle(startX, startY, segment.GetLength() / 2, 10));
+                startX += (segment.GetLength() / 2) + 5;
             }
 
             foreach (Train train in central.GetTrains())
@@ -391,11 +427,11 @@ namespace CTCOffice
 
                 if (train.GetDirection().Equals("East"))
                 {
-                    for (int i = 1; i < 6; i++)
+                    for (int i = 1; i < train.GetSegment() + 1; i++)
                     {
                         if (train.GetSegment() > i)
                         {
-                            position += central.GetTrackSegment(i).GetLength();
+                            position += (central.GetTrackSegment(i).GetLength() / 2);
                         }
                         else if (train.GetSegment() == i)
                         {
@@ -405,27 +441,27 @@ namespace CTCOffice
                 }
                 else
                 {
-                    for (int i = 1; i < 6; i++)
+                    for (int i = 1; i < train.GetSegment() + 1; i++)
                     {
                         if (train.GetSegment() > i)
                         {
-                            position += central.GetTrackSegment(i).GetLength();
+                            position += central.GetTrackSegment(i).GetLength() / 2;
                         }
                         else if (train.GetSegment() == i)
                         {
-                            position += central.GetTrackSegment(i).GetLength() - (int)train.GetPosition();
+                            position += (central.GetTrackSegment(i).GetLength() / 2) - (int)train.GetPosition();
                         }
                     }
                 }
 
-                e.Graphics.DrawEllipse(trainPen, new Rectangle(250 + position, 197, 16, 16));
+                e.Graphics.DrawEllipse(trainPen, new Rectangle(0 + position, 197, 16, 16));
             }
         }
 
         private void CTC_FormClosed(object sender, FormClosedEventArgs e)
         {
             //testingForm.Dispose();
-            formParent.Dispose();
+            //formParent.Dispose();
         }
 
         public void SetTrackHeater(string text)
