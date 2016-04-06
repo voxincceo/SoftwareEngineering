@@ -64,7 +64,7 @@ namespace TheTrainModule
 
         /*-------------------------------------------------UI FUNCTIONS---------------------------------------------------------------*/
 
-        private void generalInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GeneralInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             generalTrainInformation.Show();
         }
@@ -193,7 +193,7 @@ namespace TheTrainModule
 
         /*-----------------------------PUBLIC SET METHODS---------------------------------------*/
 
-        public void sendModules(TrainControllerForm tc)
+        public void SendModules(TrainControllerForm tc)
         {
             trainControllerForm = tc;
         }
@@ -206,7 +206,7 @@ namespace TheTrainModule
             if (!t.active)
                 t.active = true;
 
-            trainDatabase.updateTrain(id);
+            trainDatabase.UpdateTrain(id);
         }
 
         public void SetVelocity(int id, double velocity)
@@ -254,7 +254,7 @@ namespace TheTrainModule
 
             trainDatabase.GetTrain(id).commandedSpeed = velocity;
 
-            this.send(id, "commanded");
+            this.Send(id, "commanded");
         }
 
         public void SetAuthority(int id, int authority)
@@ -267,7 +267,7 @@ namespace TheTrainModule
 
             trainDatabase.GetTrain(id).authority = authority;
 
-          this.send(id, "authority");
+          this.Send(id, "authority");
         }
 
         public void SetUnderground(int id, bool state)
@@ -276,21 +276,21 @@ namespace TheTrainModule
             t.underground = state;
 
             if(state)
-                this.send(id, "underground");
+                this.Send(id, "underground");
         }
 
         public void SetPassengers(int id, int addition)
         {
             trainDatabase.GetTrain(id).passengerCount += addition;
 
-            this.send(id, "passengers");
+            this.Send(id, "passengers");
         }
 
         public void SetBeacon(int id, string beacon)
         {
             trainDatabase.GetTrain(id).beacon = beacon;
 
-            this.send(id, "beacon");
+            this.Send(id, "beacon");
         }
 
         public void SetCurrentBlock(int id, string block)
@@ -300,18 +300,18 @@ namespace TheTrainModule
 
         public bool IDExists(int id)
         {
-            return trainDatabase.contains(id);
+            return trainDatabase.Contains(id);
         }
 
-        public void setPassengerBrakes(int id, bool state)
+        public void SetPassengerBrakes(int id, bool state)
         {
             trainDatabase.GetTrain(id).emergencyBrakes = state;
 
             if (state)
-              send(id, "emergency");
+              Send(id, "emergency");
         }
 
-        public void fixFailure(int id)
+        public void FixFailure(int id)
         {
             trainDatabase.GetTrain(id).failureMode = 0;
         }
@@ -327,24 +327,24 @@ namespace TheTrainModule
             switch (info)
             {
                 case "emergency":
-                    trainControllerForm.setPassengerEmergencyBrakes(id);
+                    trainControllerForm.SetPassengerEmergencyBrakes(id);
                     break;
                 case "beacon":
-                    trainControllerForm.setBeacon(id, train.beacon);
+                    trainControllerForm.SetBeacon(id, train.beacon);
                     break;
                 case "temperature":
-                    trainControllerForm.setTemperature(id, train.temperature);
+                    trainControllerForm.SetTemperature(id, train.temperature);
                     break;
                 case "commanded":
-                    trainControllerForm.updateTrain(id);
-                    trainControllerForm.setSpeed(id, train.commandedSpeed);
+                    trainControllerForm.UpdateTrain(id);
+                    trainControllerForm.SetSpeed(id, train.commandedSpeed);
                     break;
                 case "authority":
-                    trainControllerForm.updateTrain(id);
-                    trainControllerForm.setAuthority(id, train.authority);
+                    trainControllerForm.UpdateTrain(id);
+                    trainControllerForm.SetAuthority(id, train.authority);
                     break;
                 case "velocity":
-                    trainControllerForm.setVelocity(id, train.velocity);
+                    trainControllerForm.SetVelocity(id, train.velocity);
                     break;
                 case "underground":
                     trainControllerForm.SetDarkOutside(id, train.underground);
@@ -362,7 +362,7 @@ namespace TheTrainModule
            string[] information = { "emergency", "beacon", "temperature", "commanded", "authority", "velocity", "underground", "passengers" };
 
            for (int i = 0; i < information.Length; i++)
-               this.send(id, information[i]);
+               this.Send(id, information[i]);
        }
     }
 }
