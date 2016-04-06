@@ -52,7 +52,7 @@ namespace TheTrainModule
             {
                 for(int i = 0; i < trainDatabase.Size(); i++)
                 {
-                    send(++i, trainDatabase.GetTrain(i).velocity); 
+                    Send(++i, "velocity"); 
                 }
             }
             
@@ -71,7 +71,7 @@ namespace TheTrainModule
 
         private void AddTrain()
         {
-            ToolStripMenuItem tmi = new ToolStripMenuItem("Train " + trainDatabase.size());
+            ToolStripMenuItem tmi = new ToolStripMenuItem("Train " + trainDatabase.Size());
             selectATrainMenu.DropDownItems.Add(tmi);
         }
 
@@ -91,7 +91,7 @@ namespace TheTrainModule
                     train.failureMode = 0;
 
                 if (train.failureMode > 0)
-                    send(trainId, train.failureMode);
+                    Send(trainId, "failure");
 
 
             }

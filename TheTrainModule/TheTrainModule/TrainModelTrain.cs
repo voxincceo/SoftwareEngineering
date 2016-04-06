@@ -84,7 +84,7 @@ namespace TheTrainModule
             power = 0;
         }
 
-        public void driveTrain()
+        public void DriveTrain()
         {
             if (failureMode > 0)
             {
