@@ -77,7 +77,7 @@ namespace TheTrainModule
 
         public void UpdateTrain(int id)
         {
-            GetTrain(id).update();
+            GetTrain(id).Update();
         }
 
         public void DriveTrains()
@@ -91,7 +91,7 @@ namespace TheTrainModule
                     if (t == null)
                         break;
 
-                    t.driveTrain();
+                    t.DriveTrain();
                 }
             }
         }
