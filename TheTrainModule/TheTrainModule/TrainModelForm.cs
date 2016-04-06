@@ -46,11 +46,11 @@ namespace TheTrainModule
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
-            trainDatabase.driveTrains();
+            trainDatabase.DriveTrains();
             
-            if(trainDatabase.size > 0)
+            if(trainDatabase.Size() > 0)
             {
-                for(int i = 0; i < trainDatabase.size; i++)
+                for(int i = 0; i < trainDatabase.Size(); i++)
                 {
                     send(++i, trainDatabase.GetTrain(i).velocity); 
                 }
@@ -320,7 +320,7 @@ namespace TheTrainModule
 
         /*------------------------------------------------SEND FUNCTIONS-----------------------------------------------*/
 
-        private void send(int id, string info)
+        private void Send(int id, string info)
         {
             TrainModelTrain train = trainDatabase.GetTrain(id);
 
