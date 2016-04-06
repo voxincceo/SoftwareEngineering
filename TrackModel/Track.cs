@@ -38,7 +38,7 @@ namespace TrackModelPrototype
             Block currentBlock = null;
             Block currentYard = null;
             
-            System.IO.StreamReader fileT = new System.IO.StreamReader(@"\\Mac\Home\Downloads\" + file);
+            System.IO.StreamReader fileT = new System.IO.StreamReader("../../" + file);
             while ((text = fileT.ReadLine()) != null)
             {
                 blockInfo = text.Split(',');

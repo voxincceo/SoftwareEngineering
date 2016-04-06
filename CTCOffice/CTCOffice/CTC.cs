@@ -460,7 +460,7 @@ namespace CTCOffice
         private void CTC_FormClosed(object sender, FormClosedEventArgs e)
         {
             //testingForm.Dispose();
-            //formParent.Dispose();
+            formParent.Dispose();
         }
 
         public void SetTrackHeater(string text)
