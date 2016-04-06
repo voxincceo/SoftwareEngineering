@@ -23,32 +23,23 @@ namespace CTCOffice
 
         private void ButtonDispatch_Click(object sender, EventArgs e)
         {
-            int number = 0, result = 0, segment = 0;
+            int number = 0, result = 0;
             string message = "", title = "";
             ArrayList train = new ArrayList();
             Train newTrain = new Train();
 
-            if (stationBox.Text != null)
+   
+            if (int.TryParse(numberBox.Text, out number))
             {
-                if (int.TryParse(numberBox.Text, out number))
-                {
-                    if (int.TryParse(stationBox.Text, out segment))
-                    {
-                        message = "Train " + number.ToString() + " confirmed at station " + segment.ToString();
-                        title = "Dispatch";
-                        result = 1;
-                    }
-                    else
-                    {
-                        message = "Please enter a valid segment number";
-                        title = "Error";
-                    }
-                }
-                else
-                {
-                    message = "Please enter a valid train number";
-                    title = "Error";
-                }
+
+                message = "Train " + number.ToString() + " confirmed.";
+                title = "Dispatch";
+                result = 1;
+            }
+            else
+            {
+                message = "Please enter a valid train number";
+                title = "Error";
             }
 
             MessageBox.Show(message, title);
@@ -56,7 +47,8 @@ namespace CTCOffice
             {
                 train.Add(number);
                 office.InitializeSystemTrains(train);
-                office.SetTrainSegment(number, segment);
+                office.SetTrainSegment(number, 1);
+                this.Dispose();
             }
         }
     }

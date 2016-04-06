@@ -30,8 +30,6 @@
         {
             this.labelNumber = new System.Windows.Forms.Label();
             this.numberBox = new System.Windows.Forms.MaskedTextBox();
-            this.labelStation = new System.Windows.Forms.Label();
-            this.stationBox = new System.Windows.Forms.MaskedTextBox();
             this.buttonDispatch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -51,25 +49,9 @@
             this.numberBox.Size = new System.Drawing.Size(100, 20);
             this.numberBox.TabIndex = 1;
             // 
-            // labelStation
-            // 
-            this.labelStation.AutoSize = true;
-            this.labelStation.Location = new System.Drawing.Point(13, 66);
-            this.labelStation.Name = "labelStation";
-            this.labelStation.Size = new System.Drawing.Size(49, 13);
-            this.labelStation.TabIndex = 2;
-            this.labelStation.Text = "Segment";
-            // 
-            // stationBox
-            // 
-            this.stationBox.Location = new System.Drawing.Point(94, 63);
-            this.stationBox.Name = "stationBox";
-            this.stationBox.Size = new System.Drawing.Size(100, 20);
-            this.stationBox.TabIndex = 3;
-            // 
             // buttonDispatch
             // 
-            this.buttonDispatch.Location = new System.Drawing.Point(62, 125);
+            this.buttonDispatch.Location = new System.Drawing.Point(61, 39);
             this.buttonDispatch.Name = "buttonDispatch";
             this.buttonDispatch.Size = new System.Drawing.Size(75, 23);
             this.buttonDispatch.TabIndex = 4;
@@ -81,10 +63,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(206, 176);
+            this.ClientSize = new System.Drawing.Size(206, 81);
             this.Controls.Add(this.buttonDispatch);
-            this.Controls.Add(this.stationBox);
-            this.Controls.Add(this.labelStation);
             this.Controls.Add(this.numberBox);
             this.Controls.Add(this.labelNumber);
             this.Name = "TrainDispatch";
@@ -98,8 +78,6 @@
 
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.MaskedTextBox numberBox;
-        private System.Windows.Forms.Label labelStation;
-        private System.Windows.Forms.MaskedTextBox stationBox;
         private System.Windows.Forms.Button buttonDispatch;
     }
 }

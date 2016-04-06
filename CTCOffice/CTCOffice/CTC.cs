@@ -722,7 +722,7 @@ namespace CTCOffice
                         }
                     }
 
-                    if (train.GetDestination() == train.GetSegment())
+                    if (train.GetDestination() == 0)
                     {
                         SetTrainSpeed(train.GetNumber(), 0);
                         SetTrainAuthority(train.GetNumber(), 0);

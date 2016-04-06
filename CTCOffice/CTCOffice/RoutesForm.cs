@@ -61,6 +61,10 @@ namespace CTCOffice
 
             MessageBox.Show(message, title);
 
+            if(title.Equals("Confirm"))
+            {
+                this.Dispose();
+            }
         }
 
         private void InitializeRouteList()
