@@ -108,7 +108,7 @@
             this.generalInformationToolStripMenuItem.Name = "generalInformationToolStripMenuItem";
             this.generalInformationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generalInformationToolStripMenuItem.Text = "General Information";
-            this.generalInformationToolStripMenuItem.Click += new System.EventHandler(this.generalInformationToolStripMenuItem_Click);
+            this.generalInformationToolStripMenuItem.Click += new System.EventHandler(this.GeneralInformationToolStripMenuItem_Click);
             // 
             // label1
             // 
