@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using TrainController;
+using TrainController;
 
 
 namespace TheTrainModule
@@ -16,7 +16,7 @@ namespace TheTrainModule
     {
         /*------------------------------------DECLARATIONS--------------------------------------------------------------------------------*/
 
-        //private TrainControllerForm trainControllerForm = null;
+        private TrainControllerForm trainControllerForm = null;
         private TrainDatabase trainDatabase = null;
         private GeneralTrainInformation generalTrainInformation = null;
         private TrainModelTrain train = null;
@@ -32,10 +32,7 @@ namespace TheTrainModule
             generalTrainInformation = new GeneralTrainInformation();
             trainDatabase = new TrainDatabase();
             trainModelTimer = timer;
-            trainModelTimer.Elapsed += Timer_Elapsed;
-            trainModelTimer.AutoReset = true;
-            trainModelTimer.Interval = 1000;
-            trainModelTimer.Start();
+            trainModelTimer.Elapsed += Timer_Elapsed;;
 
             InitializeComponent();
         }
@@ -85,8 +82,8 @@ namespace TheTrainModule
                 else
                     train.failureMode = 0;
 
-                //if (train.failureMode > 0)
-                    //send(trainId, train.failureMode);
+                if (train.failureMode > 0)
+                    send(trainId, train.failureMode);
 
 
             }
@@ -188,10 +185,10 @@ namespace TheTrainModule
 
         /*-----------------------------PUBLIC SET METHODS---------------------------------------*/
 
-        /*public void sendModules(TrainControllerForm tc)
+        public void sendModules(TrainControllerForm tc)
         {
             trainControllerForm = tc;
-        }*/
+        }
 
         public void SetPower(int id, int power)
         {
@@ -249,7 +246,7 @@ namespace TheTrainModule
 
             trainDatabase.GetTrain(id).commandedSpeed = velocity;
 
-            //this.send(id, "commanded");
+            this.send(id, "commanded");
         }
 
         public void SetAuthority(int id, int authority)
@@ -262,7 +259,7 @@ namespace TheTrainModule
 
             trainDatabase.GetTrain(id).authority = authority;
 
-          //this.send(id, "authority");
+          this.send(id, "authority");
         }
 
         public void SetUnderground(int id, bool state)
@@ -270,22 +267,22 @@ namespace TheTrainModule
             TrainModelTrain t = trainDatabase.GetTrain(id);
             t.underground = state;
 
-          //  if(state)
-            //    this.send(id, "underground");
+            if(state)
+                this.send(id, "underground");
         }
 
         public void SetPassengers(int id, int addition)
         {
             trainDatabase.GetTrain(id).passengerCount += addition;
 
-            //this.send(id, "passengers");
+            this.send(id, "passengers");
         }
 
         public void SetBeacon(int id, string beacon)
         {
             trainDatabase.GetTrain(id).beacon = beacon;
 
-            //this.send(id, "beacon");
+            this.send(id, "beacon");
         }
 
         public void SetCurrentBlock(int id, string block)
@@ -302,8 +299,8 @@ namespace TheTrainModule
         {
             trainDatabase.GetTrain(id).emergencyBrakes = state;
 
-            //if (state)
-              //send(id, "emergency");
+            if (state)
+              send(id, "emergency");
         }
 
         public void fixFailure(int id)
@@ -315,7 +312,7 @@ namespace TheTrainModule
 
         /*------------------------------------------------SEND FUNCTIONS-----------------------------------------------*/
 
-        /*private void send(int id, string info)
+        private void send(int id, string info)
         {
             TrainModelTrain train = trainDatabase.GetTrain(id);
 
@@ -358,6 +355,6 @@ namespace TheTrainModule
 
            for (int i = 0; i < information.Length; i++)
                this.send(id, information[i]);
-       }*/
+       }
     }
 }
