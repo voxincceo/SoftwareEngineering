@@ -56,16 +56,16 @@ namespace TheTrainModule
             power = 0;
         }
 
-        public void update()
+        public void Update()
         {
-            calculateMass();
-            calculateForce();
-            calculateAcceleration();
-            calculateVelocity();
-            calculateDistance();
+            CalculateMass();
+            CalculateForce();
+            CalculateAcceleration();
+            CalculateVelocity();
+            CalculateDistance();
         }
 
-        public void toFailure()
+        public void ToFailure()
         {
             active = false;
             doors = Constants.CLOSED;
@@ -88,16 +88,16 @@ namespace TheTrainModule
         {
             if (failureMode > 0)
             {
-                toFailure();
+                ToFailure();
             }
             else
             {
-                calculateVelocity();
-                calculateDistance();
+                CalculateVelocity();
+                CalculateDistance();
             }
         }
 
-        private void calculateForce()
+        private void CalculateForce()
         {
             double f = 0;
             double p = power;
@@ -132,12 +132,12 @@ namespace TheTrainModule
            force = f;
         }
 
-        private void calculateMass()
+        private void CalculateMass()
         {
             mass = Constants.EMPTY_MASS + (crewCount + passengerCount) * Constants.HUMAN_MASS;
         }
 
-        private void calculateAcceleration()
+        private void CalculateAcceleration()
         {
             acceleration = force/mass;
 
@@ -151,7 +151,7 @@ namespace TheTrainModule
                 acceleration = Constants.aMAX;
         }
 
-        private void calculateVelocity()
+        private void CalculateVelocity()
         {
             if (serviceBrakes)
                 while (velocity > 0)
@@ -168,13 +168,13 @@ namespace TheTrainModule
                 velocity = Constants.vMAX;
         }
 
-        private void calculateDistance()
+        private void CalculateDistance()
         {
             double distance = velocity;
             distanceTraveled += distance;
         }
 
-        private void ejectPassengers()
+        private void EjectPassengers()
         {
             int p = passengerCount;
             int r = (int)Math.Ceiling(-Math.Log(p) / Math.Log(Constants.LOAD));
