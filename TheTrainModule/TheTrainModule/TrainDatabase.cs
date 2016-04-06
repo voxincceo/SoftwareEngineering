@@ -7,14 +7,14 @@ namespace TheTrainModule
     public class TrainDatabase
     {
         private int trainCount = 0;
-        private Dictionary<Train, int> trains = null;
+        private Dictionary<TrainModelTrain, int> trains = null;
 
         public TrainDatabase()
         {
-            trains = new Dictionary<Train, int>();
+            trains = new Dictionary<TrainModelTrain, int>();
         }
 
-        public bool AddTrain(Train newTrain)
+        public bool AddTrain(TrainModelTrain newTrain)
         {
             if (newTrain == null)
                 return false;
@@ -27,10 +27,10 @@ namespace TheTrainModule
 
         public void AddTrain()
         {
-            trains.Add(new Train(), ++trainCount);
+            trains.Add(new TrainModelTrain(), ++trainCount);
         }
 
-        public int GetTrainID(Train train)
+        public int GetTrainID(TrainModelTrain train)
         {
             int value;
             if (trains.TryGetValue(train, out value))
@@ -40,12 +40,12 @@ namespace TheTrainModule
             return -1;
         }
 
-        public Train GetTrain(int id)
+        public TrainModelTrain GetTrain(int id)
         {
-            List<Train> listOfTrains = new List<Train>(trains.Keys);
-            Train thisTrain = null;
+            List<TrainModelTrain> listOfTrains = new List<TrainModelTrain>(trains.Keys);
+            TrainModelTrain thisTrain = null;
 
-            foreach(Train tr in listOfTrains)
+            foreach(TrainModelTrain tr in listOfTrains)
             {
                 int value = -1;
                 trains.TryGetValue(tr, out value);
@@ -82,11 +82,11 @@ namespace TheTrainModule
 
         public void driveTrains()
         {
-            List<Train> listOfTrains = new List<Train>(trains.Keys);
+            List<TrainModelTrain> listOfTrains = new List<TrainModelTrain>(trains.Keys);
 
             if (listOfTrains.Count > 0)
             {
-                foreach (Train t in listOfTrains)
+                foreach (TrainModelTrain t in listOfTrains)
                 {
                     if (t == null)
                         break;

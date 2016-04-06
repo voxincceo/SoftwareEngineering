@@ -2,7 +2,7 @@
 
 namespace TheTrainModule
 {
-    public class Train
+    public class TrainModelTrain
     { 
         public bool active { get; set; }
         public bool doors { get; set; }
@@ -34,7 +34,7 @@ namespace TheTrainModule
         private double mass = Constants.EMPTY_MASS;
         private double distanceTraveled = 0;     
 
-        public Train()
+        public TrainModelTrain()
         {
             active = true;
             doors = Constants.CLOSED;

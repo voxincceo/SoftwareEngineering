@@ -62,11 +62,11 @@
             this.failureText = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.activeText = new System.Windows.Forms.TextBox();
             this.timerBox = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.failureMenu = new System.Windows.Forms.ComboBox();
             this.trainInformationMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -348,15 +348,6 @@
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(16, 320);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(162, 23);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "Select a Failure";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -390,16 +381,27 @@
             this.timerBox.Text = "00:00:00";
             this.timerBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // failureMenu
+            // 
+            this.failureMenu.AllowDrop = true;
+            this.failureMenu.FormattingEnabled = true;
+            this.failureMenu.Location = new System.Drawing.Point(16, 307);
+            this.failureMenu.Name = "failureMenu";
+            this.failureMenu.Size = new System.Drawing.Size(121, 21);
+            this.failureMenu.TabIndex = 34;
+            this.failureMenu.Text = "Select A Failure";
+            this.failureMenu.Click += new System.EventHandler(this.FailureMenu_DropDown);
+            // 
             // TrainModelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(571, 452);
+            this.Controls.Add(this.failureMenu);
             this.Controls.Add(this.timerBox);
             this.Controls.Add(this.activeText);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.failureText);
@@ -475,11 +477,11 @@
         private System.Windows.Forms.TextBox failureText;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox activeText;
         private System.Windows.Forms.TextBox timerBox;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.ComboBox failureMenu;
     }
 }
 
