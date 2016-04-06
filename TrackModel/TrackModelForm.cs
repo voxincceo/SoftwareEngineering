@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using TrainModule;
+using TrackController;
 
 namespace TrackModelPrototype
 {
