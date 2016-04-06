@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Configuration;
-using Microsoft.VisualBasic.FileIO;
 
 
 namespace TrackModelPrototype

@@ -126,32 +126,8 @@
     <Compile Include="..\..\TrackModel\TrackModelForm.Designer.cs">
       <Link>TrackModel\TrackModelForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainController 2.cs">
-      <Link>TrainController\TrainController 2.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainController 3.cs">
-      <Link>TrainController\TrainController 3.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainController 4.cs">
-      <Link>TrainController\TrainController 4.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainController 5.cs">
-      <Link>TrainController\TrainController 5.cs</Link>
-    </Compile>
     <Compile Include="..\..\TrainController\TrainController\TrainController.cs">
       <Link>TrainController\TrainController.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainControllerForm 2.cs">
-      <Link>TrainController\TrainControllerForm 2.cs</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainControllerForm 3.cs">
-      <Link>TrainController\TrainControllerForm 3.cs</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainControllerForm 4.cs">
-      <Link>TrainController\TrainControllerForm 4.cs</Link>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="..\..\TrainController\TrainController\TrainControllerForm.cs">
       <Link>TrainController\TrainControllerForm.cs</Link>

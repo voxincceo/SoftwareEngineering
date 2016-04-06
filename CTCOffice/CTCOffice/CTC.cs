@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using TrackModelPrototype;
-//using TheTrainModule;
-//using TrainController;
+using TrackModelPrototype;
+using TheTrainModule;
+using TrainController;
 
 namespace CTCOffice
 {
@@ -18,15 +18,15 @@ namespace CTCOffice
     {
         private ControlSystem central;
         private TestingForm testingForm;
-        //private RCS.RCS formParent;
+        private RCS.RCS formParent;
         //private TrackController trackController;
-        //private TrackModelForm trackModel;
-        //private TrainControllerForm trainController;
-        //private TrainModelForm trainModel;
+        private TrackModelForm trackModel;
+        private TrainControllerForm trainController;
+        private TrainModelForm trainModel;
         private System.Timers.Timer systemTimer;
         private int systemSpeed;
 
-        public CTC()//RCS.RCS main)
+        public CTC(RCS.RCS main)
         {
             InitializeComponent();
             systemTimer = new System.Timers.Timer(50);
@@ -39,7 +39,7 @@ namespace CTCOffice
 
             central = new ControlSystem();
             ParseTrackFile("SystemPrototype.csv");
-            //formParent = main;
+            formParent = main;
 
             systemSpeed = 1;
             StartSystemTest();
@@ -243,12 +243,12 @@ namespace CTCOffice
 
         private void TrackModelButton_Click(object sender, EventArgs e)
         {
-            //trackModel.Show();
+            trackModel.Show();
         }
 
         private void TrainModelButton_Click(object sender, EventArgs e)
         {
-            //trainModel.Show();
+            trainModel.Show();
         }
 
         private void TrackControllerButton_Click(object sender, EventArgs e)
@@ -259,9 +259,9 @@ namespace CTCOffice
         private void InitializeSystemComponents()
         {
             //trackController = new TrackController(systemTimer);
-            //trackModel = new TrackModelForm();
-            //trainModel = new TrainModel(systemTimer);
-            //trainController = new TrainController(systemTimer);
+            trackModel = new TrackModelForm();
+            trainModel = new TrainModelForm();
+            trainController = new TrainControllerForm(systemTimer);
 
             //trackController.SetSystemSpeed(systemSpeed);
             //trackModel.SetSystemSpeed(systemSpeed);
