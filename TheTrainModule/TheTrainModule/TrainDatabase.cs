@@ -60,27 +60,27 @@ namespace TheTrainModule
             return thisTrain;
         }
 
-        public int size()
+        public int Size()
         {
             return trainCount;
         }
 
-        public TrainDatabase get()
+        public TrainDatabase Get()
         {
             return this;
         }
 
-        public bool contains(int id)
+        public bool Contains(int id)
         {
             return !(this.GetTrain(id) == null);
         }
 
-        public void updateTrain(int id)
+        public void UpdateTrain(int id)
         {
             GetTrain(id).update();
         }
 
-        public void driveTrains()
+        public void DriveTrains()
         {
             List<TrainModelTrain> listOfTrains = new List<TrainModelTrain>(trains.Keys);
 
