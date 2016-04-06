@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Configuration;
-using Microsoft.VisualBasic.FileIO;
 
 
 namespace TrackModelPrototype
@@ -168,7 +167,7 @@ namespace TrackModelPrototype
                     lengthLabel.Text = curBlock.GetBlockLength().ToString();
                     gradeLabel.Text = curBlock.GetGrade().ToString();
                     speedLabel.Text = curBlock.GetSpeedLimit().ToString();
-                    infrastructureLabel.Text = "N/A";
+                    infrastructureLabel.Text = curBlock.GetStation();
                     elevationLabel.Text = curBlock.GetElevation().ToString();
                     cumelevationLabel.Text = curBlock.GetCumulativeElevation().ToString();
                     switchBlock.Text = curBlock.GetSwitchBlock();
@@ -190,7 +189,7 @@ namespace TrackModelPrototype
                     lengthLabel.Text = curBlock.GetBlockLength().ToString();
                     gradeLabel.Text = curBlock.GetGrade().ToString();
                     speedLabel.Text = curBlock.GetSpeedLimit().ToString();
-                    infrastructureLabel.Text = "N/A";
+                    infrastructureLabel.Text = curBlock.GetStation();
                     elevationLabel.Text = curBlock.GetElevation().ToString();
                     cumelevationLabel.Text = curBlock.GetCumulativeElevation().ToString();
                     switchBlock.Text = curBlock.GetSwitchBlock();
@@ -224,6 +223,7 @@ namespace TrackModelPrototype
         {
 
         }
+
     }
 
 }
