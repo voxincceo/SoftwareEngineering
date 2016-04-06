@@ -65,10 +65,36 @@ namespace TheTrainModule
             calculateDistance();
         }
 
+        public void toFailure()
+        {
+            active = false;
+            doors = Constants.CLOSED;
+            lights = Constants.OFF;
+            serviceBrakes = false;
+            emergencyBrakes = false;
+            acceleration = 0;
+            temperature = 0;
+            velocity = 0;
+            crewCount = 0;
+            passengerCount = 0;
+            currentBlock = "------";
+            nextStation = "------";
+            authority = 0;
+            commandedSpeed = 0;
+            power = 0;
+        }
+
         public void driveTrain()
         {
-            calculateVelocity();
-            calculateDistance();
+            if (failureMode > 0)
+            {
+                toFailure();
+            }
+            else
+            {
+                calculateVelocity();
+                calculateDistance();
+            }
         }
 
         private void calculateForce()
@@ -115,12 +141,14 @@ namespace TheTrainModule
         {
             acceleration = force/mass;
 
-            if (acceleration > Constants.aMAX)
-                acceleration = Constants.aMAX;
-            else if (serviceBrakes && acceleration < Constants.dMAXN)
-                acceleration = Constants.dMAXN;
-            else if (emergencyBrakes && acceleration < Constants.dMAXE)
+            if (force < 0 && emergencyBrakes)
                 acceleration = Constants.dMAXE;
+            else if (force < 0)
+                acceleration = Constants.dMAXN;
+            else if (serviceBrakes)
+                acceleration = Constants.dMAXN;
+            else if (acceleration > Constants.aMAX)
+                acceleration = Constants.aMAX;
         }
 
         private void calculateVelocity()

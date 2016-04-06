@@ -66,7 +66,11 @@
             this.activeText = new System.Windows.Forms.TextBox();
             this.timerBox = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.failureMenu = new System.Windows.Forms.ComboBox();
+            this.selectAFailureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noFailuresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.engineFailureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signalPickupFailureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brakeFailureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trainInformationMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -76,7 +80,8 @@
             // 
             this.trainInformationMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectATrainMenu,
-            this.trainToolStripMenuItem1});
+            this.trainToolStripMenuItem1,
+            this.selectAFailureToolStripMenuItem});
             this.trainInformationMenu.Location = new System.Drawing.Point(0, 0);
             this.trainInformationMenu.Name = "trainInformationMenu";
             this.trainInformationMenu.Size = new System.Drawing.Size(571, 24);
@@ -381,16 +386,41 @@
             this.timerBox.Text = "00:00:00";
             this.timerBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // failureMenu
+            // selectAFailureToolStripMenuItem
             // 
-            this.failureMenu.AllowDrop = true;
-            this.failureMenu.FormattingEnabled = true;
-            this.failureMenu.Location = new System.Drawing.Point(16, 307);
-            this.failureMenu.Name = "failureMenu";
-            this.failureMenu.Size = new System.Drawing.Size(121, 21);
-            this.failureMenu.TabIndex = 34;
-            this.failureMenu.Text = "Select A Failure";
-            this.failureMenu.Click += new System.EventHandler(this.FailureMenu_DropDown);
+            this.selectAFailureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noFailuresToolStripMenuItem,
+            this.engineFailureToolStripMenuItem,
+            this.signalPickupFailureToolStripMenuItem,
+            this.brakeFailureToolStripMenuItem});
+            this.selectAFailureToolStripMenuItem.Name = "selectAFailureToolStripMenuItem";
+            this.selectAFailureToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.selectAFailureToolStripMenuItem.Text = "Select A Failure";
+            this.selectAFailureToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.FailureChosen);
+            // 
+            // noFailuresToolStripMenuItem
+            // 
+            this.noFailuresToolStripMenuItem.Name = "noFailuresToolStripMenuItem";
+            this.noFailuresToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.noFailuresToolStripMenuItem.Text = "No Failures";
+            // 
+            // engineFailureToolStripMenuItem
+            // 
+            this.engineFailureToolStripMenuItem.Name = "engineFailureToolStripMenuItem";
+            this.engineFailureToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.engineFailureToolStripMenuItem.Text = "Engine Failure";
+            // 
+            // signalPickupFailureToolStripMenuItem
+            // 
+            this.signalPickupFailureToolStripMenuItem.Name = "signalPickupFailureToolStripMenuItem";
+            this.signalPickupFailureToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.signalPickupFailureToolStripMenuItem.Text = "Signal Pickup Failure";
+            // 
+            // brakeFailureToolStripMenuItem
+            // 
+            this.brakeFailureToolStripMenuItem.Name = "brakeFailureToolStripMenuItem";
+            this.brakeFailureToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.brakeFailureToolStripMenuItem.Text = "Brake Failure";
             // 
             // TrainModelForm
             // 
@@ -398,7 +428,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(571, 452);
-            this.Controls.Add(this.failureMenu);
             this.Controls.Add(this.timerBox);
             this.Controls.Add(this.activeText);
             this.Controls.Add(this.label14);
@@ -481,7 +510,11 @@
         private System.Windows.Forms.TextBox activeText;
         private System.Windows.Forms.TextBox timerBox;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.ComboBox failureMenu;
+        private System.Windows.Forms.ToolStripMenuItem selectAFailureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noFailuresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem engineFailureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem signalPickupFailureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brakeFailureToolStripMenuItem;
     }
 }
 
