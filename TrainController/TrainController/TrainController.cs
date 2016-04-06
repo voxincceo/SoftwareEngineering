@@ -38,7 +38,11 @@ namespace TrainController
 
         public double CalculatePower()
         {
-            outputPower = SetAuthority;
+            ui.SetAuthority(SetAuthority);
+            ui.SetCommandedSpeed(SetSpeed);
+            ui.SetCurrentVelocity(CurrentVelocity);
+            outputPower = 1;
+            ui.SetOutputPower(outputPower);
             return outputPower;
         }
 
