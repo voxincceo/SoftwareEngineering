@@ -12,16 +12,20 @@ namespace TrainController
 {
     public partial class TrainControllerForm : Form
     {
-
+        System.Timers.Timer timer;
         Dictionary<int, TrainController> trainControllers;
         private static int trainCount = 0;
+        //TrainModel trainModel;
 
-        public TrainControllerForm()
+        public TrainControllerForm(System.Timers.Timer newTimer)
         {
             InitializeComponent();
             Hide();
 
             trainControllers = new Dictionary<int, TrainController>();
+            timer = newTimer;
+
+            DispatchTrain(1);
         }
 
         private void DispatchTrain(int trainID)
@@ -30,6 +34,13 @@ namespace TrainController
             trainControllers.Add(trainID, newTrain);
             trainCount++;
         }
+
+/*
+        public void SendModules(TrainModel newTrainModel)
+        {
+            trainModel = newTrainModel;
+        }
+*/
 
         public void updateTrain(int trainID)
         {
@@ -73,7 +84,7 @@ namespace TrainController
 
         public void SetPassengerEmergencyBrake(int trainID)
         {
-            trainControllers[trainID].SetPassengerEmergencyBrake();
+            trainControllers[trainID].SetPassengerEmergencyBrake(true);
         }
 
         public void SetTemperature(int trainID, int Temperature)
