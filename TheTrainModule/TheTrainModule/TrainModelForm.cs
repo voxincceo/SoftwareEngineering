@@ -47,7 +47,15 @@ namespace TheTrainModule
         private void Timer_Elapsed(object sender, EventArgs e)
         {
             trainDatabase.driveTrains();
-
+            
+            if(trainDatabase.size > 0)
+            {
+                for(int i = 0; i < trainDatabase.size; i++)
+                {
+                    send(++i, trainDatabase.GetTrain(i).velocity); 
+                }
+            }
+            
             if (Application.OpenForms["TrainModelForm"] != null)
             {
                 ShowTrainInformation();
