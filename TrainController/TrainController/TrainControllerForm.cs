@@ -24,13 +24,14 @@ namespace TrainController
 
             trainControllers = new Dictionary<int, TrainController>();
             timer = newTimer;
-
+/*
             DispatchTrain(1);
             SetAuthority(1, 100);
             SetSpeed(1, 50);
             SetVelocity(1, 0);
             double result = GetPower(1);
-        }
+ */
+    }
 
         private void DispatchTrain(int trainID)
         {
