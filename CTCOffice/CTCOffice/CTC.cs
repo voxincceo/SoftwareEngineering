@@ -66,8 +66,8 @@ namespace CTCOffice
 
                 tempSegment.SetLine(segment[0]);
                 tempSegment.SetLength(int.Parse(segment[3]));
-                tempSegment.SetSpeedLimit(int.Parse(segment[4]));
-                if(segment[5] != "")
+                tempSegment.SetSpeedLimit(int.Parse(segment[5]));
+                if(segment[6] != "")
                 {
                     tempSegment.SetIsStation(true);
                 }
