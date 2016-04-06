@@ -22,6 +22,11 @@ namespace TrackModelPrototype
             InitializeComponent();
             track = new Track();
         }
+        
+        public void SendModules(Form TrackControllerForm, Form TrainModelForm)
+        {
+            
+        }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
