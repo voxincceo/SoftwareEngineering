@@ -16,7 +16,7 @@ namespace TrainController
         System.Timers.Timer timer;
         Dictionary<int, TrainController> trainControllers;
         private static int trainCount = 0;
-        TrainModelForm trainModel;
+        TrainModel trainModel;
 
         public TrainControllerForm(System.Timers.Timer newTimer)
         {
@@ -41,7 +41,7 @@ namespace TrainController
             trainCount++;
         }
 
-        public void SendModules(TrainModelForm newTrainModel)
+        public void SendModules(TrainModel newTrainModel)
         {
             trainModel = newTrainModel;
         }

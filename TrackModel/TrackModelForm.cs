@@ -24,7 +24,7 @@ namespace TrackModelPrototype
             track = new Track();
         }
         
-        public void SendModules(Form TrackControllerForm, Form TrainModelForm)
+        public void SendModules(TrackControllerForm trackControllerForm, TrainModel trainModelForm)
         {
             
         }

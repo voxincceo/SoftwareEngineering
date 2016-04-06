@@ -151,6 +151,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrackController\Class1.cs" />
+    <Compile Include="TrackController\Crossing.cs" />
+    <Compile Include="TrackController\PLCStruct.cs" />
+    <Compile Include="TrackController\Rail.cs" />
+    <Compile Include="TrackController\Switch.cs" />
+    <Compile Include="TrackController\Track Controller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrackController\Track Controller.Designer.cs" />
+    <Compile Include="TrackController\Train.cs" />
+    <Compile Include="TrackController\TrainLine.cs" />
     <Compile Include="TrainModel\Constants.cs" />
     <Compile Include="TrainModel\GeneralTrainInformation.cs">
       <SubType>Form</SubType>
@@ -203,6 +214,7 @@
     <EmbeddedResource Include="RCS.resx">
       <DependentUpon>RCS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TrackController\Track Controller.resx" />
     <EmbeddedResource Include="TrainModel\GeneralTrainInformation.resx" />
     <EmbeddedResource Include="TrainModel\TrainModelForm.resx" />
     <None Include="Properties\Settings.settings">
@@ -218,9 +230,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TrackController\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

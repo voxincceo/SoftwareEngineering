@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TrackModelPrototype;
 using TheTrainModule;
 using TrainController;
+using TrackController;
 
 namespace CTCOffice
 {
@@ -19,10 +20,10 @@ namespace CTCOffice
         private ControlSystem central;
         private TestingForm testingForm;
         private RCS.RCS formParent;
-        //private TrackController trackController;
+        private TrackControllerForm trackController;
         private TrackModelForm trackModel;
         private TrainControllerForm trainController;
-        private TrainModelForm trainModel;
+        private TrainModel trainModel;
         private System.Timers.Timer systemTimer;
         private int systemSpeed;
 
@@ -209,11 +210,9 @@ namespace CTCOffice
             */
             Dictionary<int, double> schedule = new Dictionary<int, double>();
             schedule.Add(5, 2.4);
-            central.SetTrainSchedule(number, schedule);
-
-            schedule = new Dictionary<int, double>();
             schedule.Add(13, 8.4);
             central.SetTrainSchedule(number, schedule);
+
             /*
             central.SetTrainRoute(route, 1);
            
@@ -253,14 +252,14 @@ namespace CTCOffice
 
         private void TrackControllerButton_Click(object sender, EventArgs e)
         {
-            //trackController.show();
+            trackController.Show();
         }
 
         private void InitializeSystemComponents()
         {
-            //trackController = new TrackController(systemTimer);
+            trackController = new TrackControllerForm(systemTimer);
             trackModel = new TrackModelForm();
-            trainModel = new TrainModelForm();
+            trainModel = new TrainModel(systemTimer);
             trainController = new TrainControllerForm(systemTimer);
 
             //trackController.SetSystemSpeed(systemSpeed);
@@ -269,9 +268,9 @@ namespace CTCOffice
             //trainController.SetSystemSpeed(systemSpeed);
 
             //trackController.SendModules(this, trackModel);
-            //trackModel.SendModules(trackController, trainModel);
-            //trainModel.SendModules(trackModel, trainController);
-            //trainController.SendModules(trainModel);
+            trackModel.SendModules(trackController, trainModel);
+            trainModel.SendModules(trackModel, trainController);
+            trainController.SendModules(trainModel);
         }
 
         private void InitializeErrorList()
@@ -435,7 +434,7 @@ namespace CTCOffice
                         }
                         else if (train.GetSegment() == i)
                         {
-                            position += (int)train.GetPosition();
+                            position += ((int)(train.GetPosition() / 2));
                         }
                     }
                 }
@@ -449,7 +448,7 @@ namespace CTCOffice
                         }
                         else if (train.GetSegment() == i)
                         {
-                            position += (central.GetTrackSegment(i).GetLength() / 2) - (int)train.GetPosition();
+                            position += (central.GetTrackSegment(i).GetLength() / 2) - ((int)(train.GetPosition() / 2));
                         }
                     }
                 }
@@ -591,7 +590,7 @@ namespace CTCOffice
                     }*/
 
                     double leastAuthority = 100000000000;
-
+                    
                     foreach (TrackSegment s in train.GetRouteSegments().GetRoute(train.GetActiveRoute()))
                     {
                         if (s.GetOpenClosed().Equals("Closed") ||s.GetFailure().Equals("Failure"))

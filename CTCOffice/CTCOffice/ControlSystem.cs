@@ -221,6 +221,7 @@ namespace CTCOffice
                     else
                     {
                         stations.AddAfter(node, ts.Value.GetNumber());
+                        node = stations.Find(ts.Value.GetNumber());
                     }
                 }
             }
@@ -260,11 +261,13 @@ namespace CTCOffice
                 {
                     train.SetRoute(GetRoute(train.GetSegment() + ((double)train.GetNextStation() / 10)));
                     train.SetActiveRoute(1);
+                    train.SetDirection("East");
                 }
                 else if (routes.ContainsKey(train.GetNextStation() + ((double)train.GetSegment() / 10))) 
                 {
                     train.SetRoute(GetRoute(train.GetNextStation() + ((double)train.GetSegment() / 10)));
                     train.SetActiveRoute(1);
+                    train.SetDirection("West");
                 }
             }
         }

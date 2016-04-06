@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TrackController.Class1" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.Crossing">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAAAAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAQ=</HashCode>
+      <FileName>Crossing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.Program" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.Rail">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAIAAAACAAAAAAAABAAEAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Rail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.Switch">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAEAAAAAAAAAAAABAAAEAAAAAAAAAAQ=</HashCode>
+      <FileName>Switch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.TrackControllerForm">
+    <Position X="7.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IBQAAAAAQHAAAAAAiBCAZAACAAAAIgCAAEYABQAIoAg=</HashCode>
+      <FileName>Track Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.Properties.Resources" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.Properties.Settings" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Train">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAgAAAAAAEAAgAEAQAQABAAAABAAAAAI=</HashCode>
+      <FileName>Train.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrainLine">
+    <Position X="2.25" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAEAQAAgAAAAAAEEAAAAQAACAAAAEAAAAIgAASA=</HashCode>
+      <FileName>TrainLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackController.PLCStruct">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>PLCStruct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

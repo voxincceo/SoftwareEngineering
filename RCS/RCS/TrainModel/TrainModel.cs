@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using TrackModelPrototype;
+using TrainController;
 
 namespace TheTrainModule
 {
-    class TrainModel
+    public class TrainModel
     {
         private TrainModelForm trainModelForm = null;
         private TrainDatabase trainDatabase = null;
@@ -40,7 +42,7 @@ namespace TheTrainModule
 
         //------------------------PUBLIC METHODS------------------------------------//
 
-          public void sendModules(TrackModelForm tr, TrainControllerForm tc)
+          public void SendModules(TrackModelForm tr, TrainControllerForm tc)
           {
               trackModelForm = tr;
               trainControllerForm = tc;
