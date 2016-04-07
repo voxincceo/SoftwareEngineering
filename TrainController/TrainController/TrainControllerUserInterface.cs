@@ -18,6 +18,11 @@ namespace TrainController
             InitializeComponent();
             thisTrainController = newTrainController;
             Text = "Train Number " + tNumber.ToString();
+
+            if (!this.IsHandleCreated)
+            {
+                this.CreateHandle();
+            }
         }
 
         private void TrainControllerUserInterface_Load(object sender, EventArgs e)
@@ -152,7 +157,10 @@ namespace TrainController
 
         public void showThis()
         {
-                ////this.Show();
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                this.Show();
+            }));
         }
     }
 }

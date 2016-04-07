@@ -16,8 +16,9 @@ namespace TrainController
     {
         System.Timers.Timer timer;
         ConcurrentDictionary<int, TrainController> trainControllers;
-        private static int trainCount = 0;
+        //private static int trainCount = 0;
         TrainModelForm trainModel;
+        private System.Object lockThis = new System.Object();
 
         public TrainControllerForm(System.Timers.Timer newTimer)
         {
@@ -37,12 +38,15 @@ namespace TrainController
 
         private void DispatchTrain(int trainID)
         {
-            if (!trainControllers.ContainsKey(trainID))
+            lock(lockThis)
             {
-                TrainController newTrain = new TrainController(trainID, this);
-                trainControllers.TryAdd(trainID, newTrain);
+                if (!trainControllers.ContainsKey(trainID))
+                {
+                    TrainController newTrain = new TrainController(trainID, this);
+                    trainControllers.TryAdd(trainID, newTrain);
+                    //trainCount++;
+                }
             }
-            trainCount++;
         }
 
         private void SendPower(int trainID)
