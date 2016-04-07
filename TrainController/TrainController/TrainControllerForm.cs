@@ -61,23 +61,27 @@ namespace TrainController
         {
             if (trainControllers.ContainsKey(trainID) != true)
             {
-                this.DispatchTrain(trainID);
+                DispatchTrain(trainID);
             }
         }
 
         public void SetAuthority(int trainID, int newAuthority)
         {
+            UpdateTrain(trainID);
             trainControllers[trainID].SetAuthority = newAuthority;
         }
 
         public void SetSpeed(int trainID, double newSpeed)
         {
+            UpdateTrain(trainID);
             trainControllers[trainID].SetSpeed = newSpeed;
         }
 
         public void SetVelocity(int trainID, double newVelocity)
         {
+            UpdateTrain(trainID);
             trainControllers[trainID].CurrentVelocity = newVelocity;
+            SendPower(trainID);
         }
 
         public void SetDarkOutside(int trainID, Boolean darkOutside)
