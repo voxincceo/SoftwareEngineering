@@ -18,6 +18,8 @@ namespace TrackModelPrototype
     public partial class TrackModelForm : Form
     {
         Track track;
+        TrackControllerForm trackController;
+        TrainModelForm trainModel;
         public TrackModelForm()
         {
             InitializeComponent();
@@ -26,7 +28,8 @@ namespace TrackModelPrototype
         
         public void SendModules(TrackControllerForm trackControllerForm, TrainModelForm trainModelForm)
         {
-            
+            trackController = trackControllerForm;
+            trainModel = trainModelForm;
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -230,6 +233,15 @@ namespace TrackModelPrototype
 
         }
 
+        public void CommandedSpeed(int trainId, double speed)
+        {
+            trainModel.SetCommandedSpeed(trainId, (int)speed);
+        }
+
+        public void CommandedAuthority(int trainId, double authority)
+        {
+            trainModel.SetAuthority(trainId, (int)authority);
+        }
     }
 
 }

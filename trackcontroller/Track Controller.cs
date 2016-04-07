@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using CTCOffice;
+using TrackModelPrototype;
 
 namespace TrackController
 {
@@ -16,8 +18,8 @@ namespace TrackController
         internal static Label switchNumberLabel;
         TrainLine[] trainLines = new TrainLine[2];
         System.Timers.Timer globalTimer;
-        //TrackModel trackModel = new TrackModel();
-        //CTCOffice ctcOffice = new CTCOffice();
+        TrackModelForm trackModel;
+        CTC ctcOffice;
 
 
         public TrackControllerForm(System.Timers.Timer inTimer)
@@ -32,15 +34,21 @@ namespace TrackController
             //timer2 = inTimer;
         }
 
-        public void show()
+
+        public void SendModules(CTC inCTC, TrackModelForm inTrackModel)
         {
-            //pop up the module
+            trackModel = inTrackModel;
+            ctcOffice = inCTC;
         }
 
-        public void SendModules(int inCTC, int inTrackModel)
+        public void SuggestTrainSpeed(int train, double speed)
         {
-            //trackModel = inTrackModel;
-            //ctcOffice = inCTC;
+            trackModel.CommandedSpeed(train, speed);
+        }
+
+        public void SuggestTrainAuthority(int train, double authority)
+        {
+            trackModel.CommandedAuthority(train, authority);
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -61,7 +61,7 @@ namespace TrainController
         {
             if (trainControllers.ContainsKey(trainID) != true)
             {
-                DispatchTrain(trainID);
+                this.DispatchTrain(trainID);
             }
         }
 

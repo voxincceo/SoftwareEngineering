@@ -267,7 +267,7 @@ namespace CTCOffice
             //trainModel.SetSystemSpeed(systemSpeed);
             //trainController.SetSystemSpeed(systemSpeed);
 
-            //trackController.SendModules(this, trackModel);
+            trackController.SendModules(this, trackModel);
             trackModel.SendModules(trackController, trainModel);
             trainModel.SendModules(trainController);
             trainController.SendModules(trainModel);
@@ -523,6 +523,15 @@ namespace CTCOffice
             {
                 if (train.GetActiveRoute() == 0)
                 {
+                    if (train.GetDestination() == 0)
+                    {
+                        SetTrainSpeed(train.GetNumber(), 0);
+                        SetTrainAuthority(train.GetNumber(), 0);
+                        trackController.SuggestTrainSpeed(train.GetNumber(), 0);
+                        trackController.SuggestTrainAuthority(train.GetNumber(), 0);
+
+                        train.SetActiveRoute(0);
+                    }
 
                     /*number = train.GetNumber();
                     segmentList = train.GetRouteSegments().GetRoute(1);
@@ -722,15 +731,7 @@ namespace CTCOffice
                         }
                     }
 
-                    if (train.GetDestination() == 0)
-                    {
-                        SetTrainSpeed(train.GetNumber(), 0);
-                        SetTrainAuthority(train.GetNumber(), 0);
-                        //trackController.SuggestTrainSpeed(train.GetNumber(), 0);
-                        //trackController.SuggestTrainAuthority(train.GetNumber(), 0);
-
-                        train.SetActiveRoute(0);
-                    }
+                    
 
                     if (IsHandleCreated && !IsDisposed)
                     {
