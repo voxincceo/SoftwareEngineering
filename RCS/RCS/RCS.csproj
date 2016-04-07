@@ -46,190 +46,160 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\CTCOffice\CTCOffice\ControlSystem.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\ControlSystem.cs">
       <Link>CTC\ControlSystem.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\CTC.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\CTC.cs">
       <Link>CTC\CTC.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\CTC.Designer.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\CTC.Designer.cs">
       <Link>CTC\CTC.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\Properties\Resources.Designer.cs">
-      <Link>CTC\Properties\Resources.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\Properties\Settings.Designer.cs">
-      <Link>CTC\Properties\Settings.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\Route.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\Route.cs">
       <Link>CTC\Route.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\RoutesForm.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\RoutesForm.cs">
       <Link>CTC\RoutesForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\RoutesForm.Designer.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\RoutesForm.Designer.cs">
       <Link>CTC\RoutesForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\SampleModule.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\SampleModule.cs">
       <Link>CTC\SampleModule.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\SampleModule.Designer.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\SampleModule.Designer.cs">
       <Link>CTC\SampleModule.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\ScheduleForm.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\ScheduleForm.cs">
       <Link>CTC\ScheduleForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\ScheduleForm.Designer.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\ScheduleForm.Designer.cs">
       <Link>CTC\ScheduleForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\TestingForm.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TestingForm.cs">
       <Link>CTC\TestingForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\TestingForm.Designer.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TestingForm.Designer.cs">
       <Link>CTC\TestingForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\TrackSegment.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TrackSegment.cs">
       <Link>CTC\TrackSegment.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\Train.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\Train.cs">
       <Link>CTC\Train.cs</Link>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\TrainDispatch.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TrainDispatch.cs">
       <Link>CTC\TrainDispatch.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\CTCOffice\CTCOffice\TrainDispatch.Designer.cs">
+    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TrainDispatch.Designer.cs">
       <Link>CTC\TrainDispatch.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\Constants.cs">
-      <Link>TrainModel\Constants.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\GeneralTrainInformation.cs">
-      <Link>TrainModel\GeneralTrainInformation.cs</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\GeneralTrainInformation.Designer.cs">
-      <Link>TrainModel\GeneralTrainInformation.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\Properties\Resources.Designer.cs">
-      <Link>TrainModel\Properties\Resources.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\Properties\Settings.Designer.cs">
-      <Link>TrainModel\Properties\Settings.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\TestForm.cs">
-      <Link>TrainModel\TestForm.cs</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\TestForm.Designer.cs">
-      <Link>TrainModel\TestForm.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainDatabase.cs">
-      <Link>TrainModel\TrainDatabase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainModelForm.cs">
-      <Link>TrainModel\TrainModelForm.cs</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainModelForm.Designer.cs">
-      <Link>TrainModel\TrainModelForm.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainModelTrain.cs">
-      <Link>TrainModel\TrainModelTrain.cs</Link>
-    </Compile>
-    <Compile Include="..\..\trackcontroller\Class1.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\Class1.cs">
       <Link>TrackController\Class1.cs</Link>
     </Compile>
-    <Compile Include="..\..\trackcontroller\Crossing.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\Crossing.cs">
       <Link>TrackController\Crossing.cs</Link>
     </Compile>
-    <Compile Include="..\..\trackcontroller\PLCStruct.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\PLCStruct.cs">
       <Link>TrackController\PLCStruct.cs</Link>
     </Compile>
-    <Compile Include="..\..\trackcontroller\Properties\Resources.Designer.cs">
-      <Link>TrackController\Properties\Resources.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\trackcontroller\Properties\Settings.Designer.cs">
-      <Link>TrackController\Properties\Settings.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\trackcontroller\Rail.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\Rail.cs">
       <Link>TrackController\Rail.cs</Link>
     </Compile>
-    <Compile Include="..\..\trackcontroller\Switch.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\Switch.cs">
       <Link>TrackController\Switch.cs</Link>
     </Compile>
-    <Compile Include="..\..\trackcontroller\Track Controller.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\Track Controller.cs">
       <Link>TrackController\Track Controller.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\trackcontroller\Track Controller.Designer.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\Track Controller.Designer.cs">
       <Link>TrackController\Track Controller.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\trackcontroller\Train.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\Train.cs">
       <Link>TrackController\Train.cs</Link>
     </Compile>
-    <Compile Include="..\..\trackcontroller\TrainLine.cs">
+    <Compile Include="..\..\..\COE1186_TrackController\trackcontroller\TrainLine.cs">
       <Link>TrackController\TrainLine.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrackModel\Block.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\Block.cs">
       <Link>TrackModel\Block.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrackModel\Crossing.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\Crossing.cs">
       <Link>TrackModel\Crossing.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrackModel\Properties\Resources.Designer.cs">
-      <Link>TrackModel\Properties\Resources.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrackModel\Properties\Settings.Designer.cs">
-      <Link>TrackModel\Properties\Settings.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrackModel\Switch.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\Switch.cs">
       <Link>TrackModel\Switch.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrackModel\TestForm.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\TestForm.cs">
       <Link>TrackModel\TestForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\TrackModel\TestForm.Designer.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\TestForm.Designer.cs">
       <Link>TrackModel\TestForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrackModel\Track.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\Track.cs">
       <Link>TrackModel\Track.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrackModel\TrackModelForm.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\TrackModelForm.cs">
       <Link>TrackModel\TrackModelForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\TrackModel\TrackModelForm.Designer.cs">
+    <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\TrackModelForm.Designer.cs">
       <Link>TrackModel\TrackModelForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrainController\TrainController\Properties\Resources.Designer.cs">
-      <Link>TrainController\Properties\Resources.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\Properties\Settings.Designer.cs">
-      <Link>TrainController\Properties\Settings.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainController.cs">
+    <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainController.cs">
       <Link>TrainController\TrainController.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainControllerForm.cs">
+    <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainControllerForm.cs">
       <Link>TrainController\TrainControllerForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainControllerForm.Designer.cs">
+    <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainControllerForm.Designer.cs">
       <Link>TrainController\TrainControllerForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainControllerUserInterface.cs">
+    <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainControllerUserInterface.cs">
       <Link>TrainController\TrainControllerUserInterface.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\TrainController\TrainController\TrainControllerUserInterface.Designer.cs">
+    <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainControllerUserInterface.Designer.cs">
       <Link>TrainController\TrainControllerUserInterface.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\Constants.cs">
+      <Link>TrainModel\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\GeneralTrainInformation.cs">
+      <Link>TrainModel\GeneralTrainInformation.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\GeneralTrainInformation.Designer.cs">
+      <Link>TrainModel\GeneralTrainInformation.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TestForm.cs">
+      <Link>TrainModel\TestForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TestForm.Designer.cs">
+      <Link>TrainModel\TestForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TrainDatabase.cs">
+      <Link>TrainModel\TrainDatabase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TrainModelForm.cs">
+      <Link>TrainModel\TrainModelForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TrainModelForm.Designer.cs">
+      <Link>TrainModel\TrainModelForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TrainModelTrain.cs">
+      <Link>TrainModel\TrainModelTrain.cs</Link>
     </Compile>
     <Compile Include="RCS.cs">
       <SubType>Form</SubType>
@@ -239,59 +209,44 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\CTC.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\CTC.resx">
       <Link>CTC\CTC.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\Properties\Resources.resx">
-      <Link>CTC\Properties\Resources.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\RoutesForm.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\RoutesForm.resx">
       <Link>CTC\RoutesForm.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\SampleModule.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\SampleModule.resx">
       <Link>CTC\SampleModule.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\ScheduleForm.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\ScheduleForm.resx">
       <Link>CTC\ScheduleForm.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\TestingForm.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TestingForm.resx">
       <Link>CTC\TestingForm.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\TrainDispatch.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TrainDispatch.resx">
       <Link>CTC\TrainDispatch.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\GeneralTrainInformation.resx">
-      <Link>TrainModel\GeneralTrainInformation.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\Properties\Resources.resx">
-      <Link>TrainModel\Properties\Resources.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\TestForm.resx">
-      <Link>TrainModel\TestForm.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\TrainModelForm.resx">
-      <Link>TrainModel\TrainModelForm.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\trackcontroller\Properties\Resources.resx">
-      <Link>TrackController\Properties\Resources.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\trackcontroller\Track Controller.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_TrackController\trackcontroller\Track Controller.resx">
       <Link>TrackController\Track Controller.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TrackModel\Properties\Resources.resx">
-      <Link>TrackModel\Properties\Resources.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TrackModel\TestForm.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_TrackModel\TrackModel\TestForm.resx">
       <Link>TrackModel\TestForm.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TrackModel\TrackModelForm.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_TrackModel\TrackModel\TrackModelForm.resx">
       <Link>TrackModel\TrackModelForm.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TrainController\TrainController\Properties\Resources.resx">
-      <Link>TrainController\Properties\Resources.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\TrainController\TrainController\TrainControllerUserInterface.resx">
+    <EmbeddedResource Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainControllerUserInterface.resx">
       <Link>TrainController\TrainControllerUserInterface.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\GeneralTrainInformation.resx">
+      <Link>TrainModel\GeneralTrainInformation.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TestForm.resx">
+      <Link>TrainModel\TestForm.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\COE1186_TrainModel\TheTrainModule\TheTrainModule\TrainModelForm.resx">
+      <Link>TrainModel\TrainModelForm.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -306,21 +261,6 @@
     <EmbeddedResource Include="RCS.resx">
       <DependentUpon>RCS.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="..\..\CTCOffice\CTCOffice\Properties\Settings.settings">
-      <Link>CTC\Properties\Settings.settings</Link>
-    </None>
-    <None Include="..\..\TheTrainModule\TheTrainModule\Properties\Settings.settings">
-      <Link>TrainModel\Properties\Settings.settings</Link>
-    </None>
-    <None Include="..\..\trackcontroller\Properties\Settings.settings">
-      <Link>TrackController\Properties\Settings.settings</Link>
-    </None>
-    <None Include="..\..\TrackModel\Properties\Settings.settings">
-      <Link>TrackModel\Properties\Settings.settings</Link>
-    </None>
-    <None Include="..\..\TrainController\TrainController\Properties\Settings.settings">
-      <Link>TrainController\Properties\Settings.settings</Link>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -334,7 +274,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CTC\Properties\" />
+    <Folder Include="TrackController\Properties\" />
+    <Folder Include="TrackModel\Properties\" />
+    <Folder Include="TrainController\Properties\" />
+    <Folder Include="TrainModel\Properties\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
