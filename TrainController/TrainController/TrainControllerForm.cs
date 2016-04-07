@@ -36,7 +36,7 @@ namespace TrainController
 
         private void DispatchTrain(int trainID)
         {
-            TrainController newTrain = new TrainController(trainID);
+            TrainController newTrain = new TrainController(trainID, this);
             trainControllers.Add(trainID, newTrain);
             trainCount++;
         }
@@ -44,7 +44,7 @@ namespace TrainController
         private void SendPower(int trainID)
         {
             double result = trainControllers[trainID].CalculatePower();
-            trainModel.SetPower(trainID, result);
+            trainModel.SetPower(trainID, (int)result);
         }
 
         private void SetDoorStatus(int trainID)
