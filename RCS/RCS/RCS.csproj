@@ -106,17 +106,75 @@
     <Compile Include="..\..\CTCOffice\CTCOffice\TrainDispatch.Designer.cs">
       <Link>CTC\TrainDispatch.Designer.cs</Link>
     </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\Constants.cs">
+      <Link>TrainModel\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\GeneralTrainInformation.cs">
+      <Link>TrainModel\GeneralTrainInformation.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\GeneralTrainInformation.Designer.cs">
+      <Link>TrainModel\GeneralTrainInformation.Designer.cs</Link>
+    </Compile>
     <Compile Include="..\..\TheTrainModule\TheTrainModule\Properties\Resources.Designer.cs">
       <Link>TrainModel\Properties\Resources.Designer.cs</Link>
     </Compile>
     <Compile Include="..\..\TheTrainModule\TheTrainModule\Properties\Settings.Designer.cs">
       <Link>TrainModel\Properties\Settings.Designer.cs</Link>
     </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\TestForm.cs">
+      <Link>TrainModel\TestForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\TestForm.Designer.cs">
+      <Link>TrainModel\TestForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainDatabase.cs">
+      <Link>TrainModel\TrainDatabase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainModelForm.cs">
+      <Link>TrainModel\TrainModelForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainModelForm.Designer.cs">
+      <Link>TrainModel\TrainModelForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TheTrainModule\TheTrainModule\TrainModelTrain.cs">
+      <Link>TrainModel\TrainModelTrain.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\Class1.cs">
+      <Link>TrackController\Class1.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\Crossing.cs">
+      <Link>TrackController\Crossing.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\PLCStruct.cs">
+      <Link>TrackController\PLCStruct.cs</Link>
+    </Compile>
     <Compile Include="..\..\trackcontroller\Properties\Resources.Designer.cs">
       <Link>TrackController\Properties\Resources.Designer.cs</Link>
     </Compile>
     <Compile Include="..\..\trackcontroller\Properties\Settings.Designer.cs">
       <Link>TrackController\Properties\Settings.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\Rail.cs">
+      <Link>TrackController\Rail.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\Switch.cs">
+      <Link>TrackController\Switch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\Track Controller.cs">
+      <Link>TrackController\Track Controller.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\Track Controller.Designer.cs">
+      <Link>TrackController\Track Controller.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\Train.cs">
+      <Link>TrackController\Train.cs</Link>
+    </Compile>
+    <Compile Include="..\..\trackcontroller\TrainLine.cs">
+      <Link>TrackController\TrainLine.cs</Link>
     </Compile>
     <Compile Include="..\..\TrackModel\Block.cs">
       <Link>TrackModel\Block.cs</Link>
@@ -181,29 +239,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrackController\Class1.cs" />
-    <Compile Include="TrackController\Crossing.cs" />
-    <Compile Include="TrackController\PLCStruct.cs" />
-    <Compile Include="TrackController\Rail.cs" />
-    <Compile Include="TrackController\Switch.cs" />
-    <Compile Include="TrackController\Track Controller.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TrackController\Track Controller.Designer.cs" />
-    <Compile Include="TrackController\Train.cs" />
-    <Compile Include="TrackController\TrainLine.cs" />
-    <Compile Include="TrainModel\Constants.cs" />
-    <Compile Include="TrainModel\GeneralTrainInformation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TrainModel\GeneralTrainInformation.Designer.cs" />
-    <Compile Include="TrainModel\Train.cs" />
-    <Compile Include="TrainModel\TrainDatabase.cs" />
-    <Compile Include="TrainModel\TrainModel.cs" />
-    <Compile Include="TrainModel\TrainModelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TrainModel\TrainModelForm.Designer.cs" />
     <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\CTC.resx">
       <Link>CTC\CTC.resx</Link>
     </EmbeddedResource>
@@ -225,11 +260,23 @@
     <EmbeddedResource Include="..\..\CTCOffice\CTCOffice\TrainDispatch.resx">
       <Link>CTC\TrainDispatch.resx</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\GeneralTrainInformation.resx">
+      <Link>TrainModel\GeneralTrainInformation.resx</Link>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\Properties\Resources.resx">
       <Link>TrainModel\Properties\Resources.resx</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\TestForm.resx">
+      <Link>TrainModel\TestForm.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\TheTrainModule\TheTrainModule\TrainModelForm.resx">
+      <Link>TrainModel\TrainModelForm.resx</Link>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\..\trackcontroller\Properties\Resources.resx">
       <Link>TrackController\Properties\Resources.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\trackcontroller\Track Controller.resx">
+      <Link>TrackController\Track Controller.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\TrackModel\Properties\Resources.resx">
       <Link>TrackModel\Properties\Resources.resx</Link>
@@ -259,9 +306,6 @@
     <EmbeddedResource Include="RCS.resx">
       <DependentUpon>RCS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrackController\Track Controller.resx" />
-    <EmbeddedResource Include="TrainModel\GeneralTrainInformation.resx" />
-    <EmbeddedResource Include="TrainModel\TrainModelForm.resx" />
     <None Include="..\..\CTCOffice\CTCOffice\Properties\Settings.settings">
       <Link>CTC\Properties\Settings.settings</Link>
     </None>

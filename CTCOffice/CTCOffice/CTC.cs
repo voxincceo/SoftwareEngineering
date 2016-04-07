@@ -23,7 +23,7 @@ namespace CTCOffice
         private TrackControllerForm trackController;
         private TrackModelForm trackModel;
         private TrainControllerForm trainController;
-        private TrainModel trainModel;
+        private TrainModelForm trainModel;
         private System.Timers.Timer systemTimer;
         private int systemSpeed;
 
@@ -259,7 +259,7 @@ namespace CTCOffice
         {
             trackController = new TrackControllerForm(systemTimer);
             trackModel = new TrackModelForm();
-            trainModel = new TrainModel(systemTimer);
+            trainModel = new TrainModelForm(systemTimer);
             trainController = new TrainControllerForm(systemTimer);
 
             //trackController.SetSystemSpeed(systemSpeed);
@@ -269,7 +269,7 @@ namespace CTCOffice
 
             //trackController.SendModules(this, trackModel);
             trackModel.SendModules(trackController, trainModel);
-            trainModel.SendModules(trackModel, trainController);
+            trainModel.SendModules(trainController);
             trainController.SendModules(trainModel);
         }
 
