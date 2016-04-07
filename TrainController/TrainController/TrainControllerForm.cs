@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 using System.Windows.Forms;
 using TheTrainModule;
 
@@ -14,7 +15,7 @@ namespace TrainController
     public partial class TrainControllerForm : Form
     {
         System.Timers.Timer timer;
-        Dictionary<int, TrainController> trainControllers;
+        ConcurrentDictionary<int, TrainController> trainControllers;
         private static int trainCount = 0;
         TrainModelForm trainModel;
 
@@ -23,7 +24,7 @@ namespace TrainController
             InitializeComponent();
             Hide();
 
-            trainControllers = new Dictionary<int, TrainController>();
+            trainControllers = new ConcurrentDictionary<int, TrainController>();
             timer = newTimer;
 /*
             DispatchTrain(1);
@@ -36,8 +37,11 @@ namespace TrainController
 
         private void DispatchTrain(int trainID)
         {
-            TrainController newTrain = new TrainController(trainID, this);
-            trainControllers.Add(trainID, newTrain);
+            if (!trainControllers.ContainsKey(trainID))
+            {
+                TrainController newTrain = new TrainController(trainID, this);
+                trainControllers.TryAdd(trainID, newTrain);
+            }
             trainCount++;
         }
 
@@ -59,7 +63,7 @@ namespace TrainController
 
         public void UpdateTrain(int trainID)
         {
-            if (trainControllers.ContainsKey(trainID) != true)
+            if (!trainControllers.ContainsKey(trainID))
             {
                 DispatchTrain(trainID);
             }

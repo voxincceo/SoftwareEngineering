@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TrainController
 {
-    public class TrainController : Form
+    public class TrainController
     {
         private static TrainControllerUserInterface ui;
         private static TrainControllerForm thisTrainControllerForm;
@@ -42,11 +42,8 @@ namespace TrainController
             DriverSpeed = 0;
             DriverEmergencyBrake = false;
             outputPower = 0;
-
-            this.Invoke(new MethodInvoker(delegate()
-            {
-                ui.Show();
-            }));
+            ui.showThis();
+           
          }
 
         private void SendDoorStatus()

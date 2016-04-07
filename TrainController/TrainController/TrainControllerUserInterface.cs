@@ -38,80 +38,121 @@ namespace TrainController
 
         public void SetAuthority(int newAuthority)
         {
-            setAuthority.Text = newAuthority.ToString();
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                setAuthority.Text = newAuthority.ToString();
+            }));
         }
 
         public void SetCommandedSpeed(double newSpeed)
         {
-            setCommandedSpeed.Text = newSpeed.ToString();
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                setCommandedSpeed.Text = newSpeed.ToString();
+            }));
         }
 
         public void SetCurrentVelocity(double newVelocity)
         {
-            setCurrentVelocity.Text = newVelocity.ToString();
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                setCurrentVelocity.Text = newVelocity.ToString();
+            }));
         }
 
         public void SetServiceBrake(Boolean serviceBrake)
         {
-            if (serviceBrake)
-                setServiceBrake.Text = "On";
-            else
-                setServiceBrake.Text = "Off";
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                if (serviceBrake)
+                    setServiceBrake.Text = "On";
+                else
+                    setServiceBrake.Text = "Off";
+            }));
         }
 
         public void SetPassengerEmergencyBrake(Boolean emergencyBrake)
         {
-            if (emergencyBrake)
-                setPassengerEmergencyBrake.Text = "On";
-            else
-                setPassengerEmergencyBrake.Text = "Off";
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                if (emergencyBrake)
+                    setPassengerEmergencyBrake.Text = "On";
+                else
+                    setPassengerEmergencyBrake.Text = "Off";
+            }));
         }
 
         public void SetEngineerEmergencyBrake(Boolean emergencyBrake)
         {
-            if (emergencyBrake)
-                setEngineerEmergencyBrake.Text = "On";
-            else
-                setEngineerEmergencyBrake.Text = "Off";
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                if (emergencyBrake)
+                    setEngineerEmergencyBrake.Text = "On";
+                else
+                    setEngineerEmergencyBrake.Text = "Off";
+            }));
         }
 
         public void SetAirConditionerStatus(Boolean airConditioner)
         {
-            if (airConditioner)
-                setACstatus.Text = "On";
-            else
-                setACstatus.Text = "Off";
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                if (airConditioner)
+                    setACstatus.Text = "On";
+                else
+                    setACstatus.Text = "Off";
+            }));
         }
 
         public void SetDoorStatus(Boolean newDoorStatus)
         {
-            if (newDoorStatus)
-                setDoorStatus.Text = "Open";
-            else
-                setDoorStatus.Text = "Closed";
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                if (newDoorStatus)
+                    setDoorStatus.Text = "Open";
+                else
+                    setDoorStatus.Text = "Closed";
+            }));
         }
 
         public void SetCurrentTemperature(int currentTemperature)
         {
-            setCurrentTemperature.Text = currentTemperature.ToString();
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                setCurrentTemperature.Text = currentTemperature.ToString();
+            }));
         }
 
         public void SetLightStatus(Boolean lightStatus)
         {
-            if (lightStatus)
-                setLightStatus.Text = "On";
-            else
-                setLightStatus.Text = "Off";
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                if (lightStatus)
+                    setLightStatus.Text = "On";
+                else
+                    setLightStatus.Text = "Off";
+            }));
         }
 
         public void SetNextStop(String nextStop)
         {
-            setNextStop.Text = nextStop;
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                setNextStop.Text = nextStop;
+            }));
         }
 
         public void SetOutputPower(Double outputPower)
         {
-            setOutputPower.Text = outputPower.ToString();
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                setOutputPower.Text = outputPower.ToString();
+            }));
+        }
+
+        public void showThis()
+        {
+                ////this.Show();
         }
     }
 }
