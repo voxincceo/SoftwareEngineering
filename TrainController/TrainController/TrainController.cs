@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TrainController
 {
-    public class TrainController
+    public class TrainController : Form
     {
         private static TrainControllerUserInterface ui;
         private static TrainControllerForm thisTrainControllerForm;
@@ -41,7 +42,11 @@ namespace TrainController
             DriverSpeed = 0;
             DriverEmergencyBrake = false;
             outputPower = 0;
-            ui.Show();
+
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                ui.Show();
+            }));
          }
 
         private void SendDoorStatus()
