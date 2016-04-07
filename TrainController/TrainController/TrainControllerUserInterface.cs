@@ -28,7 +28,7 @@ namespace TrainController
 
         private void setInputSpeed_TextChanged(object sender, EventArgs e)
         {
-            thisTrainController.ChangeSpeed(Int32.Parse(setInputSpeed.Text));
+            thisTrainController.ChangeSpeed(double.Parse(setInputSpeed.Text));
         }
 
         private void engineerEmergencyBrakeButton_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace TrainController
             setAuthority.Text = newAuthority.ToString();
         }
 
-        public void SetCommandedSpeed(int newSpeed)
+        public void SetCommandedSpeed(double newSpeed)
         {
             setCommandedSpeed.Text = newSpeed.ToString();
         }

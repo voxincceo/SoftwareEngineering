@@ -16,7 +16,7 @@ namespace TrainController
         System.Timers.Timer timer;
         Dictionary<int, TrainController> trainControllers;
         private static int trainCount = 0;
-        TrainModel trainModel;
+        TrainModelForm trainModel;
 
         public TrainControllerForm(System.Timers.Timer newTimer)
         {
@@ -41,12 +41,23 @@ namespace TrainController
             trainCount++;
         }
 
-        public void SendModules(TrainModel newTrainModel)
+        private void SendPower(int trainID)
+        {
+            double result = trainControllers[trainID].CalculatePower();
+            trainModel.SetPower(trainID, result);
+        }
+
+        private void SetDoorStatus(int trainID)
+        {
+            trainModel.SetDoors(trainID, trainControllers[trainID].Doors);
+        }
+
+        public void SendModules(TrainModelForm newTrainModel)
         {
             trainModel = newTrainModel;
         }
 
-        public void updateTrain(int trainID)
+        public void UpdateTrain(int trainID)
         {
             if (trainControllers.ContainsKey(trainID) != true)
             {
@@ -59,25 +70,20 @@ namespace TrainController
             trainControllers[trainID].SetAuthority = newAuthority;
         }
 
-        public void SetSpeed(int trainID, int newSpeed)
+        public void SetSpeed(int trainID, double newSpeed)
         {
             trainControllers[trainID].SetSpeed = newSpeed;
         }
 
-        public void SetVelocity(int trainID, int newVelocity)
+        public void SetVelocity(int trainID, double newVelocity)
         {
             trainControllers[trainID].CurrentVelocity = newVelocity;
-        }
-
-        public double GetPower(int trainID)
-        {
-            double result = trainControllers[trainID].CalculatePower();
-            return result;
         }
 
         public void SetDarkOutside(int trainID, Boolean darkOutside)
         {
             trainControllers[trainID].DarkOutside = darkOutside;
+            trainModel.SetLights(trainID, darkOutside);
         }
 
         public Boolean GetLightStatus(int trainID)
@@ -86,7 +92,7 @@ namespace TrainController
             return result;
         }
 
-        public void SetPassengerEmergencyBrake(int trainID)
+        public void SetPassengerEmergencyBrakes(int trainID)
         {
             trainControllers[trainID].SetPassengerEmergencyBrake(true);
         }
@@ -96,22 +102,45 @@ namespace TrainController
             trainControllers[trainID].Temperature = Temperature;
         }
 
-        public Boolean GetAirConditionierStatus(int trainID)
+        public void SetBeacon(int trainID, string newBeacon)
         {
-            Boolean result = trainControllers[trainID].GetAirConditionerStatus();
-            return result;
-        }
-
-        public Boolean GetDoorStatus(int trainID)
-        {
-            Boolean result = trainControllers[trainID].GetDoorStatus();
-            return result;
+            trainControllers[trainID].Beacon = newBeacon;
         }
 
         public String GetAdvertisementName(int trainID)
         {
             String result = trainControllers[trainID].GetAdvertisementName();
             return result;
+        }
+
+        public void SetFailure(int trainID, int failureMode)
+        {
+            trainControllers[trainID].SetFailure(failureMode);
+        }
+
+        public void SendDoorStatus(int trainID)
+        {
+            SetDoorStatus(trainID);
+        }
+
+        public void SendServiceBrake(int trainID)
+        {
+            trainModel.SetBrakes(trainID, 0, trainControllers[trainID].ServiceBrakes);
+        }
+
+        public void SendEmergencyBrake(int trainID)
+        {
+            trainModel.SetBrakes(trainID, 1, trainControllers[trainID].DriverEmergencyBrake);
+        }
+
+        public void SendAirConditionerStatus(int trainID)
+        {
+            trainModel.SetAirConditioning(trainID, trainControllers[trainID].AirConditionerStatus);
+        }
+
+        public void SendNextStation(int trainID)
+        {
+            trainModel.SetNextStation(trainID, trainControllers[trainID].NextStation);
         }
     }
 }

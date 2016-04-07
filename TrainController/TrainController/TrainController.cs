@@ -9,22 +9,30 @@ namespace TrainController
     public class TrainController
     {
         private static TrainControllerUserInterface ui;
+        private static TrainControllerForm thisTrainControllerForm;
         public int SetAuthority { get; set; }
-        public int SetSpeed { get; set; }
+        public double SetSpeed { get; set; }
         public double CurrentVelocity { get; set; }
         public int Temperature { get; set; }
         public Boolean DarkOutside { get; set; }
-        public int DriverSpeed { get; set; }
+        public double DriverSpeed { get; set; }
+        public Boolean ServiceBrakes { get; set; }
         public Boolean DriverEmergencyBrake { get; set; }
         public Boolean PassengerEmergencyBrake { get; set; }
         public Boolean AirConditionerStatus { get; set; }
         private static double outputPower;
         public Boolean Doors { get; set; }
         public String AdvertisementName { get; set; }
+        public String Beacon { get; set; }
+        public String NextStation { get; set; }
+        public int FailureMode { get; set; }
+        public int ThisTrainID { get; set; }
 
-         public TrainController(int trainID)
+         public TrainController(int trainID, TrainControllerForm trainControllerForm)
          {
             ui = new TrainControllerUserInterface(trainID, this);
+            thisTrainControllerForm = trainControllerForm;
+            ThisTrainID = trainID;
             SetAuthority = 0;
             SetSpeed = 0;
             CurrentVelocity = 0;
@@ -35,6 +43,21 @@ namespace TrainController
             outputPower = 0;
             ui.Show();
          }
+
+        private void SendDoorStatus()
+        {
+            thisTrainControllerForm.SendDoorStatus(ThisTrainID);
+        }
+
+        private void SendServiceBrake()
+        {
+            thisTrainControllerForm.SendServiceBrake(ThisTrainID);
+        }
+
+        private void SendEmergencyBrake()
+        {
+            thisTrainControllerForm.SendEmergencyBrake(ThisTrainID);
+        }
 
         public double CalculatePower()
         {
@@ -63,6 +86,7 @@ namespace TrainController
                 AirConditionerStatus = false;
             else
                 AirConditionerStatus = true;
+            thisTrainControllerForm.SendAirConditionerStatus(ThisTrainID);
             ui.SetAirConditionerStatus(AirConditionerStatus);
             return AirConditionerStatus;
         }
@@ -78,7 +102,7 @@ namespace TrainController
             return AdvertisementName;
         }
 
-        public void ChangeSpeed(int newSpeed)
+        public void ChangeSpeed(double newSpeed)
         {
             DriverSpeed = newSpeed;
         }
@@ -87,6 +111,11 @@ namespace TrainController
         {
             DriverEmergencyBrake = true;
             ui.SetEngineerEmergencyBrake(DriverEmergencyBrake);
+        }
+
+        public void SetFailure(int newFailure)
+        {
+            FailureMode = newFailure;
         }
     }
 }
