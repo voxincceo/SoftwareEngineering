@@ -80,13 +80,6 @@
     <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\ScheduleForm.Designer.cs">
       <Link>CTC\ScheduleForm.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TestingForm.cs">
-      <Link>CTC\TestingForm.cs</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TestingForm.Designer.cs">
-      <Link>CTC\TestingForm.Designer.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TrackSegment.cs">
       <Link>CTC\TrackSegment.cs</Link>
     </Compile>
@@ -220,9 +213,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\ScheduleForm.resx">
       <Link>CTC\ScheduleForm.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TestingForm.resx">
-      <Link>CTC\TestingForm.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\COE1186_CTCOffice\CTCOffice\CTCOffice\TrainDispatch.resx">
       <Link>CTC\TrainDispatch.resx</Link>
