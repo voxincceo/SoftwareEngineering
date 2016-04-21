@@ -148,6 +148,13 @@
     <Compile Include="..\..\..\COE1186_TrackModel\TrackModel\TrackModelForm.Designer.cs">
       <Link>TrackModel\TrackModelForm.Designer.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\DriverSpeedInput.cs">
+      <Link>TrainController\DriverSpeedInput.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\DriverSpeedInput.Designer.cs">
+      <Link>TrainController\DriverSpeedInput.Designer.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainController.cs">
       <Link>TrainController\TrainController.cs</Link>
     </Compile>
@@ -226,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\COE1186_TrackModel\TrackModel\TrackModelForm.resx">
       <Link>TrackModel\TrackModelForm.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\COE1186_TrainController\TrainController\TrainController\DriverSpeedInput.resx">
+      <Link>TrainController\DriverSpeedInput.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\COE1186_TrainController\TrainController\TrainController\TrainControllerUserInterface.resx">
       <Link>TrainController\TrainControllerUserInterface.resx</Link>
